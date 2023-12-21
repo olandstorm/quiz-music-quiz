@@ -8,7 +8,7 @@
 - Vi använder främst Discord videosamtal med kamera på vid avstämningar men även Teams för skärmdelning vid behov.
 - Retrospective 10:30 varje fredag.
 - Sprintplanering – Första dagen respektive veckan.
-- Dagliga ”standup” möten.
+- Dagliga ”standup” möten - ca tid: 9.00.
 
 ## &nbsp;
 
