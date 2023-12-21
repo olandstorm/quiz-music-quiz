@@ -44,3 +44,13 @@
 
 - [] Rage quit button
 - [] "Hem"-knapp
+- [] Det ska finnas en "progess bar" som visar hur många av frågorna som hittills har besvarats
+- [] Flera svarsalternativ ska kunna vara korrekta
+- [] Du får olika poäng beroende på hur snabbt du svarar på frågan (ni får komma på själva hur det ska funka, dokumentera i README:n)
+- [] Du får minuspoäng om du svarar fel
+- [] Du ska kunna välja vem du vill spela som, eller skapa en ny användare (förutsättningen här är att man använder samma webbläsare; använd local storage).
+- [] Implementera ett highscore (max 10 platser) med hjälp av local storage
+- [] Det ska finnas med en animation för rätt svar, och en animation för fel svar. Det kan t.ex. vara en stjärna som roterar, byter färg, eller en knapp som skakar. Vad ni gör spelar ingen roll, men ni ska implementera det med hjälp av GSAP.
+- Välj ett av nedan:
+  - [] Man ska kunna välja att spela mellan lätta, medelsvåra och svåra frågor. Planera hur detta påverkar highscoren.
+  - [] Det ska vara som en julkalender: bakom varje lucka (24 st) så visas det X antal nya frågor per dag.
