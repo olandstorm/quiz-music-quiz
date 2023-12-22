@@ -14,6 +14,7 @@ interface IExampleArray {
   age: number;
 }
 
+
 // Här skriver vi att vår array med namnet myExampleArray ska följa reglerna (interfacet)
 // i IExampleArray och att det är en array genom att vi sätter [] efter
 const myExampleArray: IExampleArray[] = [
