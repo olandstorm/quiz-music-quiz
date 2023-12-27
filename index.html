@@ -1,15 +1,36 @@
 <!doctype html>
 <html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sången bakom sången</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sången bakom sången</title>
-</head>
+  <body>
+    <section class="feedbackPage" id="feedbackPage">
+      <!--  
+    Lämnar utkommenterad tills vi bestämt om den ska med i denna section. 
+    Ev att vi bara stylear så timern får vara en egen sida som är 'visible' när antingen frågesidan eller feedback är visible.
 
-
-<body>
-  <script type="module" src="/src/main.ts"></script>
-</body>
-
+    <div class="timerContainer" id="timerContainer">
+      <p class="timer" id="timer"></p>
+    </div> 
+  -->
+      <div class="answerContainer">
+        <!-- Denna kan tas bort ev. om timern är egen page -->
+        <div class="correctAnswerContainer hidden" id="correctAnswerContainer">
+          <h2>Du svarare rätt!</h2>
+        </div>
+        <div class="wrongAnswerContainer" id="wrongAnswerContainer">
+          <h2>Fel svar!</h2>
+          <p>Rätt svar var:</p>
+          <p class="correctAnswer" class="correctAnswer">XXX</p>
+        </div>
+        <button class="nextQuestionBtn uppercase" id="nextQuestionBtn">
+          nästa fråga
+        </button>
+      </div>
+    </section>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
