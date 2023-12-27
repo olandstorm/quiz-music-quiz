@@ -7,9 +7,17 @@ body {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    align-items: center;
+    justify-content: center;
     .nameLabel,
     .runBtn {
       text-transform: uppercase;
     }
+    .playerName,
+    .runBtn {
+      border: none;
+      border-radius: 5px;
+    }
+
 	}
 }
