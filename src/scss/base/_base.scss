@@ -11,13 +11,31 @@ body {
     justify-content: center;
     .nameLabel,
     .runBtn {
-      text-transform: uppercase;
+      text-transform: uppercase; //Will be removed?
     }
     .playerName,
     .runBtn {
       border: none;
       border-radius: 5px;
     }
-
+    .nameLabel {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: $secondaryHeaderColor;
+    }
+    .playerName {
+      height: 50px;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    .runBtn {
+      background-color: $secondaryBtnBgColor;
+      color: $btnTextColor;
+      width: 5rem;
+      height: 2.5rem;
+    }
+    .runBtn:active {
+      color: $activeBtnTextColor;
+    }
 	}
 }
