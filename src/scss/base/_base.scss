@@ -1,1 +1,15 @@
 // Add style about headings, font, .hidden, backgrounds etc
+body {
+	.namePage {
+    height: 100vh;
+    width: 100vw;
+    background-color: $primaryBgColor;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    .nameLabel,
+    .runBtn {
+      text-transform: uppercase;
+    }
+	}
+}
