@@ -1,1 +1,29 @@
 // Add style about headings, font, .hidden, backgrounds etc
+.hidden {
+  display: none !important;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.landingPage {
+  height: 100vh;
+  max-height: 100%;
+  width: 100vw;
+  max-width: 100%;
+  background-color: $landingBgColor;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 25px;
+  padding-bottom: 10vh;
+
+  .pageHeading {
+    color: $primaryHeaderColor;
+    max-width: 200px;
+    text-align: center;
+  }
+  .readyBtn {
+    width: fit-content;
+  }
+}
