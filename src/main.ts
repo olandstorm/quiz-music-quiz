@@ -51,8 +51,8 @@
 // }
 // ------------------------------------- OUR FILE START FROM THIS LINE ---------------------------------------
 
-import "./questionArray.ts";
-import "./scss/style.scss"; // Importera huvud-SCSS-filen
+import './questionArray.ts';
+import './scss/style.scss'; // Importera huvud-SCSS-filen
 
 /* 
 
