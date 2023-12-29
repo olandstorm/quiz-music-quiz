@@ -1,26 +1,26 @@
-@import 'base/reset';
-@import 'abstracts/colors';
-@import 'abstracts/mixins';
-@import 'components/buttons';
+@import "base/reset";
+@import "abstracts/colors";
+@import "abstracts/mixins";
+@import "components/buttons";
 
-@import 'base/base';
+@import "base/base";
 
-@import 'components/form';
+@import "components/form";
 
 @media (hover: hover) {
-  @import 'abstracts/hover';
+  @import "abstracts/hover";
 }
 
 @media screen and (min-width: 768px) {
-  @import 'layout/tablet';
+  @import "layout/tablet";
 }
 
 @media screen and (min-width: 1024px) {
-  @import 'layout/desktop';
+  @import "layout/desktop";
 }
 
 :root {
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

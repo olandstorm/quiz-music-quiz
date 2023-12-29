@@ -1,20 +1,26 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/ZejtqupA)
+
 # Projektmall FED23D
+
 Läs instruktionerna på kurswebben för att komma igång.
 
 ## Betyg
+
 Klicka i vilka krav ni har gjort:
 
 - [x] Exempel på utförd/ikryssad uppgift
 - [ ] Ej utförd uppgift
 
 ### För Icke Godkänt
+
 - [ ] Du har inte deltagit i arbetet och/eller gjort commits (det syns tydligt i Insights-fliken på ert repo)
 - [ ] Du/ni har inte följt instruktionerna
 - [ ] Du/ni uppvisar avsaknad av kunskaper i såväl HTML, CSS som JavaScript och du/ni har ignorerat semantik och tillgänglighet
 
 ### För Godkänt
+
 #### Kodkvalitet
+
 - [ ] Koden är korrekt formaterad.
 - [ ] Koden innehåller enstaka buggar, men fungerar på det stora hela.
 - [ ] Ni har gjort åtminstone en mobilversion; om ni återanvänder samma layout i tablet/desktop så går det bra.
@@ -25,6 +31,7 @@ Klicka i vilka krav ni har gjort:
 - [ ] Ni har gjort en Lighthouse-analys på live-sidan.
 
 #### Funktionsbeskrivning
+
 - [ ] Skapa ett quiz med minst 20 frågor
 - [ ] Varje fråga ska ha 3 svarsalternativ och endast 1 svarsalternativ ska vara korrekt
 - [ ] Frågorna ska presenteras i slumpmässig ordning, och du ska visa 10 frågor per spelomgång
@@ -36,7 +43,9 @@ Klicka i vilka krav ni har gjort:
 - [ ] Varje person ska ha gjort minst två pull requests.
 
 ### För plus i kanten
+
 #### Kodkvalitet
+
 - [ ] Koden följer konventioner och praxis.
 - [ ] Projektets utförande är ambitiöst och väl genomarbetat. Ni har inte tagit på er för mycket, utan sett till att det ni har är genomarbetat.
 - [ ] Ni har tagit höjd för responsiv design (CSS) och CSS:en är välskriven.
@@ -49,6 +58,7 @@ Klicka i vilka krav ni har gjort:
 - [ ] Ni har skrivit en ordentlig README (projektbeskrivning, skrämdumpar, deltagare i arbetet).
 
 #### Funktionsbeskrivning
+
 - [ ] Det ska finnas en "progess bar" som visar hur många av frågorna som hittills har besvarats
 - [ ] Flera svarsalternativ ska kunna vara korrekta
 - [ ] Du får olika poäng beroende på hur snabbt du svarar på frågan (ni får komma på själva hur det ska funka, dokumentera i README:n)
