@@ -132,8 +132,4 @@
 
 ## Underskrivet av
 
-@olandstorm
-@MustafaaMehdi
-@PerRosen63
-@alahojat
-@LilithSWE
+@olandstorm @MustafaaMehdi @PerRosen63 @alahojat @LilithSWE
