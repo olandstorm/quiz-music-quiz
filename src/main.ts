@@ -121,3 +121,13 @@ const totalScoreContainer = document.getElementById('totalScoreContainer');
 const playAgainBtn = document.getElementById('playAgainBtn'); 
 
 */
+
+const landingPage = document.getElementById('landingPage');
+const namePage = document.getElementById('namePage');
+const readyBtn = document.getElementById('readyBtn');
+readyBtn?.addEventListener('click', displayNamePage);
+
+function displayNamePage(): void {
+  landingPage?.classList.add('hidden');
+  namePage?.classList.remove('hidden');
+}
