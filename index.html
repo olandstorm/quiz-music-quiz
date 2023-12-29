@@ -1,22 +1,68 @@
 <!doctype html>
 <html lang="sv">
-
 <head>
   <meta charset="UTF-8">
+  <meta name="description" content="Har du koll på sången bakom sången? Vet du vem som sjöng originalet? Gör detta quiz och se hur många coverlåtar du känner igen!">
+  <meta name="keywords" content="Quiz, coverlåtar, sånger, musik">
+  <meta name="author" content="Apelsinerna">
+  <meta property="og:url" content="https://www.sangenbakomsangen.com">
+  <meta property="og:title" content="Sången bakom sången!">
+  <meta property="og:description" content="Har du koll på sången bakom sången? Vet du vem som sjöng originalet? Gör detta quiz och se hur många coverlåtar du känner igen!">
+  <meta property="og:image" content="https://medieinstitutet.github.io/fed23d-javascript-grundkurs-gruppuppgift-apelsinerna/assets/images/sangen-logga.jpg">
+  <meta property="og:type" content="website">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600;1,700&display=swap"
+    rel="stylesheet">
   <title>Sången bakom sången</title>
 </head>
 
-
 <body>
 
-  <main>
-    <section class="landingPage" id="landingPage">
-      <h1 class="pageHeading uppercase" id="pageHeading">Sången bakom sången</h1>
-      <button class="readyBtn uppercase" id="readyBtn">Redo?</button>
+<!-- Landing page -->
+  <section class="landingPage" id="landingPage">
+    <h1 class="pageHeading uppercase" id="pageHeading">Sången bakom sången</h1>
+    <button class="readyBtn uppercase" id="readyBtn">Redo?</button>
+  </section>
+<!-- End Landing page -->
+
+<!---Name page --->
+  <section class="namePage hidden" id="namePage">
+    <label for="playerName" class="nameLabel" id="nameLabel">Namn?</label>
+    <input type="text" class="playerName" id="playerName" name="playerName" placeholder="John">
+    <button class="runBtn" id="runBtn">Kör</button>
+  </section>
+<!--- End Name page --->
+
+<!-- Feedback page -->
+<section class="feedbackPage" id="feedbackPage">
+      <div class="answerContainer">
+        <div class="correctAnswerContainer hidden" id="correctAnswerContainer">
+          <h2>Du svarare rätt!</h2>
+        </div>
+        <div class="wrongAnswerContainer" id="wrongAnswerContainer">
+          <h2>Fel svar!</h2>
+          <p>Rätt svar var:</p>
+          <p class="correctAnswer" class="correctAnswer">XXX</p>
+        </div>
+        <button class="nextQuestionBtn uppercase" id="nextQuestionBtn">
+          nästa fråga
+        </button>
+      </div>
     </section>
-  </main>
+<!-- End Feedback page -->
+<!-- Result page -->
+  <section id="resultPage" class="resultPage">
+    <h2 class="resultTitle">Resultat</h2>
+    <div id="totalScoreContainer" class="totalScoreContainer">
+      <p id="totalScore" class="totalScore"><span></span> av 10</p>
+    </div>
+    <button id="playAgainBtn" class="playAgainBtn">Spela igen</button>
+  </section>
+<!-- End Result page -->
+  
   <script type="module" src="/src/main.ts"></script>
 </body>
-
 </html>
