@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="sv">
-
 <head>
   <meta charset="UTF-8">
   <meta name="description" content="Har du koll på sången bakom sången? Vet du vem som sjöng originalet? Gör detta quiz och se hur många coverlåtar du känner igen!">
@@ -20,9 +19,24 @@
   <title>Sången bakom sången</title>
 </head>
 
-
 <body>
-
+<!-- Feedback page -->
+<section class="feedbackPage" id="feedbackPage">
+      <div class="answerContainer">
+        <div class="correctAnswerContainer hidden" id="correctAnswerContainer">
+          <h2>Du svarare rätt!</h2>
+        </div>
+        <div class="wrongAnswerContainer" id="wrongAnswerContainer">
+          <h2>Fel svar!</h2>
+          <p>Rätt svar var:</p>
+          <p class="correctAnswer" class="correctAnswer">XXX</p>
+        </div>
+        <button class="nextQuestionBtn uppercase" id="nextQuestionBtn">
+          nästa fråga
+        </button>
+      </div>
+    </section>
+<!-- End Feedback page -->
 <!-- Result page -->
   <section id="resultPage" class="resultPage">
     <h2 class="resultTitle">Resultat</h2>
@@ -34,5 +48,4 @@
 <!-- End Result page -->
   <script type="module" src="/src/main.ts"></script>
 </body>
-
 </html>
