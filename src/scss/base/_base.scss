@@ -1,1 +1,51 @@
 // Add style about headings, font, .hidden, backgrounds etc
+.hidden {
+  display: none !important;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+
+section.feedbackPage {
+  background-color: $primaryBgColor;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  div.answerContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    div {
+      height: 30vh;
+      min-height: 150px;
+      width: 100%;
+      display: grid;
+      padding-top: 30px;
+      grid-template-rows: 3fr 1fr 1fr 550%;
+      position: absolute;
+      top: 35vh;
+      justify-content: center;
+      align-items: end;
+      text-align: center;
+      h2 {
+        //OBS TA BORT NÄR GEMENSAM TEXT STYLING KLAR
+        font-size: 1rem;
+        font-weight: normal;
+      }
+    }
+    div.correctAnswerContainer {
+      background-color: $correctMsgBgColor;
+    }
+    div.wrongAnswerContainer {
+      background-color: $falseMsgBgColor;
+    }
+    button.nextQuestionBtn {
+      position: absolute;
+      top: clamp(275px, 55vh, 80rem);
+    }
+  }
+}
