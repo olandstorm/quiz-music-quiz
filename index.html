@@ -1,23 +1,28 @@
 <!doctype html>
 <html lang="sv">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sången bakom sången</title>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Har du koll på sången bakom sången? Vet du vem som sjöng originalet? Gör detta quiz och se hur många coverlåtar du känner igen!">
+  <meta name="keywords" content="Quiz, coverlåtar, sånger, musik">
+  <meta name="author" content="Apelsinerna">
+  <meta property="og:url" content="https://www.sangenbakomsangen.com">
+  <meta property="og:title" content="Sången bakom sången!">
+  <meta property="og:description" content="Har du koll på sången bakom sången? Vet du vem som sjöng originalet? Gör detta quiz och se hur många coverlåtar du känner igen!">
+  <meta property="og:image" content="https://medieinstitutet.github.io/fed23d-javascript-grundkurs-gruppuppgift-apelsinerna/assets/images/sangen-logga.jpg">
+  <meta property="og:type" content="website">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600;1,700&display=swap"
+    rel="stylesheet">
+  <title>Sången bakom sången</title>
+</head>
 
-  <body>
-    <section class="feedbackPage" id="feedbackPage">
-      <!--  
-    Lämnar utkommenterad tills vi bestämt om den ska med i denna section. 
-    Ev att vi bara stylear så timern får vara en egen sida som är 'visible' när antingen frågesidan eller feedback är visible.
-
-    <div class="timerContainer" id="timerContainer">
-      <p class="timer" id="timer"></p>
-    </div> 
-  -->
+<body>
+<!-- Feedback page -->
+<section class="feedbackPage" id="feedbackPage">
       <div class="answerContainer">
-        <!-- Denna kan tas bort ev. om timern är egen page -->
         <div class="correctAnswerContainer hidden" id="correctAnswerContainer">
           <h2>Du svarare rätt!</h2>
         </div>
@@ -31,6 +36,16 @@
         </button>
       </div>
     </section>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<!-- End Feedback page -->
+<!-- Result page -->
+  <section id="resultPage" class="resultPage">
+    <h2 class="resultTitle">Resultat</h2>
+    <div id="totalScoreContainer" class="totalScoreContainer">
+      <p id="totalScore" class="totalScore"><span></span> av 10</p>
+    </div>
+    <button id="playAgainBtn" class="playAgainBtn">Spela igen</button>
+  </section>
+<!-- End Result page -->
+  <script type="module" src="/src/main.ts"></script>
+</body>
 </html>
