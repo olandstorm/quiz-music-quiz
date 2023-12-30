@@ -220,18 +220,24 @@ function displayNamePage(): void {
 }
 
 function startQuiz(): void {
-  const questionText = document.querySelector('#questionText');
   let totalScore: number = 0;
-  const randomQuestionId: number = Math.floor(Math.random() * questionArrayExample.length);
+
   if (namePage !== null && questionPage !== null) {
     namePage.classList.add('hidden');
     questionPage.classList.remove('hidden');
   }
+  showQuestion()
+}
+
+function showQuestion(): void {
+  const questionText = document.querySelector('#questionText');
+  const randomQuestionId: number = Math.floor(Math.random() * questionArrayExample.length);
   if (questionText !== null && answerRadioBtn !== null) {
     questionText.innerHTML = questionArrayExample[randomQuestionId].question;
 
     for (let i = 0; i < answerRadioBtn.length; i++) {
-      answerRadioBtn[i].innerHTML = questionArrayExample[randomQuestionId].answers[i].answer.shuffle();
+      answerRadioBtn[i].innerHTML = questionArrayExample[randomQuestionId].answers[i].answer;
     }
   }
+  questionArrayExample.splice(questionArrayExample.indexOf(randomQuestionId), 1);
 }
