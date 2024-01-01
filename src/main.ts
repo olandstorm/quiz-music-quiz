@@ -132,6 +132,7 @@ interface IExampleArray {
   ];
 }
 
+// Placeholder av interface array
 const questionArrayExample: IExampleArray[] = [
   {
     id: 1,
@@ -189,17 +190,26 @@ const questionArrayExample: IExampleArray[] = [
   },
 ];
 
+// Variabler för de olika containers
 const landingPage = document.getElementById('landingPage');
 const namePage = document.getElementById('namePage');
 const questionPage = document.getElementById('questionPage');
 
+// Variabler för knapparna 
+// Redoknapp - Landing page
 const readyBtn = document.getElementById('readyBtn');
+// Körknapp - Name page
 const runBtn = document.getElementById('runBtn');
+
+// Variabel för fråge-texten
+const questionText = document.querySelector('#questionText');
+// Gruppering av alla answer radio knapparna 
+const answerRadioBtn = document.querySelectorAll('.answerText');
+
 // Variable to keep track of current question count
 const questionNumber = document.getElementById('questionNumber');
 
-// Group all answers btns by class
-const answerRadioBtn = document.querySelectorAll('.answerOption');
+
 
 // Condition to add evtlsnr if readyBtn exists in html
 if (readyBtn !== null) {
@@ -219,6 +229,8 @@ function displayNamePage(): void {
   }
 }
 
+// Funktion som triggas när användare klickar på "kör" i namnsida
+// Kallar även på fråge-funktion 
 function startQuiz(): void {
   let totalScore: number = 0;
 
@@ -226,11 +238,11 @@ function startQuiz(): void {
     namePage.classList.add('hidden');
     questionPage.classList.remove('hidden');
   }
-  showQuestion()
+  showQuestion();
 }
 
+// Funktion som visar en random fråga från arrayen, och 
 function showQuestion(): void {
-  const questionText = document.querySelector('#questionText');
   const randomQuestionId: number = Math.floor(Math.random() * questionArrayExample.length);
   if (questionText !== null && answerRadioBtn !== null) {
     questionText.innerHTML = questionArrayExample[randomQuestionId].question;
@@ -239,5 +251,9 @@ function showQuestion(): void {
       answerRadioBtn[i].innerHTML = questionArrayExample[randomQuestionId].answers[i].answer;
     }
   }
-  questionArrayExample.splice(questionArrayExample.indexOf(randomQuestionId), 1);
+  questionArrayExample.splice(randomQuestionId, 1);
 }
+
+// Ändring i HTML 
+// La till class för Answer btn span (answerText)
+// För att loopa ut svaren mot den klassen istället för att välja specifika radio-btn 
