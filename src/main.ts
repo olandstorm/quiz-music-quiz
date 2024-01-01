@@ -194,31 +194,41 @@ const questionArrayExample: IExampleArray[] = [
 const landingPage = document.getElementById('landingPage');
 const namePage = document.getElementById('namePage');
 const questionPage = document.getElementById('questionPage');
+const feedbackPage = document.getElementById('feedbackPage');
 
-// Variabler för knapparna 
+// Variabler för knapparna
 // Redoknapp - Landing page
 const readyBtn = document.getElementById('readyBtn');
 // Körknapp - Name page
 const runBtn = document.getElementById('runBtn');
 
+// Nästa fråga knapp - Feedback page
+const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+
 // Variabel för fråge-texten
 const questionText = document.querySelector('#questionText');
-// Gruppering av alla answer radio knapparna 
+// Gruppering av alla answer radio knapparna
 const answerRadioBtn = document.querySelectorAll('.answerText');
 
 // Variable to keep track of current question count
 const questionNumber = document.getElementById('questionNumber');
 
-
-
+// Click event to display the name page after user clicks on
 // Condition to add evtlsnr if readyBtn exists in html
 if (readyBtn !== null) {
   readyBtn.addEventListener('click', displayNamePage);
 }
 
+// Click event to trigger the start of the quiz after user clicks on
 // Condition to add evtlsnr if runBtn exists in html
 if (runBtn !== null) {
   runBtn.addEventListener('click', startQuiz);
+}
+
+// Click event to trigger next question
+// Condition to add evtlsnr if nextQuestionBtn exists in html
+if (nextQuestionBtn !== null) {
+  nextQuestionBtn.addEventListener('click', nextQuestion);
 }
 
 // Function to display namepage when user klicks on readyBtn
@@ -230,7 +240,7 @@ function displayNamePage(): void {
 }
 
 // Funktion som triggas när användare klickar på "kör" i namnsida
-// Kallar även på fråge-funktion 
+// Kallar även på fråge-funktion
 function startQuiz(): void {
   let totalScore: number = 0;
 
@@ -241,7 +251,7 @@ function startQuiz(): void {
   showQuestion();
 }
 
-// Funktion som visar en random fråga från arrayen, och 
+// Funktion som visar en random fråga från arrayen, och
 function showQuestion(): void {
   const randomQuestionId: number = Math.floor(Math.random() * questionArrayExample.length);
   if (questionText !== null && answerRadioBtn !== null) {
@@ -254,6 +264,15 @@ function showQuestion(): void {
   questionArrayExample.splice(randomQuestionId, 1);
 }
 
-// Ändring i HTML 
+// Funktion för att dölja feedback page och gå vidare till nästa fråga
+function nextQuestion(): void {
+  if (feedbackPage !== null && questionPage !== null) {
+    feedbackPage.classList.add('hidden');
+    questionPage.classList.remove('hidden');
+  }
+  showQuestion();
+}
+
+// Ändring i HTML
 // La till class för Answer btn span (answerText)
-// För att loopa ut svaren mot den klassen istället för att välja specifika radio-btn 
+// För att loopa ut svaren mot den klassen istället för att välja specifika radio-btn
