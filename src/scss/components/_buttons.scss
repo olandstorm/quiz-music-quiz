@@ -1,0 +1,14 @@
+// Add styling about buttons
+.nextQuestionBtn {
+  background-color: $btnBgColor;
+  color: $btnTextColor;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 10px;
+  transition: all 0.2s;
+  //CHANGE FONT
+}
+.nextQuestionBtn:active {
+  background-color: $tertiaryBtnBgColor;
+  color: $secondaryBtnTextColor;
+}

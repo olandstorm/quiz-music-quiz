@@ -1,18 +1,107 @@
 <!doctype html>
-<html lang="en">
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Har du koll på sången bakom sången? Vet du vem som sjöng originalet? Gör detta quiz och se hur många coverlåtar du känner igen!"
+    />
+    <meta name="keywords" content="Quiz, coverlåtar, sånger, musik" />
+    <meta name="author" content="Apelsinerna" />
+    <meta property="og:url" content="https://www.sangenbakomsangen.com" />
+    <meta property="og:title" content="Sången bakom sången!" />
+    <meta
+      property="og:description"
+      content="Har du koll på sången bakom sången? Vet du vem som sjöng originalet? Gör detta quiz och se hur många coverlåtar du känner igen!"
+    />
+    <meta
+      property="og:image"
+      content="https://medieinstitutet.github.io/fed23d-javascript-grundkurs-gruppuppgift-apelsinerna/assets/images/sangen-logga.jpg"
+    />
+    <meta property="og:type" content="website" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Sången bakom sången</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite + TS</title>
-</head>
+  <body>
+    <main>
+      <!-- Timer -->
+      <div class="timerContainer hidden" id="timerContainer">
+        <p class="timer" id="timer">00:00</p>
+      </div>
+      <!-- Timer end -->
 
+      <!-- Landing page -->
+      <section class="landingPage" id="landingPage">
+        <h1 class="pageHeading uppercase" id="pageHeading">Sången bakom sången</h1>
+        <button class="readyBtn uppercase" id="readyBtn">Redo?</button>
+      </section>
+      <!-- End Landing page -->
 
-<body>
-  <div class="app" id="app"></div>
-  <script type="module" src="/src/main.ts"></script>
-</body>
+      <!---Name page --->
+      <section class="namePage hidden" id="namePage">
+        <label for="playerName" class="nameLabel" id="nameLabel">Namn?</label>
+        <input type="text" class="playerName" id="playerName" name="playerName" placeholder="John" />
+        <button class="runBtn" id="runBtn">Kör</button>
+      </section>
+      <!--- End Name page --->
 
+      <!-- Question page -->
+      <section class="questionPage hidden" id="questionPage">
+        <h2 class="questionNumber" id="questionNumber">1</h2>
+        <p class="questionText" id="questionText">Lorem, ipsum dolor sit amet consectetur adipisicing elit?</p>
+        <form class="questionForm" id="questionForm">
+          <div class="radioBtnContainer" id="radioBtnContainer">
+            <label>
+              <input type="radio" class="answerRadioBtn" id="answerRadioBtn1" name="answer" value="answer1" />
+              <span>Svarsalternativ 1</span>
+            </label>
+            <label>
+              <input type="radio" class="answerRadioBtn" id="answerRadioBtn2" name="answer" value="answer2" />
+              <span>Svarsalternativ 2</span>
+            </label>
+            <label>
+              <input type="radio" class="answerRadioBtn" id="answerRadioBtn3" name="answer" value="answer3" />
+              <span>Svarsalternativ 3</span>
+            </label>
+          </div>
+          <button class="answerBtn" id="answerBtn" disabled>Svara</button>
+        </form>
+      </section>
+      <!-- End Question page -->
+
+      <!-- Feedback page -->
+      <section class="feedbackPage hidden" id="feedbackPage">
+        <div class="answerContainer">
+          <div class="correctAnswerContainer" id="correctAnswerContainer">
+            <h2>Du svarare rätt!</h2>
+          </div>
+          <div class="wrongAnswerContainer hidden" id="wrongAnswerContainer">
+            <h2>Fel svar!</h2>
+            <p>Rätt svar var:</p>
+            <p class="correctAnswer" class="correctAnswer">XXX</p>
+          </div>
+          <button class="nextQuestionBtn uppercase" id="nextQuestionBtn">nästa fråga</button>
+        </div>
+      </section>
+      <!-- End Feedback page -->
+
+      <!-- Result page -->
+      <section class="resultPage hidden" id="resultPage">
+        <h2 class="resultTitle">Resultat</h2>
+        <div id="totalScoreContainer" class="totalScoreContainer">
+          <p id="totalScore" class="totalScore"><span></span> av 10</p>
+        </div>
+        <button id="playAgainBtn" class="playAgainBtn">Spela igen</button>
+      </section>
+      <!-- End Result page -->
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>

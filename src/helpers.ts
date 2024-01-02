@@ -8,6 +8,6 @@ export function sortArrayByText(array: any[], property: string): string[] {
   return array.sort((a, b) => {
     const textA = a[property];
     const textB = b[property];
-    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    return textA < textB ? -1 : textA > textB ? 1 : 0;
   });
 }
