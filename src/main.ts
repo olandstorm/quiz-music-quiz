@@ -121,3 +121,36 @@ const totalScoreContainer = document.getElementById('totalScoreContainer');
 const playAgainBtn = document.getElementById('playAgainBtn'); 
 
 */
+
+/**
+ * --------------------------------
+ * -------------TIMER--------------
+ * --------------------------------
+ */
+
+// An interface for the timer
+interface Timer {
+  intervalId: number | null;
+  seconds: number;
+  minutes: number;
+}
+
+// Display the timer in the document
+function updateTimer(timer: Timer): void {
+  console.log(`${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`);
+}
+
+// Adds the 0 before if the number < 0
+function formatTime(time: number): string {
+  return time < 10 ? `0${time}` : `${time}`;
+}
+
+// Variable for the timer
+const timer: Timer = {
+  intervalId: null,
+  seconds: 0,
+  minutes: 0,
+};
+
+// To get rid of error messages mostly
+updateTimer(timer);
