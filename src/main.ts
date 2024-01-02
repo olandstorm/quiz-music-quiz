@@ -165,6 +165,14 @@ function stopTimer(timer: Timer): void {
   }
 }
 
+// Function to reset the timer
+function resetTimer(timer: Timer): void {
+  stopTimer(timer);
+  timer.seconds = 0;
+  timer.minutes = 0;
+  updateTimer(timer);
+}
+
 // Variable for the timer
 const timer: Timer = {
   intervalId: null,
@@ -179,3 +187,8 @@ startTimer(timer);
 setTimeout(() => {
   stopTimer(timer);
 }, 7000);
+
+// To test the resetTimer-function
+setTimeout(() => {
+  resetTimer(timer);
+}, 8000);
