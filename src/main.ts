@@ -145,6 +145,18 @@ function formatTime(time: number): string {
   return time < 10 ? `0${time}` : `${time}`;
 }
 
+// Function to start the timer
+function startTimer(timer: Timer): void {
+  timer.intervalId = setInterval(() => {
+    timer.seconds += 1;
+    if (timer.seconds === 60) {
+      timer.seconds = 0;
+      timer.minutes += 1;
+    }
+    updateTimer(timer);
+  }, 1000);
+}
+
 // Variable for the timer
 const timer: Timer = {
   intervalId: null,
@@ -152,5 +164,5 @@ const timer: Timer = {
   minutes: 0,
 };
 
-// To get rid of error messages mostly
-updateTimer(timer);
+// To display the timer in the console
+startTimer(timer);
