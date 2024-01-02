@@ -122,74 +122,6 @@ const playAgainBtn = document.getElementById('playAgainBtn');
 
 */
 
-interface IExampleArray {
-  id: number;
-  question: string;
-  answers: [
-    { answer: string; correct: boolean },
-    { answer: string; correct: boolean },
-    { answer: string; correct: boolean },
-  ];
-}
-
-// Placeholder av interface array
-const questionArrayExample: IExampleArray[] = [
-  {
-    id: 1,
-    question: 'fråga1?',
-    answers: [
-      { answer: 'svar1.1', correct: false },
-      { answer: 'svar1.2', correct: true },
-      { answer: 'svar1.3', correct: false },
-    ],
-  },
-  {
-    id: 2,
-    question: 'fråg2?',
-    answers: [
-      { answer: 'svar2.1', correct: true },
-      { answer: 'svar2.2', correct: false },
-      { answer: 'svar2.3', correct: false },
-    ],
-  },
-  {
-    id: 3,
-    question: 'Fråga3?',
-    answers: [
-      { answer: 'svar3.1', correct: false },
-      { answer: 'svar3.2', correct: false },
-      { answer: 'svar3.3', correct: true },
-    ],
-  },
-  {
-    id: 4,
-    question: 'Fråga4?',
-    answers: [
-      { answer: 'svar4.1', correct: true },
-      { answer: 'svar4.2', correct: false },
-      { answer: 'svar4.3', correct: false },
-    ],
-  },
-  {
-    id: 5,
-    question: 'Fråga5?',
-    answers: [
-      { answer: 'svar5.1', correct: false },
-      { answer: 'svar5.2', correct: true },
-      { answer: 'svar5.3', correct: false },
-    ],
-  },
-  {
-    id: 6,
-    question: 'Fråga6?',
-    answers: [
-      { answer: 'svar6.1', correct: false },
-      { answer: 'svar6.2', correct: true },
-      { answer: 'svar6.3', correct: false },
-    ],
-  },
-];
-
 // Variabler för de olika containers
 const landingPage = document.getElementById('landingPage');
 const namePage = document.getElementById('namePage');
@@ -200,16 +132,6 @@ const questionPage = document.getElementById('questionPage');
 const readyBtn = document.getElementById('readyBtn');
 // Körknapp - Name page
 const runBtn = document.getElementById('runBtn');
-
-// Variabel för fråge-texten
-const questionText = document.querySelector('#questionText');
-// Gruppering av alla answer radio knapparna 
-const answerRadioBtn = document.querySelectorAll('.answerText');
-
-// Variable to keep track of current question count
-const questionNumber = document.getElementById('questionNumber');
-
-
 
 // Condition to add evtlsnr if readyBtn exists in html
 if (readyBtn !== null) {
@@ -232,27 +154,13 @@ function displayNamePage(): void {
 // Funktion som triggas när användare klickar på "kör" i namnsida
 // Kallar även på fråge-funktion 
 function startQuiz(): void {
-  let totalScore: number = 0;
-
   if (namePage !== null && questionPage !== null) {
     namePage.classList.add('hidden');
     questionPage.classList.remove('hidden');
   }
-  showQuestion();
 }
 
-// Funktion som visar en random fråga från arrayen, och 
-function showQuestion(): void {
-  const randomQuestionId: number = Math.floor(Math.random() * questionArrayExample.length);
-  if (questionText !== null && answerRadioBtn !== null) {
-    questionText.innerHTML = questionArrayExample[randomQuestionId].question;
 
-    for (let i = 0; i < answerRadioBtn.length; i++) {
-      answerRadioBtn[i].innerHTML = questionArrayExample[randomQuestionId].answers[i].answer;
-    }
-  }
-  questionArrayExample.splice(randomQuestionId, 1);
-}
 
 // Ändring i HTML 
 // La till class för Answer btn span (answerText)
