@@ -32,28 +32,25 @@
   <body>
     <main>
       <!-- Timer -->
-      <div class="timerContainer hidden" id="timerContainer">
+      <div class="timerContainer" id="timerContainer">
         <p class="timer" id="timer">00:00</p>
       </div>
       <!-- Timer end -->
-
       <!-- Landing page -->
-      <section class="landingPage" id="landingPage">
+      <section class="landingPage hidden" id="landingPage">
         <h1 class="pageHeading uppercase" id="pageHeading">Sången bakom sången</h1>
-        <button class="readyBtn uppercase" id="readyBtn">Redo?</button>
+        <button class="readyBtn" id="readyBtn">Redo?</button>
       </section>
       <!-- End Landing page -->
-
       <!---Name page --->
-      <section class="namePage hidden" id="namePage">
+      <section class="namePage hidden uppercase" id="namePage">
         <label for="playerName" class="nameLabel" id="nameLabel">Namn?</label>
-        <input type="text" class="playerName" id="playerName" name="playerName" placeholder="John" />
+        <input type="text" class="playerName" id="playerName" name="playerName" />
         <button class="runBtn" id="runBtn">Kör</button>
       </section>
       <!--- End Name page --->
-
       <!-- Question page -->
-      <section class="questionPage hidden" id="questionPage">
+      <section class="questionPage" id="questionPage">
         <h2 class="questionNumber" id="questionNumber">1</h2>
         <p class="questionText" id="questionText">Lorem, ipsum dolor sit amet consectetur adipisicing elit?</p>
         <form class="questionForm" id="questionForm">
@@ -75,26 +72,26 @@
         </form>
       </section>
       <!-- End Question page -->
-
       <!-- Feedback page -->
       <section class="feedbackPage hidden" id="feedbackPage">
         <div class="answerContainer">
-          <div class="correctAnswerContainer" id="correctAnswerContainer">
+          <div class="correctAnswerContainer hidden" id="correctAnswerContainer">
             <h2>Du svarare rätt!</h2>
           </div>
-          <div class="wrongAnswerContainer hidden" id="wrongAnswerContainer">
+          <div class="wrongAnswerContainer" id="wrongAnswerContainer">
             <h2>Fel svar!</h2>
+            <!--       Ta bort??      
             <p>Rätt svar var:</p>
             <p class="correctAnswer" class="correctAnswer">XXX</p>
+           -->
           </div>
           <button class="nextQuestionBtn uppercase" id="nextQuestionBtn">nästa fråga</button>
         </div>
       </section>
       <!-- End Feedback page -->
-
       <!-- Result page -->
       <section class="resultPage hidden" id="resultPage">
-        <h2 class="resultTitle">Resultat</h2>
+        <h2 class="resultTitle uppercase">Resultat</h2>
         <div id="totalScoreContainer" class="totalScoreContainer">
           <p id="totalScore" class="totalScore"><span></span> av 10</p>
         </div>
