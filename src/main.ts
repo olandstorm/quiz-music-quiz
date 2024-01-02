@@ -121,3 +121,20 @@ const totalScoreContainer = document.getElementById('totalScoreContainer');
 const playAgainBtn = document.getElementById('playAgainBtn'); 
 
 */
+
+
+// -------------------RADIOBUTTONS AND ANSWERBUTTON------------------------------
+// when any radioBtn is clicked, remove the disabled attribute from the answerBtn.
+function enableAnswerBtn(): boolean {
+  const answerBtn = document.getElementById('answerBtn');
+  answerBtn?.removeAttribute('disabled');
+  return true;  
+}
+
+// declare all radiobuttons in the questionform via class
+const allRadioBtns = document.querySelectorAll('.answerRadioBtn');
+// for each radiobutton, add an eventlistener which triggers the enableAnswerBtn function
+allRadioBtns.forEach(radioBtn => {
+  radioBtn.addEventListener('click', enableAnswerBtn);
+});
+
