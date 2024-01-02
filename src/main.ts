@@ -126,7 +126,7 @@ const playAgainBtn = document.getElementById('playAgainBtn');
 // --------------------SAVE NAME FROM INPUT------------------------
 
 // global variable for the name input on the namePage
-const playerNameInput = document.getElementById('playerName') as HTMLInputElement;
+const playerNameInput = document.querySelector('.playerName') as HTMLInputElement;
 let savedPlayerName: string = ''; // declare the nameinput as initially empty
 console.log(playerNameInput);
 
