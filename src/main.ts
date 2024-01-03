@@ -171,6 +171,7 @@ const landingPage = document.getElementById('landingPage');
 const namePage = document.getElementById('namePage');
 const questionPage = document.getElementById('questionPage');
 const feedbackPage = document.getElementById('feedbackPage');
+const resultPage = document.querySelector('#resultPage');
 
 // Variabler för knapparna
 
@@ -178,14 +179,16 @@ const feedbackPage = document.getElementById('feedbackPage');
 const readyBtn = document.getElementById('readyBtn');
 // Körknapp - Name page
 const runBtn = document.getElementById('runBtn');
-// Nästa fråga knapp - Feedback page
+// Nästa fråga-knapp - Feedback page
 const questionText = document.querySelector('#questionText');
 // Gruppering av alla answer radio knapparna
 const answerRadioBtn = document.querySelectorAll('.answerText');
 // Click event to display the name page after user clicks on
 
-// Nästa fråga knapp - Feedback page
+// Nästa fråga-knapp - Feedback page
 const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+// Visa resultat-knapp - Feedback page
+const showResultBtn = document.getElementById('showResultBtn');
 
 // Click event to display the name page after user clicks on
 // Condition to add evtlsnr if readyBtn exists in html
