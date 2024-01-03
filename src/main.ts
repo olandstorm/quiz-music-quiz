@@ -283,6 +283,8 @@ function displayFeedbackPage(): void {
   const correctAnswerContainer = document.getElementById('correctAnswerContainer'); 
   // local variable for the wrongAnswerContainer
   const wrongAnswerContainer = document.getElementById('wrongAnswerContainer'); 
+  // local variable for checking if answer is correct
+  const rightAnswer = isAnswerCorrect(); 
 
   // check if the radioBtn answer is true
   if (rightAnswer === true) {
