@@ -124,6 +124,21 @@ const playAgainBtn = document.getElementById('playAgainBtn');
 
 
 
+// --------------------SAVE NAME FROM INPUT------------------------
+
+// global variable for the name input on the namePage
+const playerNameInput = document.querySelector('.playerName') as HTMLInputElement;
+let savedPlayerName: string = ''; // declare the nameinput as initially empty
+console.log(playerNameInput);
+
+// if the name input is not empty let the savedPlayerName be the value of the input
+if (playerNameInput !== null) { 
+  // this will then be used to print out the name on the resultPage
+  savedPlayerName = playerNameInput.value; 
+}
+console.log(savedPlayerName);
+
+
 /**
  * --------------------------------
  * -------------TIMER--------------
@@ -298,4 +313,5 @@ resetTotalScore();
 
 console.log(totalScore);
 // DELETE ABOVE IF NEEDED
+
 
