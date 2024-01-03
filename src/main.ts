@@ -1,57 +1,4 @@
-// import typescriptLogo from './assets/images/typescript.svg'; // Exempel på hur ni importerar bilder
-// import { sortArrayByText } from './helpers'; // Exempel på hur ni importerar en funktion från en annan fil
-
-// /**
-//  * Här definierar vi en mall för hur vi vill att vår array ska se ut.
-//  * Ett så kallat "interface".
-//  * Den är för att garantera att ALLA objekt i vår array har samtliga egenskaper.
-//  * Prova t.ex. att lägga till en egenskap i interfacet, och notera hur arrayen nedanför
-//  * får rödmarkeringar där denna egenskap saknas.
-//  */
-// interface IExampleArray {
-//   name: string;
-//   age: number;
-// }
-
-// // Här skriver vi att vår array med namnet myExampleArray ska följa reglerna (interfacet)
-// // i IExampleArray och att det är en array genom att vi sätter [] efter
-// const myExampleArray: IExampleArray[] = [
-//   {
-//     name: 'Hans',
-//     age: 25,
-//   },
-//   {
-//     name: 'Greta',
-//     age: 30,
-//   },
-//   {
-//     name: 'Häxan',
-//     age: 87,
-//   },
-// ];
-
-// // Skriv ut den sorterade arrayen i konsolen, använd en importerad funktion
-// console.table(sortArrayByText(myExampleArray, 'name'));
-
-// // Använd samma funktion för att sortera på en annan egenskap
-// console.table(sortArrayByText(myExampleArray, 'age'));
-
-// // Hämta ett HTML-element från index.html
-
-// const container: HTMLDivElement | null = document.querySelector('#app');
-
-// if (container !== null) { // Om HTML-elementet finns
-//   container.innerHTML = `
-//     <div>
-//       <h1>Hello FED23D!</h1>
-//       <img src="${typescriptLogo}" loading="lazy" width="32" height="32"
-//         alt="Blå bakgrund, vita bokstäver ovanpå med texten TS">
-//     </div>
-//   `;
-// }
-// ------------------------------------- OUR FILE START FROM THIS LINE ---------------------------------------
-
-import './questionArray.ts';
+import { questionArray } from './questionArray.ts';
 import './scss/style.scss'; // Importera huvud-SCSS-filen
 
 /* 
@@ -122,14 +69,12 @@ const playAgainBtn = document.getElementById('playAgainBtn');
 
 */
 
-
-
 // -------------------RADIOBUTTONS AND ANSWERBUTTON------------------------------
 // when any radioBtn is clicked, remove the disabled attribute from the answerBtn.
 function enableAnswerBtn(): boolean {
   const answerBtn = document.getElementById('answerBtn');
   answerBtn?.removeAttribute('disabled');
-  return true;  
+  return true;
 }
 
 // declare all radiobuttons in the questionform via class
@@ -139,28 +84,20 @@ allRadioBtns.forEach(radioBtn => {
   radioBtn.addEventListener('click', enableAnswerBtn);
 });
 
-
 // --------------------SAVE NAME FROM INPUT------------------------
 
 // global variable for the name input on the namePage
 const playerNameInput = document.querySelector('.playerName') as HTMLInputElement;
 let savedPlayerName: string = ''; // declare the nameinput as initially empty
-console.log(playerNameInput);
 
-// if the name input is not empty let the savedPlayerName be the value of the input
-if (playerNameInput !== null) { 
-  // this will then be used to print out the name on the resultPage
-  savedPlayerName = playerNameInput.value; 
-}
 console.log(savedPlayerName);
-
 
 /**
  * --------------------------------
  * -------------TIMER--------------
  * --------------------------------
  */
-
+/* 
 // An interface for the timer
 interface Timer {
   intervalId: number | null;
@@ -213,7 +150,6 @@ const timer: Timer = {
   minutes: 0,
 };
 
-/*
 // To display the timer in the console
 startTimer(timer);
 
@@ -228,9 +164,7 @@ setTimeout(() => {
 }, 8000);
 
 // To get rid of error messages mostly
-updateTimer(timer);
-*/
-
+updateTimer(timer); */
 
 // Variabler för de olika containers
 const landingPage = document.getElementById('landingPage');
@@ -238,8 +172,7 @@ const namePage = document.getElementById('namePage');
 const questionPage = document.getElementById('questionPage');
 const feedbackPage = document.getElementById('feedbackPage');
 
-
-// Variabler för knapparna 
+// Variabler för knapparna
 
 // Redoknapp - Landing page
 const readyBtn = document.getElementById('readyBtn');
@@ -254,14 +187,11 @@ const answerRadioBtn = document.querySelectorAll('.answerText');
 // Nästa fråga knapp - Feedback page
 const nextQuestionBtn = document.getElementById('nextQuestionBtn');
 
-
-
 // Click event to display the name page after user clicks on
 // Condition to add evtlsnr if readyBtn exists in html
 if (readyBtn !== null) {
   readyBtn.addEventListener('click', displayNamePage);
 }
-
 
 // Click event to trigger the start of the quiz after user clicks on
 // Condition to add evtlsnr if runBtn exists in html
@@ -291,6 +221,13 @@ function startQuiz(): void {
     questionPage.classList.remove('hidden');
   }
   showQuestion();
+
+  // if the name input is not empty let the savedPlayerName be the value of the input
+  if (playerNameInput !== null) {
+    // this will then be used to print out the name on the resultPage
+    savedPlayerName = playerNameInput.value;
+  }
+  console.log(savedPlayerName);
 }
 // Funktion som visar en random fråga från arrayen, och
 function showQuestion(): void {
@@ -305,7 +242,6 @@ function showQuestion(): void {
   console.table(questionArray);
 }
 
-
 // Funktion för att dölja feedback page och gå vidare till nästa fråga
 function nextQuestion(): void {
   if (feedbackPage !== null && questionPage !== null) {
@@ -314,7 +250,6 @@ function nextQuestion(): void {
   }
   showQuestion();
 }
-
 
 // DELETE WHEN MERGE IF NEEDED
 let totalScore: number = 0; // TS type defined and set to 0.
@@ -329,4 +264,3 @@ resetTotalScore();
 
 console.log(totalScore);
 // DELETE ABOVE IF NEEDED
-

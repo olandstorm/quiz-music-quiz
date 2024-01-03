@@ -1,8 +1,3 @@
-/* eslint-disable max-len */
-// import './scss/style.scss'; // Importera huvud-SCSS-filen
-// import typescriptLogo from './assets/images/typescript.svg'; // Exempel på hur ni importerar bilder
-import { sortArrayByText } from './helpers'; // Exempel på hur ni importerar en funktion från en annan fil
-
 /**
  * Här definierar vi en mall för hur vi vill att vår array ska se ut.
  * Ett så kallat "interface".
@@ -22,10 +17,11 @@ interface IQuestionArray {
 
 // Här skriver vi att vår array med namnet myExampleArray ska följa reglerna (interfacet)
 // i IExampleArray och att det är en array genom att vi sätter [] efter
-const myQuestionArray: IQuestionArray[] = [
+export const questionArray: IQuestionArray[] = [
   {
     id: 1,
-    question: '1977 gav Sex Pistols ut singeln Pretty Vacant med b-sidan No Fun. Vem/vilka gjorde originalet till No Fun?',
+    question:
+      '1977 gav Sex Pistols ut singeln Pretty Vacant med b-sidan No Fun. Vem/vilka gjorde originalet till No Fun?',
     answers: [
       { answer: 'The Who', correct: false },
       { answer: 'Hep Stars', correct: false },
@@ -43,7 +39,9 @@ const myQuestionArray: IQuestionArray[] = [
   },
   {
     id: 3,
-    question: 'Beatles-låten I Wanna Be Your Man spelades in och gavs ut av ett annat band innan Beatles egna utgåva. Vilket var bandet?',
+    question:
+      // eslint-disable-next-line
+      'Beatles-låten I Wanna Be Your Man spelades in och gavs ut av ett annat band innan Beatles egna utgåva. Vilket var bandet?',
     answers: [
       { answer: 'The Searchers', correct: false },
       { answer: 'The Merseys', correct: false },
@@ -79,7 +77,9 @@ const myQuestionArray: IQuestionArray[] = [
   },
   {
     id: 7,
-    question: 'Låten Ice Ice Baby med Vanilla Ice baseras på en sampling av basgången i en låt sprungen ur ett artistsamarbete. Vilka var artisterna?',
+    question:
+      // eslint-disable-next-line
+      'Låten Ice Ice Baby med Vanilla Ice baseras på en sampling av basgången i en låt sprungen ur ett artistsamarbete. Vilka var artisterna?',
     answers: [
       { answer: 'Fleetwood Mac & Sting', correct: false },
       { answer: 'Queen & David Bowie', correct: false },
@@ -88,7 +88,9 @@ const myQuestionArray: IQuestionArray[] = [
   },
   {
     id: 8,
-    question: 'Because the Night är från början en halvskriven outgiven låt av Bruce Springsteen. Vilket band fick en världshit med den efter att bandledaren skrivit klart texten?',
+    question:
+      // eslint-disable-next-line
+      'Because the Night är från början en halvskriven outgiven låt av Bruce Springsteen. Vilket band fick en världshit med den efter att bandledaren skrivit klart texten?',
     answers: [
       { answer: 'Florence and the Machine', correct: false },
       { answer: 'Huey Lewis & the News', correct: false },
@@ -97,7 +99,9 @@ const myQuestionArray: IQuestionArray[] = [
   },
   {
     id: 9,
-    question: 'Bandet Smaklösa (världsberömda på Gotland) har haft en jätte(?)hit med låten Det regnar kor som är en svensk version av låten It\'s Raining Men. Vad heter gruppen som framförde originalet?',
+    question:
+      // eslint-disable-next-line
+      "Bandet Smaklösa (världsberömda på Gotland) har haft en jätte(?)hit med låten Det regnar kor som är en svensk version av låten It's Raining Men. Vad heter gruppen som framförde originalet?",
     answers: [
       { answer: 'The Weather Girls', correct: true },
       { answer: 'Spice Girls', correct: false },
@@ -106,7 +110,9 @@ const myQuestionArray: IQuestionArray[] = [
   },
   {
     id: 10,
-    question: 'I filmen Notting Hill tolkade Elvis Costello låten She på soundtracket. Vilken fransktalande artist gjorde originalet?',
+    question:
+      // eslint-disable-next-line
+      'I filmen Notting Hill tolkade Elvis Costello låten She på soundtracket. Vilken fransktalande artist gjorde originalet?',
     answers: [
       { answer: 'Johnny Halliday', correct: false },
       { answer: 'Jacques Brel', correct: false },
@@ -124,7 +130,9 @@ const myQuestionArray: IQuestionArray[] = [
   },
   {
     id: 12,
-    question: 'Låten Hallelujah är nog mest känd i en version från 1994 med Jeff Buckley, men vem skrev och spelade in originalet på 80-talet?',
+    question:
+      // eslint-disable-next-line
+      'Låten Hallelujah är nog mest känd i en version från 1994 med Jeff Buckley, men vem skrev och spelade in originalet på 80-talet?',
     answers: [
       { answer: 'Leonard Cohen', correct: true },
       { answer: 'Tim Buckley', correct: false },
@@ -142,7 +150,9 @@ const myQuestionArray: IQuestionArray[] = [
   },
   {
     id: 14,
-    question: '2023 sjöng Cher in jullåten Christmas (Baby, please come home) i duett med artisten som 60 år tidigare först gjorde den, den gången med Cher som bakgrundssångerska. Vad heter originalartisten?',
+    question:
+      // eslint-disable-next-line
+      '2023 sjöng Cher in jullåten Christmas (Baby, please come home) i duett med artisten som 60 år tidigare först gjorde den, den gången med Cher som bakgrundssångerska. Vad heter originalartisten?',
     answers: [
       { answer: 'Ronnie Spector', correct: false },
       { answer: 'Diana Ross', correct: false },
@@ -151,7 +161,9 @@ const myQuestionArray: IQuestionArray[] = [
   },
   {
     id: 15,
-    question: 'Engelska bandet Status Quo gjorde 1970 den nysläppta låten Roadhouse Blues till en av sina standards live. Låten gav dem inspiration till den boogieinriktade rock som skulle göra dem kända. Vad hette bandet som gav ut originalet?',
+    question:
+      // eslint-disable-next-line
+      'Engelska bandet Status Quo gjorde 1970 den nysläppta låten Roadhouse Blues till en av sina standards live. Låten gav dem inspiration till den boogieinriktade rock som skulle göra dem kända. Vad hette bandet som gav ut originalet?',
     answers: [
       { answer: 'MC5', correct: false },
       { answer: 'Greatful Dead', correct: false },
@@ -160,7 +172,9 @@ const myQuestionArray: IQuestionArray[] = [
   },
   {
     id: 16,
-    question: 'Skotska bandet Nazareth fick 1975 en brottarhit med balladen Love Hurts. Låten hade tidigare spelats in av bl a Emmylou Harris & Gram Parsons, men vilken grupp gav ut originalet 1960?',
+    question:
+      // eslint-disable-next-line
+      'Skotska bandet Nazareth fick 1975 en brottarhit med balladen Love Hurts. Låten hade tidigare spelats in av bl a Emmylou Harris & Gram Parsons, men vilken grupp gav ut originalet 1960?',
     answers: [
       { answer: 'The Everly Brothers', correct: true },
       { answer: 'The Walker Brothers', correct: false },
@@ -169,7 +183,9 @@ const myQuestionArray: IQuestionArray[] = [
   },
   {
     id: 17,
-    question: 'Glimmande nymf är en sång gavs ut av Fred Åkerström 1975. Vems sånger tokade han på albumet med samma namn som sången?',
+    question:
+      // eslint-disable-next-line
+      'Glimmande nymf är en sång gavs ut av Fred Åkerström 1975. Vems sånger tokade han på albumet med samma namn som sången?',
     answers: [
       { answer: 'Evert Taubes', correct: false },
       { answer: 'Dan Anderssons', correct: false },
@@ -178,7 +194,9 @@ const myQuestionArray: IQuestionArray[] = [
   },
   {
     id: 18,
-    question: '2008 samplar artisten Kid Rock tre artister/grupper i "plågan" All Summer Long. Warren Zevon och Bob Seger var två av dem. Vilket band var tredje källan?',
+    question:
+      // eslint-disable-next-line
+      '2008 samplar artisten Kid Rock tre artister/grupper i "plågan" All Summer Long. Warren Zevon och Bob Seger var två av dem. Vilket band var tredje källan?',
     answers: [
       { answer: 'The Allman Brothers', correct: false },
       { answer: 'Lynyrd Skynyrd', correct: true },
@@ -187,7 +205,9 @@ const myQuestionArray: IQuestionArray[] = [
   },
   {
     id: 19,
-    question: 'Rockstandardlåten Cocaine är kanske mest känd i Eric Claptons version från 1977. Originalverionen kom året innan. Vem var artisten och låtskrivaren?',
+    question:
+      // eslint-disable-next-line
+      'Rockstandardlåten Cocaine är kanske mest känd i Eric Claptons version från 1977. Originalverionen kom året innan. Vem var artisten och låtskrivaren?',
     answers: [
       { answer: 'J.J. Cale', correct: true },
       { answer: 'John Cale', correct: false },
@@ -196,7 +216,9 @@ const myQuestionArray: IQuestionArray[] = [
   },
   {
     id: 20,
-    question: '1949 sjöng Bertil Boo "Jag drömmer om en jul hemma". Sju år tidigare spelades det engelskspråkiga originalet in, som kom att bli den mest sålda (fysika) singeln genom tiderna. Vem sjöng den?',
+    question:
+      // eslint-disable-next-line
+      '1949 sjöng Bertil Boo "Jag drömmer om en jul hemma". Sju år tidigare spelades det engelskspråkiga originalet in, som kom att bli den mest sålda (fysika) singeln genom tiderna. Vem sjöng den?',
     answers: [
       { answer: 'Frank Sinatra', correct: false },
       { answer: 'Jim Reeves', correct: false },
@@ -204,23 +226,3 @@ const myQuestionArray: IQuestionArray[] = [
     ],
   },
 ];
-
-
-// // Skriv ut den sorterade arrayen i konsolen, använd en importerad funktion
-console.table(sortArrayByText(myQuestionArray, 'id'));
-
-// // Använd samma funktion för att sortera på en annan egenskap
-console.table(sortArrayByText(myQuestionArray, 'question'));
-
-// // Hämta ett HTML-element från index.html
-// const container: HTMLDivElement | null = document.querySelector('#app');
-
-// if (container !== null) { // Om HTML-elementet finns
-//   container.innerHTML = `
-//     <div>
-//       <h1>Hello FED23D!</h1>
-//       <img src="${typescriptLogo}" loading="lazy" width="32" height="32"
-//         alt="Blå bakgrund, vita bokstäver ovanpå med texten TS">
-//     </div>
-//   `;
-// }
