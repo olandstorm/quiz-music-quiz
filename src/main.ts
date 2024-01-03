@@ -144,6 +144,7 @@ const questionText = document.querySelector('#questionText');
 const answerRadioBtn = document.querySelectorAll('.answerText');
 
 // Click event to display the name page after user clicks on
+
 // Condition to add evtlsnr if readyBtn exists in html
 if (readyBtn !== null) {
   readyBtn.addEventListener('click', displayNamePage);
@@ -176,7 +177,6 @@ function startQuiz(): void {
     namePage.classList.add('hidden');
     questionPage.classList.remove('hidden');
   }
-  showQuestion();
 }
 
 // Funktion som visar en random fråga från arrayen, och
@@ -202,6 +202,4 @@ function nextQuestion(): void {
   showQuestion();
 }
 
-// Ändring i HTML
-// La till class för Answer btn span (answerText)
-// För att loopa ut svaren mot den klassen istället för att välja specifika radio-btn
+
