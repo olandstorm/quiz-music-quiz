@@ -183,7 +183,6 @@ const runBtn = document.getElementById('runBtn');
 const questionText = document.querySelector('#questionText');
 // Gruppering av alla answer radio knapparna
 const answerRadioBtn = document.querySelectorAll('.answerText');
-// Click event to display the name page after user clicks on
 
 // Nästa fråga-knapp - Feedback page
 const nextQuestionBtn = document.getElementById('nextQuestionBtn');
@@ -242,6 +241,7 @@ function startQuiz(): void {
   }
   console.log(savedPlayerName);
 }
+
 // Funktion som visar en random fråga från arrayen, och
 function showQuestion(): void {
   const randomQuestionId: number = Math.floor(Math.random() * questionArray.length);
@@ -266,11 +266,15 @@ function nextQuestion(): void {
 
 // Function for displaying Result page
 function displayResultPage(): void {
-  if (feedbackPage !== null && resultPage !== null) {
+  const resultTitlePlayerName = document.querySelector('#resultTitlePlayerName');
+  if (feedbackPage !== null && resultPage !== null && resultTitlePlayerName !== null) {
     feedbackPage.classList.add('hidden');
     resultPage.classList.remove('hidden');
+    resultTitlePlayerName.innerHTML = savedPlayerName;
   }
 }
+
+
 
 // DELETE WHEN MERGE IF NEEDED
 let totalScore: number = 0; // TS type defined and set to 0.
