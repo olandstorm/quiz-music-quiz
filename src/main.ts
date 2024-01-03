@@ -121,3 +121,18 @@ const totalScoreContainer = document.getElementById('totalScoreContainer');
 const playAgainBtn = document.getElementById('playAgainBtn'); 
 
 */
+
+const landingPage = document.getElementById('landingPage');
+const namePage = document.getElementById('namePage');
+const readyBtn = document.getElementById('readyBtn');
+
+if (readyBtn !== null) {
+  readyBtn.addEventListener('click', displayNamePage);
+}
+
+function displayNamePage(): void {
+  if (landingPage !== null && namePage !== null) {
+    landingPage.classList.add('hidden');
+    namePage.classList.remove('hidden');
+  }
+}
