@@ -123,6 +123,40 @@ const playAgainBtn = document.getElementById('playAgainBtn');
 */
 
 
+/**
+ * --------------------------------
+ * -------------TIMER--------------
+ * --------------------------------
+ */
+
+// An interface for the timer
+interface Timer {
+  intervalId: number | null;
+  seconds: number;
+  minutes: number;
+}
+
+// Display the timer in the document
+function updateTimer(timer: Timer): void {
+  console.log(`${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`);
+}
+
+// Adds the 0 before if the number < 0
+function formatTime(time: number): string {
+  return time < 10 ? `0${time}` : `${time}`;
+}
+
+// Variable for the timer
+const timer: Timer = {
+  intervalId: null,
+  seconds: 0,
+  minutes: 0,
+};
+
+// To get rid of error messages mostly
+updateTimer(timer);
+
+
 // Variabler för de olika containers
 const landingPage = document.getElementById('landingPage');
 const namePage = document.getElementById('namePage');
@@ -196,19 +230,6 @@ function showQuestion(): void {
   console.table(questionArray);
 }
 
-// Funktion som visar en random fråga från arrayen, och
-function showQuestion(): void {
-  const randomQuestionId: number = Math.floor(Math.random() * questionArray.length);
-  if (questionText !== null && answerRadioBtn !== null) {
-    questionText.innerHTML = questionArray[randomQuestionId].question;
-
-    for (let i = 0; i < answerRadioBtn.length; i++) {
-      answerRadioBtn[i].innerHTML = questionArray[randomQuestionId].answers[i].answer;
-    }
-  }
-  questionArray.splice(randomQuestionId, 1);
-  console.table(questionArray);
-}
 
 // Funktion för att dölja feedback page och gå vidare till nästa fråga
 function nextQuestion(): void {
@@ -218,6 +239,5 @@ function nextQuestion(): void {
   }
   showQuestion();
 }
-
 
 
