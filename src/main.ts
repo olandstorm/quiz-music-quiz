@@ -190,6 +190,8 @@ const nextQuestionBtn = document.getElementById('nextQuestionBtn');
 // Visa resultat-knapp - Feedback page
 const showResultBtn = document.getElementById('showResultBtn');
 
+// Events
+
 // Click event to display the name page after user clicks on
 // Condition to add evtlsnr if readyBtn exists in html
 if (readyBtn !== null) {
@@ -207,6 +209,14 @@ if (runBtn !== null) {
 if (nextQuestionBtn !== null) {
   nextQuestionBtn.addEventListener('click', nextQuestion);
 }
+
+// Click event to trigger Result page
+// Condition to add evtlsnr if showResultBtn exists in html
+if (showResultBtn !== null) {
+  showResultBtn.addEventListener('click', displayResultPage);
+}
+
+// Functions
 
 // Function to display namepage when user klicks on readyBtn
 function displayNamePage(): void {
@@ -252,6 +262,14 @@ function nextQuestion(): void {
     questionPage.classList.remove('hidden');
   }
   showQuestion();
+}
+
+// Function for displaying Result page
+function displayResultPage(): void {
+  if (feedbackPage !== null && resultPage !== null) {
+    feedbackPage.classList.add('hidden');
+    resultPage.classList.remove('hidden');
+  }
 }
 
 // DELETE WHEN MERGE IF NEEDED
