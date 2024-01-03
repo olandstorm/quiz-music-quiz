@@ -122,17 +122,46 @@ const playAgainBtn = document.getElementById('playAgainBtn');
 
 */
 
+// Variabler för de olika containers
 const landingPage = document.getElementById('landingPage');
 const namePage = document.getElementById('namePage');
-const readyBtn = document.getElementById('readyBtn');
+const questionPage = document.getElementById('questionPage');
 
+// Variabler för knapparna 
+// Redoknapp - Landing page
+const readyBtn = document.getElementById('readyBtn');
+// Körknapp - Name page
+const runBtn = document.getElementById('runBtn');
+
+// Condition to add evtlsnr if readyBtn exists in html
 if (readyBtn !== null) {
   readyBtn.addEventListener('click', displayNamePage);
 }
 
+// Condition to add evtlsnr if runBtn exists in html
+if (runBtn !== null) {
+  runBtn.addEventListener('click', startQuiz);
+}
+
+// Function to display namepage when user klicks on readyBtn
 function displayNamePage(): void {
   if (landingPage !== null && namePage !== null) {
     landingPage.classList.add('hidden');
     namePage.classList.remove('hidden');
   }
 }
+
+// Funktion som triggas när användare klickar på "kör" i namnsida
+// Kallar även på fråge-funktion 
+function startQuiz(): void {
+  if (namePage !== null && questionPage !== null) {
+    namePage.classList.add('hidden');
+    questionPage.classList.remove('hidden');
+  }
+}
+
+
+
+// Ändring i HTML 
+// La till class för Answer btn span (answerText)
+// För att loopa ut svaren mot den klassen istället för att välja specifika radio-btn 
