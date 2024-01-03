@@ -1,4 +1,5 @@
 import { questionArray } from './questionArray.ts';
+import type { IQuestionArray } from './questionArray.ts';
 import './scss/style.scss'; // Importera huvud-SCSS-filen
 
 /* 
@@ -71,8 +72,9 @@ const playAgainBtn = document.getElementById('playAgainBtn');
 
 // -------------------RADIOBUTTONS AND ANSWERBUTTON------------------------------
 // when any radioBtn is clicked, remove the disabled attribute from the answerBtn.
+const answerBtn = document.getElementById('answerBtn');
+
 function enableAnswerBtn(): boolean {
-  const answerBtn = document.getElementById('answerBtn');
   answerBtn?.removeAttribute('disabled');
   return true;
 }
@@ -230,17 +232,62 @@ function startQuiz(): void {
   console.log(savedPlayerName);
 }
 // Funktion som visar en random fråga från arrayen, och
-function showQuestion(): void {
+let currentQuestion: IQuestionArray;
+
+function randomQuestion(): IQuestionArray {
   const randomQuestionId: number = Math.floor(Math.random() * questionArray.length);
+  currentQuestion = questionArray[randomQuestionId];
+  questionArray.splice(randomQuestionId, 1);
+  return currentQuestion;
+}
+
+function showQuestion(): void {
+  randomQuestion();
   if (questionText !== null && answerRadioBtn !== null) {
-    questionText.innerHTML = questionArray[randomQuestionId].question;
+    questionText.innerHTML = currentQuestion.question;
     for (let i = 0; i < answerRadioBtn.length; i++) {
-      answerRadioBtn[i].innerHTML = questionArray[randomQuestionId].answers[i].answer;
+      answerRadioBtn[i].innerHTML = currentQuestion.answers[i].answer;
     }
   }
-  questionArray.splice(randomQuestionId, 1);
   console.table(questionArray);
 }
+
+function checkAnswerInput(): number | null {
+  const radioButtons = document.getElementsByName('answer');
+
+  for (let i = 0; i < radioButtons.length; i++) {
+    const radioButton = radioButtons[i] as HTMLInputElement;
+
+    if (radioButton.checked) {
+      console.log(i);
+      return i;
+    }
+  }
+  return null;
+}
+
+function checkAnswer(): number | null {
+  for (let i = 0; i < currentQuestion.answers.length; i++) {
+    if (currentQuestion.answers[i].correct) {
+      console.log(i);
+      return i;
+    }
+  }
+  return null;
+}
+
+function test(): void {
+  const userAnswerIndex = checkAnswerInput();
+  const correctAnswerIndex = checkAnswer();
+
+  if (userAnswerIndex === correctAnswerIndex) {
+    console.log('correct');
+  } else {
+    console.log('false');
+  }
+}
+
+answerBtn?.addEventListener('click', test);
 
 // Funktion för att dölja feedback page och gå vidare till nästa fråga
 function nextQuestion(): void {
