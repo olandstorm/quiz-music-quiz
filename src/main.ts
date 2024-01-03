@@ -264,3 +264,36 @@ resetTotalScore();
 
 console.log(totalScore);
 // DELETE ABOVE IF NEEDED
+
+
+// global variable for the answerButton on questionPage
+const answerBtn = document.getElementById('answerBtn'); 
+// eventlistener for answerBtn which displays the feedback page
+answerBtn?.addEventListener('click', displayFeedbackPage);
+
+// function displaying feedback page when answerBtn is clicked
+function displayFeedbackPage(): void {
+  if (feedbackPage !== null && questionPage !== null) {
+    feedbackPage.classList.remove('hidden');
+    questionPage.classList.add('hidden');
+    console.log(displayFeedbackPage);
+  }
+  
+  // local variable for the correctAnswerContainer
+  const correctAnswerContainer = document.getElementById('correctAnswerContainer'); 
+  // local variable for the wrongAnswerContainer
+  const wrongAnswerContainer = document.getElementById('wrongAnswerContainer'); 
+
+  // check if the radioBtn answer is true
+  if (rightAnswer === true) {
+    // if answer is true, display the correctAnswerContainer styling
+    correctAnswerContainer?.classList.add('hidden');
+    wrongAnswerContainer?.classList.remove('hidden');
+  } else {
+    // if answer isn't true, display the wrongAnswerContainer styling
+    correctAnswerContainer?.classList.add('hidden');
+    wrongAnswerContainer?.classList.remove('hidden');
+  }
+}
+
+
