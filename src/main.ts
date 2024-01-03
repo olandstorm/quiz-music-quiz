@@ -123,6 +123,7 @@ const playAgainBtn = document.getElementById('playAgainBtn');
 */
 
 
+
 /**
  * --------------------------------
  * -------------TIMER--------------
@@ -282,4 +283,19 @@ function nextQuestion(): void {
   }
   showQuestion();
 }
+
+
+// DELETE WHEN MERGE IF NEEDED
+let totalScore: number = 0; // TS type defined and set to 0.
+// DELETE ABOVE IF NEEDED
+
+function resetTotalScore(): void {
+  totalScore = 0;
+}
+
+// DELETE WHEN MERGE IF NEEDED
+resetTotalScore();
+
+console.log(totalScore);
+// DELETE ABOVE IF NEEDED
 
