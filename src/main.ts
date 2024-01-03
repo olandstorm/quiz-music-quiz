@@ -99,16 +99,16 @@ console.log(savedPlayerName);
  * -------------TIMER--------------
  * --------------------------------
  */
-/* 
-// An interface for the timer
-interface Timer {
+
+/* // An interface for the timer
+interface ITimer {
   intervalId: number | null;
   seconds: number;
   minutes: number;
 }
 
 // Display the timer in the document
-function updateTimer(timer: Timer): void {
+function updateTimer(timer: ITimer): void {
   console.log(`${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`);
 }
 
@@ -118,7 +118,7 @@ function formatTime(time: number): string {
 }
 
 // Function to start the timer
-function startTimer(timer: Timer): void {
+function startTimer(timer: ITimer): void {
   timer.intervalId = setInterval(() => {
     timer.seconds += 1;
     if (timer.seconds === 60) {
@@ -130,7 +130,7 @@ function startTimer(timer: Timer): void {
 }
 
 // Function to stop the timer
-function stopTimer(timer: Timer): void {
+function stopTimer(timer: ITimer): void {
   if (timer.intervalId !== null) {
     clearInterval(timer.intervalId);
     timer.intervalId = null;
@@ -138,7 +138,7 @@ function stopTimer(timer: Timer): void {
 }
 
 // Function to reset the timer
-function resetTimer(timer: Timer): void {
+function resetTimer(timer: ITimer): void {
   stopTimer(timer);
   timer.seconds = 0;
   timer.minutes = 0;
@@ -234,6 +234,7 @@ function startQuiz(): void {
 // Funktion som visar en random fråga från arrayen, och
 let currentQuestion: IQuestionArray;
 
+// Randomize a question and return that question
 function randomQuestion(): IQuestionArray {
   const randomQuestionId: number = Math.floor(Math.random() * questionArray.length);
   currentQuestion = questionArray[randomQuestionId];
@@ -241,6 +242,7 @@ function randomQuestion(): IQuestionArray {
   return currentQuestion;
 }
 
+// Display that question in the HTML
 function showQuestion(): void {
   randomQuestion();
   if (questionText !== null && answerRadioBtn !== null) {
@@ -252,12 +254,11 @@ function showQuestion(): void {
   console.table(questionArray);
 }
 
+// Check what the user har picked as answer in the form and return the index of that button
 function checkAnswerInput(): number | null {
   const radioButtons = document.getElementsByName('answer');
-
   for (let i = 0; i < radioButtons.length; i++) {
     const radioButton = radioButtons[i] as HTMLInputElement;
-
     if (radioButton.checked) {
       console.log(i);
       return i;
@@ -266,7 +267,8 @@ function checkAnswerInput(): number | null {
   return null;
 }
 
-function checkAnswer(): number | null {
+// Check the correct answer of the array of answers and return the index of that correct answer
+function checkCorrectAnswer(): number | null {
   for (let i = 0; i < currentQuestion.answers.length; i++) {
     if (currentQuestion.answers[i].correct) {
       console.log(i);
@@ -276,18 +278,16 @@ function checkAnswer(): number | null {
   return null;
 }
 
-function test(): void {
+// Run a test of the users answer and the correct answer of the question and return a log of the answer
+// THIS IS BETA AND WILL BE ADAPTED TO THE MAIN STRUCTURE AND FUNCTION OF THE FEEDBACK RESULT PAGE
+function isAnswerCorrect(): boolean {
   const userAnswerIndex = checkAnswerInput();
-  const correctAnswerIndex = checkAnswer();
-
-  if (userAnswerIndex === correctAnswerIndex) {
-    console.log('correct');
-  } else {
-    console.log('false');
-  }
+  const correctAnswerIndex = checkCorrectAnswer();
+  return userAnswerIndex === correctAnswerIndex;
 }
 
-answerBtn?.addEventListener('click', test);
+// ONLY FOR TESTING DELETE LATER
+isAnswerCorrect();
 
 // Funktion för att dölja feedback page och gå vidare till nästa fråga
 function nextQuestion(): void {
