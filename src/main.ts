@@ -166,6 +166,14 @@ function stopTimer(timer: Timer): void {
   }
 }
 
+// Function to reset the timer
+function resetTimer(timer: Timer): void {
+  stopTimer(timer);
+  timer.seconds = 0;
+  timer.minutes = 0;
+  updateTimer(timer);
+}
+
 // Variable for the timer
 const timer: Timer = {
   intervalId: null,
@@ -173,7 +181,7 @@ const timer: Timer = {
   minutes: 0,
 };
 
-
+/*
 // To display the timer in the console
 startTimer(timer);
 
@@ -182,8 +190,14 @@ setTimeout(() => {
   stopTimer(timer);
 }, 7000);
 
+// To test the resetTimer-function
+setTimeout(() => {
+  resetTimer(timer);
+}, 8000);
+
 // To get rid of error messages mostly
 updateTimer(timer);
+*/
 
 
 // Variabler för de olika containers
@@ -268,5 +282,4 @@ function nextQuestion(): void {
   }
   showQuestion();
 }
-
 
