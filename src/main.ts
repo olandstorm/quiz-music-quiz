@@ -158,6 +158,14 @@ function startTimer(timer: Timer): void {
   }, 1000);
 }
 
+// Function to stop the timer
+function stopTimer(timer: Timer): void {
+  if (timer.intervalId !== null) {
+    clearInterval(timer.intervalId);
+    timer.intervalId = null;
+  }
+}
+
 // Variable for the timer
 const timer: Timer = {
   intervalId: null,
@@ -168,6 +176,12 @@ const timer: Timer = {
 
 // To display the timer in the console
 startTimer(timer);
+
+// To test the stopTimer-function
+setTimeout(() => {
+  stopTimer(timer);
+}, 7000);
+
 // To get rid of error messages mostly
 updateTimer(timer);
 
