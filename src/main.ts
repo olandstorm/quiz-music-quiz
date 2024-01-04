@@ -1,57 +1,5 @@
-// import typescriptLogo from './assets/images/typescript.svg'; // Exempel på hur ni importerar bilder
-// import { sortArrayByText } from './helpers'; // Exempel på hur ni importerar en funktion från en annan fil
-
-// /**
-//  * Här definierar vi en mall för hur vi vill att vår array ska se ut.
-//  * Ett så kallat "interface".
-//  * Den är för att garantera att ALLA objekt i vår array har samtliga egenskaper.
-//  * Prova t.ex. att lägga till en egenskap i interfacet, och notera hur arrayen nedanför
-//  * får rödmarkeringar där denna egenskap saknas.
-//  */
-// interface IExampleArray {
-//   name: string;
-//   age: number;
-// }
-
-// // Här skriver vi att vår array med namnet myExampleArray ska följa reglerna (interfacet)
-// // i IExampleArray och att det är en array genom att vi sätter [] efter
-// const myExampleArray: IExampleArray[] = [
-//   {
-//     name: 'Hans',
-//     age: 25,
-//   },
-//   {
-//     name: 'Greta',
-//     age: 30,
-//   },
-//   {
-//     name: 'Häxan',
-//     age: 87,
-//   },
-// ];
-
-// // Skriv ut den sorterade arrayen i konsolen, använd en importerad funktion
-// console.table(sortArrayByText(myExampleArray, 'name'));
-
-// // Använd samma funktion för att sortera på en annan egenskap
-// console.table(sortArrayByText(myExampleArray, 'age'));
-
-// // Hämta ett HTML-element från index.html
-
-// const container: HTMLDivElement | null = document.querySelector('#app');
-
-// if (container !== null) { // Om HTML-elementet finns
-//   container.innerHTML = `
-//     <div>
-//       <h1>Hello FED23D!</h1>
-//       <img src="${typescriptLogo}" loading="lazy" width="32" height="32"
-//         alt="Blå bakgrund, vita bokstäver ovanpå med texten TS">
-//     </div>
-//   `;
-// }
-// ------------------------------------- OUR FILE START FROM THIS LINE ---------------------------------------
-
-import './questionArray.ts';
+import { questionArray } from './questionArray.ts';
+import type { IQuestionArray } from './questionArray.ts';
 import './scss/style.scss'; // Importera huvud-SCSS-filen
 
 /* 
@@ -121,3 +69,280 @@ const totalScoreContainer = document.getElementById('totalScoreContainer');
 const playAgainBtn = document.getElementById('playAgainBtn'); 
 
 */
+
+// -------------------RADIOBUTTONS AND ANSWERBUTTON------------------------------
+// when any radioBtn is clicked, remove the disabled attribute from the answerBtn.
+const answerBtn = document.getElementById('answerBtn');
+
+function enableAnswerBtn(): boolean {
+  answerBtn?.removeAttribute('disabled');
+  return true;
+}
+
+// declare all radiobuttons in the questionform via class
+const allRadioBtns = document.querySelectorAll('.answerRadioBtn');
+// for each radiobutton, add an eventlistener which triggers the enableAnswerBtn function
+allRadioBtns.forEach(radioBtn => {
+  radioBtn.addEventListener('click', enableAnswerBtn);
+});
+
+// --------------------SAVE NAME FROM INPUT------------------------
+
+// global variable for the name input on the namePage
+const playerNameInput = document.querySelector('.playerName') as HTMLInputElement;
+let savedPlayerName: string = ''; // declare the nameinput as initially empty
+
+console.log(savedPlayerName);
+
+/**
+ * --------------------------------
+ * -------------TIMER--------------
+ * --------------------------------
+ */
+
+/* // An interface for the timer
+interface ITimer {
+  intervalId: number | null;
+  seconds: number;
+  minutes: number;
+}
+
+// Display the timer in the document
+function updateTimer(timer: ITimer): void {
+  console.log(`${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`);
+}
+
+// Adds the 0 before if the number < 0
+function formatTime(time: number): string {
+  return time < 10 ? `0${time}` : `${time}`;
+}
+
+// Function to start the timer
+function startTimer(timer: ITimer): void {
+  timer.intervalId = setInterval(() => {
+    timer.seconds += 1;
+    if (timer.seconds === 60) {
+      timer.seconds = 0;
+      timer.minutes += 1;
+    }
+    updateTimer(timer);
+  }, 1000);
+}
+
+// Function to stop the timer
+function stopTimer(timer: ITimer): void {
+  if (timer.intervalId !== null) {
+    clearInterval(timer.intervalId);
+    timer.intervalId = null;
+  }
+}
+
+// Function to reset the timer
+function resetTimer(timer: ITimer): void {
+  stopTimer(timer);
+  timer.seconds = 0;
+  timer.minutes = 0;
+  updateTimer(timer);
+}
+
+// Variable for the timer
+const timer: Timer = {
+  intervalId: null,
+  seconds: 0,
+  minutes: 0,
+};
+
+// To display the timer in the console
+startTimer(timer);
+
+// To test the stopTimer-function
+setTimeout(() => {
+  stopTimer(timer);
+}, 7000);
+
+// To test the resetTimer-function
+setTimeout(() => {
+  resetTimer(timer);
+}, 8000);
+
+// To get rid of error messages mostly
+updateTimer(timer); */
+
+// Variabler för de olika containers
+const landingPage = document.getElementById('landingPage');
+const namePage = document.getElementById('namePage');
+const questionPage = document.getElementById('questionPage');
+const feedbackPage = document.getElementById('feedbackPage');
+
+// Variabler för knapparna
+
+// Redoknapp - Landing page
+const readyBtn = document.getElementById('readyBtn');
+// Körknapp - Name page
+const runBtn = document.getElementById('runBtn');
+// Nästa fråga knapp - Feedback page
+const questionText = document.querySelector('#questionText');
+// Gruppering av alla answer radio knapparna
+const answerRadioBtn = document.querySelectorAll('.answerText');
+// Click event to display the name page after user clicks on
+
+// Nästa fråga knapp - Feedback page
+const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+
+// Click event to display the name page after user clicks on
+// Condition to add evtlsnr if readyBtn exists in html
+if (readyBtn !== null) {
+  readyBtn.addEventListener('click', displayNamePage);
+}
+
+// Click event to trigger the start of the quiz after user clicks on
+// Condition to add evtlsnr if runBtn exists in html
+if (runBtn !== null) {
+  runBtn.addEventListener('click', startQuiz);
+}
+
+// Click event to trigger next question
+// Condition to add evtlsnr if nextQuestionBtn exists in html
+if (nextQuestionBtn !== null) {
+  nextQuestionBtn.addEventListener('click', nextQuestion);
+}
+
+// variable for empty gameArray
+let gameArray: any[] = [];
+console.table(gameArray);
+
+// Function to display namepage when user klicks on readyBtn
+function displayNamePage(): void {
+  if (landingPage !== null && namePage !== null) {
+    landingPage.classList.add('hidden');
+    namePage.classList.remove('hidden');
+  }
+
+  // call on gameArray to copy original questionArray
+  gameArray = [...questionArray];
+  console.table(gameArray);
+}
+// Funktion som triggas när användare klickar på "kör" i namnsida
+// Kallar även på fråge-funktion
+
+function startQuiz(): void {
+  if (namePage !== null && questionPage !== null) {
+    namePage.classList.add('hidden');
+    questionPage.classList.remove('hidden');
+  }
+  showQuestion();
+
+  // if the name input is not empty let the savedPlayerName be the value of the input
+  if (playerNameInput !== null) {
+    // this will then be used to print out the name on the resultPage
+    savedPlayerName = playerNameInput.value;
+  }
+  console.log(savedPlayerName);
+}
+// Funktion som visar en random fråga från arrayen, och
+let currentQuestion: IQuestionArray;
+
+// Randomize a question and return that question
+function randomQuestion(): IQuestionArray {
+  const randomQuestionId: number = Math.floor(Math.random() * gameArray.length);
+  currentQuestion = gameArray[randomQuestionId];
+  gameArray.splice(randomQuestionId, 1);
+  return currentQuestion;
+}
+
+// Display that question in the HTML
+function showQuestion(): void {
+  randomQuestion();
+  if (questionText !== null && answerRadioBtn !== null) {
+    questionText.innerHTML = currentQuestion.question;
+    for (let i = 0; i < answerRadioBtn.length; i++) {
+      answerRadioBtn[i].innerHTML = currentQuestion.answers[i].answer;
+    }
+  }
+
+  console.table(gameArray);
+  console.table(questionArray);
+}
+
+// Check what the user har picked as answer in the form and return the index of that button
+function checkAnswerInput(): number | null {
+  const radioButtons = document.getElementsByName('answer');
+  for (let i = 0; i < radioButtons.length; i++) {
+    const radioButton = radioButtons[i] as HTMLInputElement;
+    if (radioButton.checked) {
+      console.log(i);
+      return i;
+    }
+  }
+  return null;
+}
+
+// Check the correct answer of the array of answers and return the index of that correct answer
+function checkCorrectAnswer(): number | null {
+  for (let i = 0; i < currentQuestion.answers.length; i++) {
+    if (currentQuestion.answers[i].correct) {
+      console.log(i);
+      return i;
+    }
+  }
+  return null;
+}
+
+// Run a test of the users answer and the correct answer of the question and return a log of the answer
+function isAnswerCorrect(): boolean {
+  const userAnswerIndex = checkAnswerInput();
+  const correctAnswerIndex = checkCorrectAnswer();
+  return userAnswerIndex === correctAnswerIndex;
+}
+
+// Funktion för att dölja feedback page och gå vidare till nästa fråga
+function nextQuestion(): void {
+  if (feedbackPage !== null && questionPage !== null) {
+    feedbackPage.classList.add('hidden');
+    questionPage.classList.remove('hidden');
+  }
+  showQuestion();
+}
+
+// DELETE WHEN MERGE IF NEEDED
+let totalScore: number = 0; // TS type defined and set to 0.
+// DELETE ABOVE IF NEEDED
+
+function resetTotalScore(): void {
+  totalScore = 0;
+}
+
+// DELETE WHEN MERGE IF NEEDED
+resetTotalScore();
+
+console.log(totalScore);
+// DELETE ABOVE IF NEEDED
+
+// eventlistener for answerBtn which displays the feedback page
+answerBtn?.addEventListener('click', displayFeedbackPage);
+
+// function displaying feedback page when answerBtn is clicked
+function displayFeedbackPage(): void {
+  if (feedbackPage !== null && questionPage !== null) {
+    feedbackPage.classList.remove('hidden');
+    questionPage.classList.add('hidden');
+  }
+
+  // local variable for the correctAnswerContainer
+  const correctAnswerContainer = document.getElementById('correctAnswerContainer');
+  // local variable for the wrongAnswerContainer
+  const wrongAnswerContainer = document.getElementById('wrongAnswerContainer');
+  // local variable for checking if answer is correct
+  const rightAnswer = isAnswerCorrect();
+
+  // check if the radioBtn answer is true
+  if (rightAnswer) {
+    // if answer is true, display the correctAnswerContainer styling
+    correctAnswerContainer?.classList.remove('hidden');
+    wrongAnswerContainer?.classList.add('hidden');
+  } else {
+    // if answer isn't true, display the wrongAnswerContainer styling
+    correctAnswerContainer?.classList.add('hidden');
+    wrongAnswerContainer?.classList.remove('hidden');
+  }
+}
