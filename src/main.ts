@@ -208,7 +208,7 @@ if (nextQuestionBtn !== null) {
 }
 
 // variable for empty gameArray
-let gameArray: IQuestionArray = [];
+let gameArray: any[] = [];
 console.table(gameArray);
 
 // Function to display namepage when user klicks on readyBtn
@@ -288,15 +288,11 @@ function checkCorrectAnswer(): number | null {
 }
 
 // Run a test of the users answer and the correct answer of the question and return a log of the answer
-// THIS IS BETA AND WILL BE ADAPTED TO THE MAIN STRUCTURE AND FUNCTION OF THE FEEDBACK RESULT PAGE
 function isAnswerCorrect(): boolean {
   const userAnswerIndex = checkAnswerInput();
   const correctAnswerIndex = checkCorrectAnswer();
   return userAnswerIndex === correctAnswerIndex;
 }
-
-// ONLY FOR TESTING DELETE LATER
-isAnswerCorrect();
 
 // Funktion för att dölja feedback page och gå vidare till nästa fråga
 function nextQuestion(): void {
@@ -321,6 +317,38 @@ resetTotalScore();
 console.log(totalScore);
 // DELETE ABOVE IF NEEDED
 
+
+
+
+// eventlistener for answerBtn which displays the feedback page
+answerBtn?.addEventListener('click', displayFeedbackPage);
+
+// function displaying feedback page when answerBtn is clicked
+function displayFeedbackPage(): void {
+  if (feedbackPage !== null && questionPage !== null) {
+    feedbackPage.classList.remove('hidden');
+    questionPage.classList.add('hidden');
+    console.log(displayFeedbackPage);
+  }
+  
+  // local variable for the correctAnswerContainer
+  const correctAnswerContainer = document.getElementById('correctAnswerContainer'); 
+  // local variable for the wrongAnswerContainer
+  const wrongAnswerContainer = document.getElementById('wrongAnswerContainer'); 
+  // local variable for checking if answer is correct
+  const rightAnswer = isAnswerCorrect(); 
+
+  // check if the radioBtn answer is true
+  if (rightAnswer) {
+    // if answer is true, display the correctAnswerContainer styling
+    correctAnswerContainer?.classList.remove('hidden');
+    wrongAnswerContainer?.classList.add('hidden');
+  } else {
+    // if answer isn't true, display the wrongAnswerContainer styling
+    correctAnswerContainer?.classList.add('hidden');
+    wrongAnswerContainer?.classList.remove('hidden');
+  }
+}
 
 
 
