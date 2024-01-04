@@ -69,22 +69,18 @@
               <span class="answerText">Svarsalternativ 3</span>
             </label>
           </div>
-          <button class="answerBtn" id="answerBtn" disabled>Svara</button>
         </form>
+        <button class="answerBtn" id="answerBtn" disabled>Svara</button>
       </section>
       <!-- End Question page -->
       <!-- Feedback page -->
       <section class="feedbackPage hidden" id="feedbackPage">
         <div class="answerContainer">
           <div class="correctAnswerContainer hidden" id="correctAnswerContainer">
-            <h2>Du svarare rätt!</h2>
+            <h2>Du svarade rätt!</h2>
           </div>
           <div class="wrongAnswerContainer" id="wrongAnswerContainer">
             <h2>Fel svar!</h2>
-            <!--       Ta bort??      
-            <p>Rätt svar var:</p>
-            <p class="correctAnswer" class="correctAnswer">XXX</p>
-           -->
           </div>
           <button class="nextQuestionBtn uppercase" id="nextQuestionBtn">Nästa fråga</button>
           <button class="showResultBtn uppercase hidden" id="showResultBtn">Visa resultat</button>
@@ -98,6 +94,7 @@
           <p id="totalScore" class="totalScore"><span></span> av 10</p>
         </div>
         <button id="playAgainBtn" class="playAgainBtn">Spela igen</button>
+        <button id="newPlayerBtn" class="newPlayerBtn">Ny spelare</button>
       </section>
       <!-- End Result page -->
     </main>

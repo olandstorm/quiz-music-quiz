@@ -5,7 +5,7 @@
  * Prova t.ex. att lägga till en egenskap i interfacet, och notera hur arrayen nedanför
  * får rödmarkeringar där denna egenskap saknas.
  */
-interface IQuestionArray {
+export interface IQuestionArray {
   id: number;
   question: string;
   answers: [
@@ -82,8 +82,8 @@ export const questionArray: IQuestionArray[] = [
       'Låten Ice Ice Baby med Vanilla Ice baseras på en sampling av basgången i en låt sprungen ur ett artistsamarbete. Vilka var artisterna?',
     answers: [
       { answer: 'Fleetwood Mac & Sting', correct: false },
-      { answer: 'Queen & David Bowie', correct: false },
-      { answer: 'Michael Jackson & Paul McCartney', correct: true },
+      { answer: 'Queen & David Bowie', correct: true },
+      { answer: 'Michael Jackson & Paul McCartney', correct: false },
     ],
   },
   {

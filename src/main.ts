@@ -1,7 +1,7 @@
-import { questionArray } from './questionArray.ts';
+import { questionArray, type IQuestionArray } from './questionArray.ts';
 import './scss/style.scss'; // Importera huvud-SCSS-filen
 
-/* 
+/*
 
 // GLOBAL VARIABLES 
 // If the variable you need is of the local variety in another function, 
@@ -71,8 +71,9 @@ const playAgainBtn = document.getElementById('playAgainBtn');
 
 // -------------------RADIOBUTTONS AND ANSWERBUTTON------------------------------
 // when any radioBtn is clicked, remove the disabled attribute from the answerBtn.
+const answerBtn = document.getElementById('answerBtn');
+
 function enableAnswerBtn(): boolean {
-  const answerBtn = document.getElementById('answerBtn');
   answerBtn?.removeAttribute('disabled');
   return true;
 }
@@ -97,16 +98,16 @@ console.log(savedPlayerName);
  * -------------TIMER--------------
  * --------------------------------
  */
-/* 
-// An interface for the timer
-interface Timer {
+
+/* // An interface for the timer
+interface ITimer {
   intervalId: number | null;
   seconds: number;
   minutes: number;
 }
 
 // Display the timer in the document
-function updateTimer(timer: Timer): void {
+function updateTimer(timer: ITimer): void {
   console.log(`${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`);
 }
 
@@ -116,7 +117,7 @@ function formatTime(time: number): string {
 }
 
 // Function to start the timer
-function startTimer(timer: Timer): void {
+function startTimer(timer: ITimer): void {
   timer.intervalId = setInterval(() => {
     timer.seconds += 1;
     if (timer.seconds === 60) {
@@ -128,7 +129,7 @@ function startTimer(timer: Timer): void {
 }
 
 // Function to stop the timer
-function stopTimer(timer: Timer): void {
+function stopTimer(timer: ITimer): void {
   if (timer.intervalId !== null) {
     clearInterval(timer.intervalId);
     timer.intervalId = null;
@@ -136,7 +137,7 @@ function stopTimer(timer: Timer): void {
 }
 
 // Function to reset the timer
-function resetTimer(timer: Timer): void {
+function resetTimer(timer: ITimer): void {
   stopTimer(timer);
   timer.seconds = 0;
   timer.minutes = 0;
@@ -215,6 +216,10 @@ if (showResultBtn !== null) {
   showResultBtn.addEventListener('click', displayResultPage);
 }
 
+// variable for empty gameArray
+let gameArray: any[] = [];
+console.table(gameArray);
+
 // Functions
 
 // Function to display namepage when user klicks on readyBtn
@@ -223,6 +228,10 @@ function displayNamePage(): void {
     landingPage.classList.add('hidden');
     namePage.classList.remove('hidden');
   }
+
+  // call on gameArray to copy original questionArray
+  gameArray = [...questionArray];
+  console.table(gameArray);
 }
 // Funktion som triggas när användare klickar på "kör" i namnsida
 // Kallar även på fråge-funktion
@@ -243,16 +252,59 @@ function startQuiz(): void {
 }
 
 // Funktion som visar en random fråga från arrayen, och
+let currentQuestion: IQuestionArray;
+
+// Randomize a question and return that question
+function randomQuestion(): IQuestionArray {
+  const randomQuestionId: number = Math.floor(Math.random() * gameArray.length);
+  currentQuestion = gameArray[randomQuestionId];
+  gameArray.splice(randomQuestionId, 1);
+  return currentQuestion;
+}
+
+// Display that question in the HTML
 function showQuestion(): void {
-  const randomQuestionId: number = Math.floor(Math.random() * questionArray.length);
+  randomQuestion();
   if (questionText !== null && answerRadioBtn !== null) {
-    questionText.innerHTML = questionArray[randomQuestionId].question;
+    questionText.innerHTML = currentQuestion.question;
     for (let i = 0; i < answerRadioBtn.length; i++) {
-      answerRadioBtn[i].innerHTML = questionArray[randomQuestionId].answers[i].answer;
+      answerRadioBtn[i].innerHTML = currentQuestion.answers[i].answer;
     }
   }
-  questionArray.splice(randomQuestionId, 1);
+
+  console.table(gameArray);
   console.table(questionArray);
+}
+
+// Check what the user har picked as answer in the form and return the index of that button
+function checkAnswerInput(): number | null {
+  const radioButtons = document.getElementsByName('answer');
+  for (let i = 0; i < radioButtons.length; i++) {
+    const radioButton = radioButtons[i] as HTMLInputElement;
+    if (radioButton.checked) {
+      console.log(i);
+      return i;
+    }
+  }
+  return null;
+}
+
+// Check the correct answer of the array of answers and return the index of that correct answer
+function checkCorrectAnswer(): number | null {
+  for (let i = 0; i < currentQuestion.answers.length; i++) {
+    if (currentQuestion.answers[i].correct) {
+      console.log(i);
+      return i;
+    }
+  }
+  return null;
+}
+
+// Run a test of the users answer and the correct answer of the question and return a log of the answer
+function isAnswerCorrect(): boolean {
+  const userAnswerIndex = checkAnswerInput();
+  const correctAnswerIndex = checkCorrectAnswer();
+  return userAnswerIndex === correctAnswerIndex;
 }
 
 // Funktion för att dölja feedback page och gå vidare till nästa fråga
@@ -290,3 +342,32 @@ resetTotalScore();
 
 console.log(totalScore);
 // DELETE ABOVE IF NEEDED
+
+// eventlistener for answerBtn which displays the feedback page
+answerBtn?.addEventListener('click', displayFeedbackPage);
+
+// function displaying feedback page when answerBtn is clicked
+function displayFeedbackPage(): void {
+  if (feedbackPage !== null && questionPage !== null) {
+    feedbackPage.classList.remove('hidden');
+    questionPage.classList.add('hidden');
+  }
+
+  // local variable for the correctAnswerContainer
+  const correctAnswerContainer = document.getElementById('correctAnswerContainer');
+  // local variable for the wrongAnswerContainer
+  const wrongAnswerContainer = document.getElementById('wrongAnswerContainer');
+  // local variable for checking if answer is correct
+  const rightAnswer = isAnswerCorrect();
+
+  // check if the radioBtn answer is true
+  if (rightAnswer) {
+    // if answer is true, display the correctAnswerContainer styling
+    correctAnswerContainer?.classList.remove('hidden');
+    wrongAnswerContainer?.classList.add('hidden');
+  } else {
+    // if answer isn't true, display the wrongAnswerContainer styling
+    correctAnswerContainer?.classList.add('hidden');
+    wrongAnswerContainer?.classList.remove('hidden');
+  }
+}
