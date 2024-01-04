@@ -184,8 +184,6 @@ const runBtn = document.getElementById('runBtn');
 const questionText = document.querySelector('#questionText');
 // Gruppering av alla answer radio knapparna
 const answerRadioBtn = document.querySelectorAll('.answerText');
-// Click event to display the name page after user clicks on
-
 // Nästa fråga knapp - Feedback page
 const nextQuestionBtn = document.getElementById('nextQuestionBtn');
 
@@ -337,6 +335,8 @@ function displayFeedbackPage(): void {
 
   // check if the radioBtn answer is true
   if (rightAnswer) {
+    // Adjust total score
+    totalScore += 1;
     // if answer is true, display the correctAnswerContainer styling
     correctAnswerContainer?.classList.remove('hidden');
     wrongAnswerContainer?.classList.add('hidden');
