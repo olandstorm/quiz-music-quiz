@@ -186,8 +186,7 @@ const answerRadioBtn = document.querySelectorAll('.answerText');
 const nextQuestionBtn = document.getElementById('nextQuestionBtn');
 // Show result button - Feedback page
 const showResultBtn = document.getElementById('showResultBtn');
-// New player button - Result page
-const newPlayerBtn = document.getElementById('newPlayerBtn');
+
 
 // Variables for each radio-Btn
 const answerRadioBtn1 = document.getElementById('answerRadioBtn1') as HTMLInputElement;
@@ -218,12 +217,6 @@ if (nextQuestionBtn !== null) {
 // Condition to add evtlsnr if showResultBtn exists in html
 if (showResultBtn !== null) {
   showResultBtn.addEventListener('click', displayResultPage);
-}
-
-// Click event to trigger new player
-// Condition to add evtlsnr if newPlayerBtn exists in html
-if (newPlayerBtn !== null) {
-  newPlayerBtn.addEventListener('click', newPlayerRound);
 }
 
 // variable for empty gameArray
@@ -356,23 +349,6 @@ function resetTotalScore(): void {
   totalScore = 0;
 }
 
-function newPlayerRound(): void {
-  if (resultPage === null) {
-    return;
-  }
-  if (namePage === null) {
-    return;
-  }
-  resultPage.classList.add('hidden');
-  namePage.classList.remove('hidden');
-  gameArray = [...questionArray];
-  // Reset question-counter value
-  // resetTimer()
-  savedPlayerName = '';
-  playerNameInput.value = '';
-  resetTotalScore();
-  console.table(gameArray);
-}
 
 // DELETE WHEN MERGE IF NEEDED
 resetTotalScore();
