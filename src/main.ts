@@ -324,12 +324,22 @@ let totalScore: number = 0; // TS type defined and set to 0.
 function displayResultPage(): void {
   const resultTitlePlayerName = document.querySelector('#resultTitlePlayerName');
   const totalScoreSpan = document.querySelector('#totalScore span');
-  if (feedbackPage !== null && resultPage !== null && resultTitlePlayerName !== null && totalScoreSpan !== null) {
-    feedbackPage.classList.add('hidden');
-    resultPage.classList.remove('hidden');
-    resultTitlePlayerName.innerHTML = savedPlayerName;
-    totalScoreSpan.innerHTML = `${totalScore}`;
+  if (feedbackPage === null) {
+    return;
   }
+  if (resultPage === null) {
+    return;
+  }
+  if (resultTitlePlayerName === null) {
+    return;
+  }
+  if (totalScoreSpan === null) {
+    return;
+  }
+  feedbackPage.classList.add('hidden');
+  resultPage.classList.remove('hidden');
+  resultTitlePlayerName.innerHTML = savedPlayerName;
+  totalScoreSpan.innerHTML = `${totalScore}`;
   if (gameArray.length > 10) {
     playAgainBtn?.classList.remove('hidden');
   } else {
