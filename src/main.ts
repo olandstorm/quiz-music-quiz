@@ -261,6 +261,7 @@ function showQuestion(): void {
   }
 
   console.table(gameArray);
+  console.table(questionArray);
 }
 
 // Check what the user har picked as answer in the form and return the index of that button
@@ -317,9 +318,6 @@ resetTotalScore();
 console.log(totalScore);
 // DELETE ABOVE IF NEEDED
 
-
-
-
 // eventlistener for answerBtn which displays the feedback page
 answerBtn?.addEventListener('click', displayFeedbackPage);
 
@@ -328,15 +326,14 @@ function displayFeedbackPage(): void {
   if (feedbackPage !== null && questionPage !== null) {
     feedbackPage.classList.remove('hidden');
     questionPage.classList.add('hidden');
-    console.log(displayFeedbackPage);
   }
-  
+
   // local variable for the correctAnswerContainer
-  const correctAnswerContainer = document.getElementById('correctAnswerContainer'); 
+  const correctAnswerContainer = document.getElementById('correctAnswerContainer');
   // local variable for the wrongAnswerContainer
-  const wrongAnswerContainer = document.getElementById('wrongAnswerContainer'); 
+  const wrongAnswerContainer = document.getElementById('wrongAnswerContainer');
   // local variable for checking if answer is correct
-  const rightAnswer = isAnswerCorrect(); 
+  const rightAnswer = isAnswerCorrect();
 
   // check if the radioBtn answer is true
   if (rightAnswer) {
@@ -349,6 +346,3 @@ function displayFeedbackPage(): void {
     wrongAnswerContainer?.classList.remove('hidden');
   }
 }
-
-
-
