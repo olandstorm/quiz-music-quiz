@@ -5,7 +5,7 @@
  * Prova t.ex. att lägga till en egenskap i interfacet, och notera hur arrayen nedanför
  * får rödmarkeringar där denna egenskap saknas.
  */
-interface IQuestionArray {
+export interface IQuestionArray {
   id: number;
   question: string;
   answers: [
