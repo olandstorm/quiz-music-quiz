@@ -276,7 +276,7 @@ function displayResultPage(): void {
     feedbackPage.classList.add('hidden');
     resultPage.classList.remove('hidden');
     resultTitlePlayerName.innerHTML = savedPlayerName;
-    totalScoreSpan.innerHTML = totalScore;
+    totalScoreSpan.innerHTML = `${totalScore}`;
   }
 }
 
