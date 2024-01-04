@@ -1,8 +1,7 @@
-import { questionArray } from './questionArray.ts';
-import type { IQuestionArray } from './questionArray.ts';
+import { questionArray, type IQuestionArray } from './questionArray.ts';
 import './scss/style.scss'; // Importera huvud-SCSS-filen
 
-/* 
+/*
 
 // GLOBAL VARIABLES 
 // If the variable you need is of the local variety in another function, 
