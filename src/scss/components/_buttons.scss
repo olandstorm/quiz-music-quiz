@@ -30,7 +30,7 @@ button:active {
   padding-inline: 30px;
   margin-top: 20px;
 }
-.nextQuestionBtn {
+.nextQuestionBtn, .showResultBtn {
   position: absolute;
   top: 55vh;
   left: 50%;
@@ -38,7 +38,7 @@ button:active {
   padding: 10px 15px;
   font-size: 1.3rem;
 }
-.nextQuestionBtn:active {
+.nextQuestionBtn:active, .showResultBtn:active {
   background-color: $secondaryBtnBgColor;
 }
 .playAgainBtn {
