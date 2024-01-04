@@ -262,6 +262,26 @@ function randomQuestion(): IQuestionArray {
   return currentQuestion;
 }
 
+// Variable for counting
+let questionCounter: number = 0;
+
+// function for counting and displaying question number
+function displayQuestionNumber(): void {
+  const questionNumber = document.querySelector('#questionNumber');
+  if (questionNumber === null) { 
+    return;
+  }
+  if (questionCounter === null) {
+    return;
+  }
+  questionCounter += 1;
+  questionNumber.innerHTML = `${questionCounter}`;
+  // If questions reach 10 reset
+  if (questionCounter === 10) {
+    questionCounter = 0;
+  }
+}
+
 // Display that question in the HTML
 function showQuestion(): void {
   randomQuestion();
@@ -271,7 +291,7 @@ function showQuestion(): void {
       answerRadioBtn[i].innerHTML = currentQuestion.answers[i].answer;
     }
   }
-
+  displayQuestionNumber();
   console.table(gameArray);
   console.table(questionArray);
 }
@@ -342,6 +362,8 @@ resetTotalScore();
 
 console.log(totalScore);
 // DELETE ABOVE IF NEEDED
+
+
 
 // eventlistener for answerBtn which displays the feedback page
 answerBtn?.addEventListener('click', displayFeedbackPage);
