@@ -264,21 +264,22 @@ function nextQuestion(): void {
   showQuestion();
 }
 
-// Function for displaying Result page
-function displayResultPage(): void {
-  const resultTitlePlayerName = document.querySelector('#resultTitlePlayerName');
-  if (feedbackPage !== null && resultPage !== null && resultTitlePlayerName !== null) {
-    feedbackPage.classList.add('hidden');
-    resultPage.classList.remove('hidden');
-    resultTitlePlayerName.innerHTML = savedPlayerName;
-  }
-}
-
-
-
 // DELETE WHEN MERGE IF NEEDED
 let totalScore: number = 0; // TS type defined and set to 0.
 // DELETE ABOVE IF NEEDED
+
+// Function for displaying Result page
+function displayResultPage(): void {
+  const resultTitlePlayerName = document.querySelector('#resultTitlePlayerName');
+  const totalScoreSpan = document.querySelector('#totalScore span');
+  if (feedbackPage !== null && resultPage !== null && resultTitlePlayerName !== null && totalScoreSpan !== null) {
+    feedbackPage.classList.add('hidden');
+    resultPage.classList.remove('hidden');
+    resultTitlePlayerName.innerHTML = savedPlayerName;
+    totalScoreSpan.innerHTML = totalScore;
+  }
+}
+
 
 function resetTotalScore(): void {
   totalScore = 0;
