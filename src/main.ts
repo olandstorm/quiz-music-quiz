@@ -205,12 +205,20 @@ if (nextQuestionBtn !== null) {
   nextQuestionBtn.addEventListener('click', nextQuestion);
 }
 
+// variable for empty gameArray
+let gameArray: any[] = [];
+console.table(gameArray);
+
 // Function to display namepage when user klicks on readyBtn
 function displayNamePage(): void {
   if (landingPage !== null && namePage !== null) {
     landingPage.classList.add('hidden');
     namePage.classList.remove('hidden');
   }
+
+  // call on gameArray to copy original questionArray
+  gameArray = [...questionArray];
+  console.table(gameArray);
 }
 // Funktion som triggas när användare klickar på "kör" i namnsida
 // Kallar även på fråge-funktion
@@ -231,14 +239,15 @@ function startQuiz(): void {
 }
 // Funktion som visar en random fråga från arrayen, och
 function showQuestion(): void {
-  const randomQuestionId: number = Math.floor(Math.random() * questionArray.length);
+  const randomQuestionId: number = Math.floor(Math.random() * gameArray.length);
   if (questionText !== null && answerRadioBtn !== null) {
-    questionText.innerHTML = questionArray[randomQuestionId].question;
+    questionText.innerHTML = gameArray[randomQuestionId].question;
     for (let i = 0; i < answerRadioBtn.length; i++) {
-      answerRadioBtn[i].innerHTML = questionArray[randomQuestionId].answers[i].answer;
+      answerRadioBtn[i].innerHTML = gameArray[randomQuestionId].answers[i].answer;
     }
   }
-  questionArray.splice(randomQuestionId, 1);
+  gameArray.splice(randomQuestionId, 1);
+  console.table(gameArray);
   console.table(questionArray);
 }
 
@@ -264,3 +273,7 @@ resetTotalScore();
 
 console.log(totalScore);
 // DELETE ABOVE IF NEEDED
+
+
+
+
