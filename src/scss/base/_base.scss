@@ -1,112 +1,152 @@
 // Add style about headings, font, .hidden, backgrounds etc
+// Elements, common
+body {
+  background-color: $primaryBgColor;
+}
+h1 {
+  color: $primaryHeaderColor;
+  max-width: 200px;
+  text-align: center;
+}
+
+// Specific page-containeres and their content
+.timerContainer,
+.landingPage,
+.namePage,
+.questionPage,
+.resultPage {
+  height: 100vh;
+  max-height: 100%;
+  width: 100vw;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  font-size: 1.5rem;
+}
+.timerContainer {
+  height: 20vh;
+  width: 100%;
+  font-size: 2rem;
+}
+.landingPage {
+  background-color: $landingBgColor;
+  padding-bottom: 10vh;
+  line-height: 3rem;
+  row-gap: 4rem;
+}
+.namePage {
+  .nameLabel {
+    font-weight: bold;
+    font-size: 1.7rem;
+  }
+  .playerName {
+    margin-top: 2rem;
+    border: none;
+    border-radius: 10px;
+    height: 3.5rem;
+    width: 15rem;
+    padding-left: 15px;
+  }
+}
+.questionPage {
+  background-color: $questionsBgColor;
+  justify-content: space-evenly;
+  text-align: center;
+  height: 60vh;
+  width: 100%;
+  position: absolute;
+  top: 20vh;
+  left: 0;
+  padding-inline: 20px;
+  font-size: clamp(2vh, 1rem, 10vh);
+  .questionNumber {
+    font-size: clamp(2vh, 3rem, 10vh);
+  }
+  .questionForm {
+    width: 100%;
+    min-width: 100vw;
+    max-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: clamp(2vh, 1rem, 10vh);
+    .radioBtnContainer {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+      gap: 1rem;
+      justify-items: start;
+      padding-inline-end: 2rem;
+      label {
+        grid-row: span 1;
+        span {
+          padding-left: 15px;
+          font-size: clamp(2vh, 1rem, 10vh);
+        }
+      }
+    }
+  }
+}
+.feedbackPage {
+  .correctAnswerContainer,
+  .wrongAnswerContainer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 35vh;
+    left: 0;
+    height: 30vh;
+    width: 100%;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    h2 {
+      margin-bottom: 4rem;
+    }
+  }
+  .correctAnswerContainer {
+    background-color: $correctMsgBgColor;
+  }
+  .wrongAnswerContainer {
+    background-color: $falseMsgBgColor;
+  }
+}
+.resultPage {
+  justify-content: space-between;
+  padding: 4rem 2rem;
+  .resultTitle {
+    align-self: flex-start;
+    font-style: italic;
+    font-size: 2.6rem;
+  }
+  .totalScoreContainer {
+    padding-left: 2rem;
+    align-self: flex-start;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+}
+
+// Togglable classes and commonly used classes across the page
+.resultTimer {
+  background-color: $timerBgColor;
+  position: absolute;
+  width: 50%;
+  height: 10vh;
+  right: 0;
+  top: 25vh;
+  align-items: start;
+  padding-left: 1rem;
+  font-weight: 600;
+  font-size: 2rem;
+}
 .hidden {
   display: none !important;
 }
 .uppercase {
   text-transform: uppercase;
-}
-
-.landingPage {
-  height: 100vh;
-  max-height: 100%;
-  width: 100vw;
-  max-width: 100%;
-  background-color: $landingBgColor;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  row-gap: 25px;
-  padding-bottom: 10vh;
-
-  .pageHeading {
-    color: $primaryHeaderColor;
-    max-width: 200px;
-    text-align: center;
-  }
-  .readyBtn {
-    width: fit-content;
-  }
-}
-.namePage {
-  height: 100vh;
-  width: 100vw;
-  background-color: $primaryBgColor;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  align-items: center;
-  justify-content: center;
-  .nameLabel,
-  .runBtn {
-    text-transform: uppercase; //Will be removed?
-  }
-  .playerName,
-  .runBtn {
-    border: none;
-    border-radius: 5px;
-  }
-  .nameLabel {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: $secondaryHeaderColor;
-  }
-  .playerName {
-    height: 50px;
-    font-size: 1.5rem;
-    text-align: center;
-  }
-  .runBtn {
-    background-color: $secondaryBtnBgColor;
-    color: $btnTextColor;
-    width: 5rem;
-    height: 2.5rem;
-  }
-  .runBtn:active {
-    color: $activeBtnTextColor; //Hover?
-  }
-}
-section.feedbackPage {
-  background-color: $primaryBgColor;
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  div.answerContainer {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    div {
-      height: 30vh;
-      min-height: 150px;
-      width: 100%;
-      display: grid;
-      padding-top: 30px;
-      grid-template-rows: 3fr 1fr 1fr 550%;
-      position: absolute;
-      top: 35vh;
-      justify-content: center;
-      align-items: end;
-      text-align: center;
-      h2 {
-        //OBS TA BORT NÄR GEMENSAM TEXT STYLING KLAR
-        font-size: 1rem;
-        font-weight: normal;
-      }
-    }
-    div.correctAnswerContainer {
-      background-color: $correctMsgBgColor;
-    }
-    div.wrongAnswerContainer {
-      background-color: $falseMsgBgColor;
-    }
-    button.nextQuestionBtn {
-      position: absolute;
-      top: clamp(275px, 55vh, 80rem);
-    }
-  }
 }
