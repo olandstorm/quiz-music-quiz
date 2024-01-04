@@ -167,33 +167,33 @@ setTimeout(() => {
 // To get rid of error messages mostly
 updateTimer(timer); */
 
-// Variabler för de olika containers
+// Variables for containers
 const landingPage = document.getElementById('landingPage');
 const namePage = document.getElementById('namePage');
 const questionPage = document.getElementById('questionPage');
 const feedbackPage = document.getElementById('feedbackPage');
 const resultPage = document.querySelector('#resultPage');
 
-// Variabler för knapparna
+// Variables for Buttons
 
-// Redoknapp - Landing page
 const readyBtn = document.getElementById('readyBtn');
-// Körknapp - Name page
 const runBtn = document.getElementById('runBtn');
-// Nästa fråga-knapp - Feedback page
+
 const questionText = document.querySelector('#questionText');
-// Gruppering av alla answer radio knapparna
 const answerRadioBtn = document.querySelectorAll('.answerText');
 
-// Nästa fråga-knapp - Feedback page
+// Next question button - Feedback page
 const nextQuestionBtn = document.getElementById('nextQuestionBtn');
-// Visa resultat-knapp - Feedback page
+// Show result button - Feedback page
 const showResultBtn = document.getElementById('showResultBtn');
+// New player button - Result page
+const newPlayerBtn = document.getElementById('newPlayerBtn');
 
 // Variables for each radio-Btn
 const answerRadioBtn1 = document.getElementById('answerRadioBtn1') as HTMLInputElement;
 const answerRadioBtn2 = document.getElementById('answerRadioBtn2') as HTMLInputElement;
 const answerRadioBtn3 = document.getElementById('answerRadioBtn3') as HTMLInputElement;
+
 // Events
 
 // Click event to display the name page after user clicks on
@@ -218,6 +218,12 @@ if (nextQuestionBtn !== null) {
 // Condition to add evtlsnr if showResultBtn exists in html
 if (showResultBtn !== null) {
   showResultBtn.addEventListener('click', displayResultPage);
+}
+
+// Click event to trigger new player
+// Condition to add evtlsnr if newPlayerBtn exists in html
+if (newPlayerBtn !== null) {
+  newPlayerBtn.addEventListener('click', newPlayerRound);
 }
 
 // variable for empty gameArray
@@ -312,7 +318,7 @@ function isAnswerCorrect(): boolean {
 }
 
 // Function to clear the answer input and disable answr btn
-function clearRadioBtn(): void {
+function clearAnswer(): void {
   answerRadioBtn1.checked = false;
   answerRadioBtn2.checked = false;
   answerRadioBtn3.checked = false;
@@ -350,6 +356,24 @@ function resetTotalScore(): void {
   totalScore = 0;
 }
 
+function newPlayerRound(): void {
+  if (resultPage === null) {
+    return;
+  }
+  if (namePage === null) {
+    return;
+  }
+  resultPage.classList.add('hidden');
+  namePage.classList.remove('hidden');
+  gameArray = [...questionArray];
+  // Reset question-counter value
+  // resetTimer()
+  savedPlayerName = '';
+  playerNameInput.value = '';
+  resetTotalScore();
+  console.table(gameArray);
+}
+
 // DELETE WHEN MERGE IF NEEDED
 resetTotalScore();
 
@@ -383,5 +407,5 @@ function displayFeedbackPage(): void {
     correctAnswerContainer?.classList.add('hidden');
     wrongAnswerContainer?.classList.remove('hidden');
   }
-  clearRadioBtn();
+  clearAnswer();
 }
