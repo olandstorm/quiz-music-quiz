@@ -1,4 +1,5 @@
 import { questionArray } from './questionArray.ts';
+import type { IQuestionArray } from './questionArray.ts';
 import './scss/style.scss'; // Importera huvud-SCSS-filen
 
 /* 
@@ -71,8 +72,9 @@ const playAgainBtn = document.getElementById('playAgainBtn');
 
 // -------------------RADIOBUTTONS AND ANSWERBUTTON------------------------------
 // when any radioBtn is clicked, remove the disabled attribute from the answerBtn.
+const answerBtn = document.getElementById('answerBtn');
+
 function enableAnswerBtn(): boolean {
-  const answerBtn = document.getElementById('answerBtn');
   answerBtn?.removeAttribute('disabled');
   return true;
 }
@@ -97,16 +99,16 @@ console.log(savedPlayerName);
  * -------------TIMER--------------
  * --------------------------------
  */
-/* 
-// An interface for the timer
-interface Timer {
+
+/* // An interface for the timer
+interface ITimer {
   intervalId: number | null;
   seconds: number;
   minutes: number;
 }
 
 // Display the timer in the document
-function updateTimer(timer: Timer): void {
+function updateTimer(timer: ITimer): void {
   console.log(`${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`);
 }
 
@@ -116,7 +118,7 @@ function formatTime(time: number): string {
 }
 
 // Function to start the timer
-function startTimer(timer: Timer): void {
+function startTimer(timer: ITimer): void {
   timer.intervalId = setInterval(() => {
     timer.seconds += 1;
     if (timer.seconds === 60) {
@@ -128,7 +130,7 @@ function startTimer(timer: Timer): void {
 }
 
 // Function to stop the timer
-function stopTimer(timer: Timer): void {
+function stopTimer(timer: ITimer): void {
   if (timer.intervalId !== null) {
     clearInterval(timer.intervalId);
     timer.intervalId = null;
@@ -136,7 +138,7 @@ function stopTimer(timer: Timer): void {
 }
 
 // Function to reset the timer
-function resetTimer(timer: Timer): void {
+function resetTimer(timer: ITimer): void {
   stopTimer(timer);
   timer.seconds = 0;
   timer.minutes = 0;
@@ -206,7 +208,7 @@ if (nextQuestionBtn !== null) {
 }
 
 // variable for empty gameArray
-let gameArray: any[] = [];
+let gameArray: IQuestionArray = [];
 console.table(gameArray);
 
 // Function to display namepage when user klicks on readyBtn
@@ -238,18 +240,63 @@ function startQuiz(): void {
   console.log(savedPlayerName);
 }
 // Funktion som visar en random fråga från arrayen, och
-function showQuestion(): void {
+let currentQuestion: IQuestionArray;
+
+// Randomize a question and return that question
+function randomQuestion(): IQuestionArray {
   const randomQuestionId: number = Math.floor(Math.random() * gameArray.length);
+  currentQuestion = gameArray[randomQuestionId];
+  gameArray.splice(randomQuestionId, 1);
+  return currentQuestion;
+}
+
+// Display that question in the HTML
+function showQuestion(): void {
+  randomQuestion();
   if (questionText !== null && answerRadioBtn !== null) {
-    questionText.innerHTML = gameArray[randomQuestionId].question;
+    questionText.innerHTML = currentQuestion.question;
     for (let i = 0; i < answerRadioBtn.length; i++) {
-      answerRadioBtn[i].innerHTML = gameArray[randomQuestionId].answers[i].answer;
+      answerRadioBtn[i].innerHTML = currentQuestion.answers[i].answer;
     }
   }
-  gameArray.splice(randomQuestionId, 1);
+
   console.table(gameArray);
-  console.table(questionArray);
 }
+
+// Check what the user har picked as answer in the form and return the index of that button
+function checkAnswerInput(): number | null {
+  const radioButtons = document.getElementsByName('answer');
+  for (let i = 0; i < radioButtons.length; i++) {
+    const radioButton = radioButtons[i] as HTMLInputElement;
+    if (radioButton.checked) {
+      console.log(i);
+      return i;
+    }
+  }
+  return null;
+}
+
+// Check the correct answer of the array of answers and return the index of that correct answer
+function checkCorrectAnswer(): number | null {
+  for (let i = 0; i < currentQuestion.answers.length; i++) {
+    if (currentQuestion.answers[i].correct) {
+      console.log(i);
+      return i;
+    }
+  }
+  return null;
+}
+
+// Run a test of the users answer and the correct answer of the question and return a log of the answer
+// THIS IS BETA AND WILL BE ADAPTED TO THE MAIN STRUCTURE AND FUNCTION OF THE FEEDBACK RESULT PAGE
+function isAnswerCorrect(): boolean {
+  const userAnswerIndex = checkAnswerInput();
+  const correctAnswerIndex = checkCorrectAnswer();
+  return userAnswerIndex === correctAnswerIndex;
+}
+
+// ONLY FOR TESTING DELETE LATER
+isAnswerCorrect();
 
 // Funktion för att dölja feedback page och gå vidare till nästa fråga
 function nextQuestion(): void {
