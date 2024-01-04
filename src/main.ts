@@ -190,6 +190,10 @@ const nextQuestionBtn = document.getElementById('nextQuestionBtn');
 // Visa resultat-knapp - Feedback page
 const showResultBtn = document.getElementById('showResultBtn');
 
+// Variables for each radio-Btn
+const answerRadioBtn1 = document.getElementById('answerRadioBtn1') as HTMLInputElement;
+const answerRadioBtn2 = document.getElementById('answerRadioBtn2') as HTMLInputElement;
+const answerRadioBtn3 = document.getElementById('answerRadioBtn3') as HTMLInputElement;
 // Events
 
 // Click event to display the name page after user clicks on
@@ -307,6 +311,16 @@ function isAnswerCorrect(): boolean {
   return userAnswerIndex === correctAnswerIndex;
 }
 
+// Function to clear the answer input and disable answr btn
+function clearRadioBtn(): void {
+  answerRadioBtn1.checked = false;
+  answerRadioBtn2.checked = false;
+  answerRadioBtn3.checked = false;
+  if (answerBtn !== null) {
+    answerBtn.setAttribute('disabled', '');
+  }
+}
+
 // Funktion för att dölja feedback page och gå vidare till nästa fråga
 function nextQuestion(): void {
   if (feedbackPage !== null && questionPage !== null) {
@@ -331,7 +345,6 @@ function displayResultPage(): void {
     totalScoreSpan.innerHTML = `${totalScore}`;
   }
 }
-
 
 function resetTotalScore(): void {
   totalScore = 0;
@@ -370,4 +383,5 @@ function displayFeedbackPage(): void {
     correctAnswerContainer?.classList.add('hidden');
     wrongAnswerContainer?.classList.remove('hidden');
   }
+  clearRadioBtn();
 }
