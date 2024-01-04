@@ -207,12 +207,20 @@ if (nextQuestionBtn !== null) {
   nextQuestionBtn.addEventListener('click', nextQuestion);
 }
 
+// variable for empty gameArray
+let gameArray: IQuestionArray = [];
+console.table(gameArray);
+
 // Function to display namepage when user klicks on readyBtn
 function displayNamePage(): void {
   if (landingPage !== null && namePage !== null) {
     landingPage.classList.add('hidden');
     namePage.classList.remove('hidden');
   }
+
+  // call on gameArray to copy original questionArray
+  gameArray = [...questionArray];
+  console.table(gameArray);
 }
 // Funktion som triggas när användare klickar på "kör" i namnsida
 // Kallar även på fråge-funktion
@@ -236,9 +244,9 @@ let currentQuestion: IQuestionArray;
 
 // Randomize a question and return that question
 function randomQuestion(): IQuestionArray {
-  const randomQuestionId: number = Math.floor(Math.random() * questionArray.length);
-  currentQuestion = questionArray[randomQuestionId];
-  questionArray.splice(randomQuestionId, 1);
+  const randomQuestionId: number = Math.floor(Math.random() * gameArray.length);
+  currentQuestion = gameArray[randomQuestionId];
+  gameArray.splice(randomQuestionId, 1);
   return currentQuestion;
 }
 
@@ -251,7 +259,8 @@ function showQuestion(): void {
       answerRadioBtn[i].innerHTML = currentQuestion.answers[i].answer;
     }
   }
-  console.table(questionArray);
+
+  console.table(gameArray);
 }
 
 // Check what the user har picked as answer in the form and return the index of that button
@@ -311,3 +320,7 @@ resetTotalScore();
 
 console.log(totalScore);
 // DELETE ABOVE IF NEEDED
+
+
+
+
