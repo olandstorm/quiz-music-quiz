@@ -183,7 +183,7 @@ setTimeout(() => {
 // To get rid of error messages mostly
 updateTimer(timer); */
 
-// Variabler för de olika containers
+// Variables for containers
 const timerContainer = document.getElementById('timeContainer');
 const landingPage = document.getElementById('landingPage');
 const namePage = document.getElementById('namePage');
@@ -191,20 +191,23 @@ const questionPage = document.getElementById('questionPage');
 const feedbackPage = document.getElementById('feedbackPage');
 const resultPage = document.getElementById('resultPage');
 
-// Variabler för knapparna
-// Redoknapp - Landing page
+// Variables for Buttons
 const readyBtn = document.getElementById('readyBtn');
-// Körknapp - Name page
 const runBtn = document.getElementById('runBtn');
-// Nästa fråga-knapp - Feedback page
+
 const questionText = document.querySelector('#questionText');
-// Gruppering av alla answer radio knapparna
 const answerRadioBtn = document.querySelectorAll('.answerText');
 
-// Nästa fråga knapp - Feedback page
+// Next question button - Feedback page
 const nextQuestionBtn = document.getElementById('nextQuestionBtn');
-// Visa resultat-knapp - Feedback page
+// Show result button - Feedback page
 const showResultBtn = document.getElementById('showResultBtn');
+
+
+// Variables for each radio-Btn
+const answerRadioBtn1 = document.getElementById('answerRadioBtn1') as HTMLInputElement;
+const answerRadioBtn2 = document.getElementById('answerRadioBtn2') as HTMLInputElement;
+const answerRadioBtn3 = document.getElementById('answerRadioBtn3') as HTMLInputElement;
 
 // Events
 
@@ -347,6 +350,16 @@ function isAnswerCorrect(): boolean {
   return userAnswerIndex === correctAnswerIndex;
 }
 
+// Function to clear the answer input and disable answr btn
+function clearAnswer(): void {
+  answerRadioBtn1.checked = false;
+  answerRadioBtn2.checked = false;
+  answerRadioBtn3.checked = false;
+  if (answerBtn !== null) {
+    answerBtn.setAttribute('disabled', '');
+  }
+}
+
 // Funktion för att dölja feedback page och gå vidare till nästa fråga
 function nextQuestion(): void {
   if (feedbackPage !== null && questionPage !== null) {
@@ -443,4 +456,5 @@ function displayFeedbackPage(): void {
     correctAnswerContainer?.classList.add('hidden');
     wrongAnswerContainer?.classList.remove('hidden');
   }
+  clearAnswer();
 }
