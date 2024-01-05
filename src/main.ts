@@ -99,6 +99,22 @@ console.log(savedPlayerName);
  * --------------------------------
  */
 
+function toggleTimerContainer(): void {
+  if (
+    !(questionPage as HTMLElement)?.classList.contains('hidden') ||
+    !(feedbackPage as HTMLElement)?.classList.contains('hidden')
+  ) {
+    timerContainer?.classList.remove('hidden');
+    timerContainer?.classList.remove('resultTimer');
+  } else if (!(resultPage as HTMLElement)?.classList.contains('hidden')) {
+    timerContainer?.classList.remove('hidden');
+    timerContainer?.classList.add('resultTimer');
+  } else {
+    timerContainer?.classList.add('hidden');
+    timerContainer?.classList.remove('resultTimer');
+  }
+}
+
 // An interface for the timer
 interface ITimer {
   intervalId: number | null;
@@ -158,40 +174,33 @@ const timer: ITimer = {
   minutes: 0,
 };
 
-
-/*
-// To test the resetTimer-function
-setTimeout(() => {
-  resetTimer(timer);
-}, 10000);
-*/
-
-
-console.log(resetTimer);
-
-
-// Variabler för de olika containers
+// Variables for containers
+const timerContainer = document.getElementById('timeContainer');
 const landingPage = document.getElementById('landingPage');
 const namePage = document.getElementById('namePage');
 const questionPage = document.getElementById('questionPage');
 const feedbackPage = document.getElementById('feedbackPage');
-const resultPage = document.querySelector('#resultPage');
+const resultPage = document.getElementById('resultPage');
 
-// Variabler för knapparna
-
-// Redoknapp - Landing page
+// Variables for Buttons
 const readyBtn = document.getElementById('readyBtn');
-// Körknapp - Name page
 const runBtn = document.getElementById('runBtn');
-// Nästa fråga-knapp - Feedback page
+
 const questionText = document.querySelector('#questionText');
-// Gruppering av alla answer radio knapparna
 const answerRadioBtn = document.querySelectorAll('.answerText');
 
-// Nästa fråga-knapp - Feedback page
+// Next question button - Feedback page
 const nextQuestionBtn = document.getElementById('nextQuestionBtn');
-// Visa resultat-knapp - Feedback page
+// Show result button - Feedback page
 const showResultBtn = document.getElementById('showResultBtn');
+
+// New player btn - result page
+const newPlayerBtn = document.getElementById('newPlayerBtn');
+
+// Variables for each radio-Btn
+const answerRadioBtn1 = document.getElementById('answerRadioBtn1') as HTMLInputElement;
+const answerRadioBtn2 = document.getElementById('answerRadioBtn2') as HTMLInputElement;
+const answerRadioBtn3 = document.getElementById('answerRadioBtn3') as HTMLInputElement;
 
 // Events
 
@@ -219,6 +228,12 @@ if (showResultBtn !== null) {
   showResultBtn.addEventListener('click', displayResultPage);
 }
 
+// Click event to trigger new player
+// Condition to add evtlsnr if newPlayerBtn exists in html
+if (newPlayerBtn !== null) {
+  newPlayerBtn.addEventListener('click', newPlayerRound);
+}
+
 // variable for empty gameArray
 let gameArray: any[] = [];
 console.table(gameArray);
@@ -235,6 +250,8 @@ function displayNamePage(): void {
   // call on gameArray to copy original questionArray
   gameArray = [...questionArray];
   console.table(gameArray);
+  // Calls timerContainer to go away
+  toggleTimerContainer();
 }
 // Funktion som triggas när användare klickar på "kör" i namnsida
 // Kallar även på fråge-funktion
@@ -246,12 +263,9 @@ function startQuiz(): void {
   }
 
   startTimer(timer);
-  // To test the stopTimer-function
-  setTimeout(() => {
-    stopTimer(timer);
-  }, 7000);
-
   showQuestion();
+  // Calls timerContainer to display propperly
+  toggleTimerContainer();
 
   // if the name input is not empty let the savedPlayerName be the value of the input
   if (playerNameInput !== null) {
@@ -272,6 +286,26 @@ function randomQuestion(): IQuestionArray {
   return currentQuestion;
 }
 
+// Variable for counting
+let questionCounter: number = 0;
+
+// function for counting and displaying question number
+function displayQuestionNumber(): void {
+  const questionNumber = document.querySelector('#questionNumber');
+  if (questionNumber === null) { 
+    return;
+  }
+  if (questionCounter === null) {
+    return;
+  }
+  questionCounter += 1;
+  questionNumber.innerHTML = `${questionCounter}`;
+  // If questions reach 10 reset
+  if (questionCounter === 10) {
+    questionCounter = 0;
+  }
+}
+
 // Display that question in the HTML
 function showQuestion(): void {
   randomQuestion();
@@ -281,7 +315,7 @@ function showQuestion(): void {
       answerRadioBtn[i].innerHTML = currentQuestion.answers[i].answer;
     }
   }
-
+  displayQuestionNumber();
   console.table(gameArray);
   console.table(questionArray);
 }
@@ -317,6 +351,16 @@ function isAnswerCorrect(): boolean {
   return userAnswerIndex === correctAnswerIndex;
 }
 
+// Function to clear the answer input and disable answr btn
+function clearAnswer(): void {
+  answerRadioBtn1.checked = false;
+  answerRadioBtn2.checked = false;
+  answerRadioBtn3.checked = false;
+  if (answerBtn !== null) {
+    answerBtn.setAttribute('disabled', '');
+  }
+}
+
 // Funktion för att dölja feedback page och gå vidare till nästa fråga
 function nextQuestion(): void {
   if (feedbackPage !== null && questionPage !== null) {
@@ -330,27 +374,75 @@ function nextQuestion(): void {
 let totalScore: number = 0; // TS type defined and set to 0.
 // DELETE ABOVE IF NEEDED
 
-// Function for displaying Result page
+// Function for displaying Result page and toggle display on the playAgain-button
 function displayResultPage(): void {
   const resultTitlePlayerName = document.querySelector('#resultTitlePlayerName');
   const totalScoreSpan = document.querySelector('#totalScore span');
-  if (feedbackPage !== null && resultPage !== null && resultTitlePlayerName !== null && totalScoreSpan !== null) {
-    feedbackPage.classList.add('hidden');
-    resultPage.classList.remove('hidden');
-    resultTitlePlayerName.innerHTML = savedPlayerName;
-    totalScoreSpan.innerHTML = `${totalScore}`;
+  if (feedbackPage === null) {
+    return;
   }
+  if (resultPage === null) {
+    return;
+  }
+  if (resultTitlePlayerName === null) {
+    return;
+  }
+  if (totalScoreSpan === null) {
+    return;
+  }
+  feedbackPage.classList.add('hidden');
+  resultPage.classList.remove('hidden');
+  resultTitlePlayerName.innerHTML = savedPlayerName;
+  totalScoreSpan.innerHTML = `${totalScore}`;
+  if (gameArray.length >= 10) {
+    playAgainBtn?.classList.remove('hidden');
+  } else {
+    playAgainBtn?.classList.add('hidden');
+  }
+  // Calls timerContainer to display propperly
+  toggleTimerContainer();
+}
+
+// Function to make the same player play another round
+const playAgainBtn = document.querySelector('#playAgainBtn');
+playAgainBtn?.addEventListener('click', playAgain);
+function playAgain(): void {
+  if (resultPage === null) {
+    return;
+  }
+  if (questionPage === null) {
+    return;
+  }
+  resultPage.classList.add('hidden');
+  questionPage.classList.remove('hidden');
+  resetTimer(timer);
+  startTimer(timer);
+  resetTotalScore();
+  showQuestion();
 }
 
 function resetTotalScore(): void {
   totalScore = 0;
 }
 
-// DELETE WHEN MERGE IF NEEDED
-resetTotalScore();
+function newPlayerRound(): void {
+  if (resultPage === null) {
+    return;
+  }
+  if (namePage === null) {
+    return;
+  }
+  resultPage.classList.add('hidden');
+  namePage.classList.remove('hidden');
+  gameArray = [...questionArray];
+  // Reset question-counter value
+  resetTimer(timer);
+  savedPlayerName = '';
+  playerNameInput.value = '';
+  resetTotalScore();
+  console.table(gameArray);
+}
 
-console.log(totalScore);
-// DELETE ABOVE IF NEEDED
 
 // eventlistener for answerBtn which displays the feedback page
 answerBtn?.addEventListener('click', displayFeedbackPage);
@@ -362,6 +454,9 @@ function displayFeedbackPage(): void {
     questionPage.classList.add('hidden');
   }
 
+  // Calls timerContainer to display propperly
+  toggleTimerContainer();
+
   // local variable for the correctAnswerContainer
   const correctAnswerContainer = document.getElementById('correctAnswerContainer');
   // local variable for the wrongAnswerContainer
@@ -371,6 +466,8 @@ function displayFeedbackPage(): void {
 
   // check if the radioBtn answer is true
   if (rightAnswer) {
+    // Adjust total score
+    totalScore += 1;
     // if answer is true, display the correctAnswerContainer styling
     correctAnswerContainer?.classList.remove('hidden');
     wrongAnswerContainer?.classList.add('hidden');
@@ -379,4 +476,5 @@ function displayFeedbackPage(): void {
     correctAnswerContainer?.classList.add('hidden');
     wrongAnswerContainer?.classList.remove('hidden');
   }
+  clearAnswer();
 }
