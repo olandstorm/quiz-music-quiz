@@ -99,6 +99,22 @@ console.log(savedPlayerName);
  * --------------------------------
  */
 
+function toggleTimerContainer(): void {
+  if (
+    !(questionPage as HTMLElement)?.classList.contains('hidden') ||
+    !(feedbackPage as HTMLElement)?.classList.contains('hidden')
+  ) {
+    timerContainer?.classList.remove('hidden');
+    timerContainer?.classList.remove('resultTimer');
+  } else if (!(resultPage as HTMLElement)?.classList.contains('hidden')) {
+    timerContainer?.classList.remove('hidden');
+    timerContainer?.classList.add('resultTimer');
+  } else {
+    timerContainer?.classList.add('hidden');
+    timerContainer?.classList.remove('resultTimer');
+  }
+}
+
 /* // An interface for the timer
 interface ITimer {
   intervalId: number | null;
@@ -168,14 +184,14 @@ setTimeout(() => {
 updateTimer(timer); */
 
 // Variabler för de olika containers
+const timerContainer = document.getElementById('timeContainer');
 const landingPage = document.getElementById('landingPage');
 const namePage = document.getElementById('namePage');
 const questionPage = document.getElementById('questionPage');
 const feedbackPage = document.getElementById('feedbackPage');
-const resultPage = document.querySelector('#resultPage');
+const resultPage = document.getElementById('resultPage');
 
 // Variabler för knapparna
-
 // Redoknapp - Landing page
 const readyBtn = document.getElementById('readyBtn');
 // Körknapp - Name page
@@ -232,6 +248,8 @@ function displayNamePage(): void {
   // call on gameArray to copy original questionArray
   gameArray = [...questionArray];
   console.table(gameArray);
+  // Calls timerContainer to go away
+  toggleTimerContainer();
 }
 // Funktion som triggas när användare klickar på "kör" i namnsida
 // Kallar även på fråge-funktion
@@ -242,6 +260,8 @@ function startQuiz(): void {
     questionPage.classList.remove('hidden');
   }
   showQuestion();
+  // Calls timerContainer to display propperly
+  toggleTimerContainer();
 
   // if the name input is not empty let the savedPlayerName be the value of the input
   if (playerNameInput !== null) {
@@ -330,6 +350,8 @@ function displayResultPage(): void {
     resultTitlePlayerName.innerHTML = savedPlayerName;
     totalScoreSpan.innerHTML = `${totalScore}`;
   }
+  // Calls timerContainer to display propperly
+  toggleTimerContainer();
 }
 
 
@@ -352,6 +374,9 @@ function displayFeedbackPage(): void {
     feedbackPage.classList.remove('hidden');
     questionPage.classList.add('hidden');
   }
+
+  // Calls timerContainer to display propperly
+  toggleTimerContainer();
 
   // local variable for the correctAnswerContainer
   const correctAnswerContainer = document.getElementById('correctAnswerContainer');
