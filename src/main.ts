@@ -1,8 +1,7 @@
-import { questionArray } from './questionArray.ts';
-import type { IQuestionArray } from './questionArray.ts';
+import { questionArray, type IQuestionArray } from './questionArray.ts';
 import './scss/style.scss'; // Importera huvud-SCSS-filen
 
-/* 
+/*
 
 // GLOBAL VARIABLES 
 // If the variable you need is of the local variety in another function, 
@@ -193,19 +192,21 @@ const feedbackPage = document.getElementById('feedbackPage');
 const resultPage = document.getElementById('resultPage');
 
 // Variabler för knapparna
-
 // Redoknapp - Landing page
 const readyBtn = document.getElementById('readyBtn');
 // Körknapp - Name page
 const runBtn = document.getElementById('runBtn');
-// Nästa fråga knapp - Feedback page
+// Nästa fråga-knapp - Feedback page
 const questionText = document.querySelector('#questionText');
 // Gruppering av alla answer radio knapparna
 const answerRadioBtn = document.querySelectorAll('.answerText');
-// Click event to display the name page after user clicks on
 
 // Nästa fråga knapp - Feedback page
 const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+// Visa resultat-knapp - Feedback page
+const showResultBtn = document.getElementById('showResultBtn');
+
+// Events
 
 // Click event to display the name page after user clicks on
 // Condition to add evtlsnr if readyBtn exists in html
@@ -225,9 +226,17 @@ if (nextQuestionBtn !== null) {
   nextQuestionBtn.addEventListener('click', nextQuestion);
 }
 
+// Click event to trigger Result page
+// Condition to add evtlsnr if showResultBtn exists in html
+if (showResultBtn !== null) {
+  showResultBtn.addEventListener('click', displayResultPage);
+}
+
 // variable for empty gameArray
 let gameArray: any[] = [];
 console.table(gameArray);
+
+// Functions
 
 // Function to display namepage when user klicks on readyBtn
 function displayNamePage(): void {
@@ -261,6 +270,7 @@ function startQuiz(): void {
   }
   console.log(savedPlayerName);
 }
+
 // Funktion som visar en random fråga från arrayen, och
 let currentQuestion: IQuestionArray;
 
@@ -330,6 +340,21 @@ function nextQuestion(): void {
 let totalScore: number = 0; // TS type defined and set to 0.
 // DELETE ABOVE IF NEEDED
 
+// Function for displaying Result page
+function displayResultPage(): void {
+  const resultTitlePlayerName = document.querySelector('#resultTitlePlayerName');
+  const totalScoreSpan = document.querySelector('#totalScore span');
+  if (feedbackPage !== null && resultPage !== null && resultTitlePlayerName !== null && totalScoreSpan !== null) {
+    feedbackPage.classList.add('hidden');
+    resultPage.classList.remove('hidden');
+    resultTitlePlayerName.innerHTML = savedPlayerName;
+    totalScoreSpan.innerHTML = `${totalScore}`;
+  }
+  // Calls timerContainer to display propperly
+  toggleTimerContainer();
+}
+
+
 function resetTotalScore(): void {
   totalScore = 0;
 }
@@ -362,6 +387,8 @@ function displayFeedbackPage(): void {
 
   // check if the radioBtn answer is true
   if (rightAnswer) {
+    // Adjust total score
+    totalScore += 1;
     // if answer is true, display the correctAnswerContainer styling
     correctAnswerContainer?.classList.remove('hidden');
     wrongAnswerContainer?.classList.add('hidden');
