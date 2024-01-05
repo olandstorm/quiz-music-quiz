@@ -292,7 +292,7 @@ let questionCounter: number = 0;
 // function for counting and displaying question number
 function displayQuestionNumber(): void {
   const questionNumber = document.querySelector('#questionNumber');
-  if (questionNumber === null) { 
+  if (questionNumber === null) {
     return;
   }
   if (questionCounter === null) {
@@ -374,6 +374,17 @@ function nextQuestion(): void {
 let totalScore: number = 0; // TS type defined and set to 0.
 // DELETE ABOVE IF NEEDED
 
+/**
+ * Takes the user to resultPage if it was the 10th question
+ */
+function getResult(): void {
+  if (questionCounter === 0) {
+    nextQuestionBtn?.classList.add('hidden');
+    showResultBtn?.classList.remove('hidden');
+    stopTimer(timer);
+  }
+}
+
 // Function for displaying Result page and toggle display on the playAgain-button
 function displayResultPage(): void {
   const resultTitlePlayerName = document.querySelector('#resultTitlePlayerName');
@@ -406,6 +417,7 @@ function displayResultPage(): void {
 // Function to make the same player play another round
 const playAgainBtn = document.querySelector('#playAgainBtn');
 playAgainBtn?.addEventListener('click', playAgain);
+
 function playAgain(): void {
   if (resultPage === null) {
     return;
@@ -419,6 +431,7 @@ function playAgain(): void {
   startTimer(timer);
   resetTotalScore();
   showQuestion();
+  toggleTimerContainer();
 }
 
 function resetTotalScore(): void {
@@ -435,14 +448,12 @@ function newPlayerRound(): void {
   resultPage.classList.add('hidden');
   namePage.classList.remove('hidden');
   gameArray = [...questionArray];
-  // Reset question-counter value
   resetTimer(timer);
   savedPlayerName = '';
   playerNameInput.value = '';
   resetTotalScore();
-  console.table(gameArray);
+  toggleTimerContainer();
 }
-
 
 // eventlistener for answerBtn which displays the feedback page
 answerBtn?.addEventListener('click', displayFeedbackPage);
@@ -453,10 +464,8 @@ function displayFeedbackPage(): void {
     feedbackPage.classList.remove('hidden');
     questionPage.classList.add('hidden');
   }
-
   // Calls timerContainer to display propperly
   toggleTimerContainer();
-
   // local variable for the correctAnswerContainer
   const correctAnswerContainer = document.getElementById('correctAnswerContainer');
   // local variable for the wrongAnswerContainer
@@ -477,4 +486,6 @@ function displayFeedbackPage(): void {
     wrongAnswerContainer?.classList.remove('hidden');
   }
   clearAnswer();
+  // Makes the buttons toggle display and stops timer if last question
+  getResult();
 }
