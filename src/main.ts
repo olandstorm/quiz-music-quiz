@@ -99,6 +99,22 @@ console.log(savedPlayerName);
  * --------------------------------
  */
 
+function toggleTimerContainer(): void {
+  if (
+    !(questionPage as HTMLElement)?.classList.contains('hidden') ||
+    !(feedbackPage as HTMLElement)?.classList.contains('hidden')
+  ) {
+    timerContainer?.classList.remove('hidden');
+    timerContainer?.classList.remove('resultTimer');
+  } else if (!(resultPage as HTMLElement)?.classList.contains('hidden')) {
+    timerContainer?.classList.remove('hidden');
+    timerContainer?.classList.add('resultTimer');
+  } else {
+    timerContainer?.classList.add('hidden');
+    timerContainer?.classList.remove('resultTimer');
+  }
+}
+
 /* // An interface for the timer
 interface ITimer {
   intervalId: number | null;
@@ -168,14 +184,14 @@ setTimeout(() => {
 updateTimer(timer); */
 
 // Variabler för de olika containers
+const timerContainer = document.getElementById('timeContainer');
 const landingPage = document.getElementById('landingPage');
 const namePage = document.getElementById('namePage');
 const questionPage = document.getElementById('questionPage');
 const feedbackPage = document.getElementById('feedbackPage');
-const resultPage = document.querySelector('#resultPage');
+const resultPage = document.getElementById('resultPage');
 
 // Variabler för knapparna
-
 // Redoknapp - Landing page
 const readyBtn = document.getElementById('readyBtn');
 // Körknapp - Name page
@@ -185,7 +201,7 @@ const questionText = document.querySelector('#questionText');
 // Gruppering av alla answer radio knapparna
 const answerRadioBtn = document.querySelectorAll('.answerText');
 
-// Nästa fråga-knapp - Feedback page
+// Nästa fråga knapp - Feedback page
 const nextQuestionBtn = document.getElementById('nextQuestionBtn');
 // Visa resultat-knapp - Feedback page
 const showResultBtn = document.getElementById('showResultBtn');
@@ -232,6 +248,8 @@ function displayNamePage(): void {
   // call on gameArray to copy original questionArray
   gameArray = [...questionArray];
   console.table(gameArray);
+  // Calls timerContainer to go away
+  toggleTimerContainer();
 }
 // Funktion som triggas när användare klickar på "kör" i namnsida
 // Kallar även på fråge-funktion
@@ -242,6 +260,8 @@ function startQuiz(): void {
     questionPage.classList.remove('hidden');
   }
   showQuestion();
+  // Calls timerContainer to display propperly
+  toggleTimerContainer();
 
   // if the name input is not empty let the savedPlayerName be the value of the input
   if (playerNameInput !== null) {
@@ -340,30 +360,56 @@ function nextQuestion(): void {
 let totalScore: number = 0; // TS type defined and set to 0.
 // DELETE ABOVE IF NEEDED
 
-// Function for displaying Result page
+// Function for displaying Result page and toggle display on the playAgain-button
 function displayResultPage(): void {
   const resultTitlePlayerName = document.querySelector('#resultTitlePlayerName');
   const totalScoreSpan = document.querySelector('#totalScore span');
-  if (feedbackPage !== null && resultPage !== null && resultTitlePlayerName !== null && totalScoreSpan !== null) {
-    feedbackPage.classList.add('hidden');
-    resultPage.classList.remove('hidden');
-    resultTitlePlayerName.innerHTML = savedPlayerName;
-    totalScoreSpan.innerHTML = `${totalScore}`;
+  if (feedbackPage === null) {
+    return;
   }
+  if (resultPage === null) {
+    return;
+  }
+  if (resultTitlePlayerName === null) {
+    return;
+  }
+  if (totalScoreSpan === null) {
+    return;
+  }
+  feedbackPage.classList.add('hidden');
+  resultPage.classList.remove('hidden');
+  resultTitlePlayerName.innerHTML = savedPlayerName;
+  totalScoreSpan.innerHTML = `${totalScore}`;
+  if (gameArray.length >= 10) {
+    playAgainBtn?.classList.remove('hidden');
+  } else {
+    playAgainBtn?.classList.add('hidden');
+  }
+  // Calls timerContainer to display propperly
+  toggleTimerContainer();
 }
 
+// Function to make the same player play another round
+const playAgainBtn = document.querySelector('#playAgainBtn');
+playAgainBtn?.addEventListener('click', playAgain);
+function playAgain(): void {
+  if (resultPage === null) {
+    return;
+  }
+  if (questionPage === null) {
+    return;
+  }
+  resultPage.classList.add('hidden');
+  questionPage.classList.remove('hidden');
+  /* resetTimer(timer); */
+  /* startTimer(timer); */
+  resetTotalScore();
+  showQuestion();
+}
 
 function resetTotalScore(): void {
   totalScore = 0;
 }
-
-// DELETE WHEN MERGE IF NEEDED
-resetTotalScore();
-
-console.log(totalScore);
-// DELETE ABOVE IF NEEDED
-
-
 
 // eventlistener for answerBtn which displays the feedback page
 answerBtn?.addEventListener('click', displayFeedbackPage);
@@ -375,6 +421,9 @@ function displayFeedbackPage(): void {
     questionPage.classList.add('hidden');
   }
 
+  // Calls timerContainer to display propperly
+  toggleTimerContainer();
+
   // local variable for the correctAnswerContainer
   const correctAnswerContainer = document.getElementById('correctAnswerContainer');
   // local variable for the wrongAnswerContainer
@@ -384,6 +433,8 @@ function displayFeedbackPage(): void {
 
   // check if the radioBtn answer is true
   if (rightAnswer) {
+    // Adjust total score
+    totalScore += 1;
     // if answer is true, display the correctAnswerContainer styling
     correctAnswerContainer?.classList.remove('hidden');
     wrongAnswerContainer?.classList.add('hidden');
