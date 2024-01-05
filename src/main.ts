@@ -185,7 +185,7 @@ const questionText = document.querySelector('#questionText');
 // Gruppering av alla answer radio knapparna
 const answerRadioBtn = document.querySelectorAll('.answerText');
 
-// Nästa fråga-knapp - Feedback page
+// Nästa fråga knapp - Feedback page
 const nextQuestionBtn = document.getElementById('nextQuestionBtn');
 // Visa resultat-knapp - Feedback page
 const showResultBtn = document.getElementById('showResultBtn');
@@ -362,6 +362,8 @@ function displayFeedbackPage(): void {
 
   // check if the radioBtn answer is true
   if (rightAnswer) {
+    // Adjust total score
+    totalScore += 1;
     // if answer is true, display the correctAnswerContainer styling
     correctAnswerContainer?.classList.remove('hidden');
     wrongAnswerContainer?.classList.add('hidden');
