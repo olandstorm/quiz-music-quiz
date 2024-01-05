@@ -203,6 +203,8 @@ const nextQuestionBtn = document.getElementById('nextQuestionBtn');
 // Show result button - Feedback page
 const showResultBtn = document.getElementById('showResultBtn');
 
+// New player btn - result page
+const newPlayerBtn = document.getElementById('newPlayerBtn');
 
 // Variables for each radio-Btn
 const answerRadioBtn1 = document.getElementById('answerRadioBtn1') as HTMLInputElement;
@@ -233,6 +235,12 @@ if (nextQuestionBtn !== null) {
 // Condition to add evtlsnr if showResultBtn exists in html
 if (showResultBtn !== null) {
   showResultBtn.addEventListener('click', displayResultPage);
+}
+
+// Click event to trigger new player
+// Condition to add evtlsnr if newPlayerBtn exists in html
+if (newPlayerBtn !== null) {
+  newPlayerBtn.addEventListener('click', newPlayerRound);
 }
 
 // variable for empty gameArray
@@ -414,8 +422,8 @@ function playAgain(): void {
   }
   resultPage.classList.add('hidden');
   questionPage.classList.remove('hidden');
-  /* resetTimer(timer); */
-  /* startTimer(timer); */
+  resetTimer(timer);
+  startTimer(timer);
   resetTotalScore();
   showQuestion();
 }
@@ -423,6 +431,25 @@ function playAgain(): void {
 function resetTotalScore(): void {
   totalScore = 0;
 }
+
+function newPlayerRound(): void {
+  if (resultPage === null) {
+    return;
+  }
+  if (namePage === null) {
+    return;
+  }
+  resultPage.classList.add('hidden');
+  namePage.classList.remove('hidden');
+  gameArray = [...questionArray];
+  // Reset question-counter value
+  resetTimer(timer);
+  savedPlayerName = '';
+  playerNameInput.value = '';
+  resetTotalScore();
+  console.table(gameArray);
+}
+
 
 // eventlistener for answerBtn which displays the feedback page
 answerBtn?.addEventListener('click', displayFeedbackPage);
