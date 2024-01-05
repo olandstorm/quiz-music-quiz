@@ -115,7 +115,7 @@ function toggleTimerContainer(): void {
   }
 }
 
-/* // An interface for the timer
+// An interface for the timer
 interface ITimer {
   intervalId: number | null;
   seconds: number;
@@ -124,7 +124,14 @@ interface ITimer {
 
 // Display the timer in the document
 function updateTimer(timer: ITimer): void {
+  // function for displaying the timer on the page
+  const timerDisplay = document.querySelector('.timer');
   console.log(`${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`);
+
+  // change the innerHTML of the timercontainer to display the actual timer
+  if (timerDisplay !== null) {
+    timerDisplay.innerHTML = `${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`;
+  }
 }
 
 // Adds the 0 before if the number < 0
@@ -161,27 +168,11 @@ function resetTimer(timer: ITimer): void {
 }
 
 // Variable for the timer
-const timer: Timer = {
+const timer: ITimer = {
   intervalId: null,
   seconds: 0,
   minutes: 0,
 };
-
-// To display the timer in the console
-startTimer(timer);
-
-// To test the stopTimer-function
-setTimeout(() => {
-  stopTimer(timer);
-}, 7000);
-
-// To test the resetTimer-function
-setTimeout(() => {
-  resetTimer(timer);
-}, 8000);
-
-// To get rid of error messages mostly
-updateTimer(timer); */
 
 // Variables for containers
 const timerContainer = document.getElementById('timeContainer');
@@ -270,6 +261,8 @@ function startQuiz(): void {
     namePage.classList.add('hidden');
     questionPage.classList.remove('hidden');
   }
+
+  startTimer(timer);
   showQuestion();
   // Calls timerContainer to display propperly
   toggleTimerContainer();
