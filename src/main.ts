@@ -340,30 +340,56 @@ function nextQuestion(): void {
 let totalScore: number = 0; // TS type defined and set to 0.
 // DELETE ABOVE IF NEEDED
 
-// Function for displaying Result page
+// Function for displaying Result page and toggle display on the playAgain-button
 function displayResultPage(): void {
   const resultTitlePlayerName = document.querySelector('#resultTitlePlayerName');
   const totalScoreSpan = document.querySelector('#totalScore span');
-  if (feedbackPage !== null && resultPage !== null && resultTitlePlayerName !== null && totalScoreSpan !== null) {
-    feedbackPage.classList.add('hidden');
-    resultPage.classList.remove('hidden');
-    resultTitlePlayerName.innerHTML = savedPlayerName;
-    totalScoreSpan.innerHTML = `${totalScore}`;
+  if (feedbackPage === null) {
+    return;
+  }
+  if (resultPage === null) {
+    return;
+  }
+  if (resultTitlePlayerName === null) {
+    return;
+  }
+  if (totalScoreSpan === null) {
+    return;
+  }
+  feedbackPage.classList.add('hidden');
+  resultPage.classList.remove('hidden');
+  resultTitlePlayerName.innerHTML = savedPlayerName;
+  totalScoreSpan.innerHTML = `${totalScore}`;
+  if (gameArray.length > 10) {
+    playAgainBtn?.classList.remove('hidden');
+  } else {
+    playAgainBtn?.classList.add('hidden');
   }
   // Calls timerContainer to display propperly
   toggleTimerContainer();
 }
 
+// Function to make the same player play another round
+const playAgainBtn = document.querySelector('#playAgainBtn');
+playAgainBtn?.addEventListener('click', playAgain);
+function playAgain(): void {
+  if (resultPage === null) {
+    return;
+  }
+  if (questionPage === null) {
+    return;
+  }
+  resultPage.classList.add('hidden');
+  questionPage.classList.remove('hidden');
+  /* resetTimer(timer); */
+  /* startTimer(timer); */
+  resetTotalScore();
+  showQuestion();
+}
 
 function resetTotalScore(): void {
   totalScore = 0;
 }
-
-// DELETE WHEN MERGE IF NEEDED
-resetTotalScore();
-
-console.log(totalScore);
-// DELETE ABOVE IF NEEDED
 
 // eventlistener for answerBtn which displays the feedback page
 answerBtn?.addEventListener('click', displayFeedbackPage);
