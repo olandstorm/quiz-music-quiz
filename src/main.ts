@@ -175,7 +175,7 @@ const timer: ITimer = {
 };
 
 // Variables for containers
-const timerContainer = document.getElementById('timeContainer');
+const timerContainer = document.getElementById('timerContainer');
 const landingPage = document.getElementById('landingPage');
 const namePage = document.getElementById('namePage');
 const questionPage = document.getElementById('questionPage');
