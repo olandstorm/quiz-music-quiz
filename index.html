@@ -37,6 +37,7 @@
       </div>
       <!-- Timer end -->
       <!-- Landing page -->
+      
       <section class="landingPage" id="landingPage">
         <h1 class="pageHeading uppercase" id="pageHeading">Sången bakom sången</h1>
         <button class="readyBtn" id="readyBtn">Redo?</button>
@@ -82,12 +83,13 @@
             <h2>Fel svar!</h2>
           </div>
           <button class="nextQuestionBtn uppercase" id="nextQuestionBtn">Nästa fråga</button>
+          <button class="showResultBtn uppercase hidden" id="showResultBtn">Visa resultat</button>
         </div>
       </section>
       <!-- End Feedback page -->
       <!-- Result page -->
       <section class="resultPage hidden" id="resultPage">
-        <h2 class="resultTitle uppercase">Resultat</h2>
+        <h2 class="resultTitle uppercase">Resultat för <span id="resultTitlePlayerName"></span></h2>
         <div id="totalScoreContainer" class="totalScoreContainer">
           <p id="totalScore" class="totalScore"><span></span> av 10</p>
         </div>
