@@ -282,6 +282,26 @@ function randomQuestion(): IQuestionArray {
   return currentQuestion;
 }
 
+// Variable for counting
+let questionCounter: number = 0;
+
+// function for counting and displaying question number
+function displayQuestionNumber(): void {
+  const questionNumber = document.querySelector('#questionNumber');
+  if (questionNumber === null) { 
+    return;
+  }
+  if (questionCounter === null) {
+    return;
+  }
+  questionCounter += 1;
+  questionNumber.innerHTML = `${questionCounter}`;
+  // If questions reach 10 reset
+  if (questionCounter === 10) {
+    questionCounter = 0;
+  }
+}
+
 // Display that question in the HTML
 function showQuestion(): void {
   randomQuestion();
@@ -291,7 +311,7 @@ function showQuestion(): void {
       answerRadioBtn[i].innerHTML = currentQuestion.answers[i].answer;
     }
   }
-
+  displayQuestionNumber();
   console.table(gameArray);
   console.table(questionArray);
 }
@@ -360,7 +380,7 @@ function displayResultPage(): void {
   resultPage.classList.remove('hidden');
   resultTitlePlayerName.innerHTML = savedPlayerName;
   totalScoreSpan.innerHTML = `${totalScore}`;
-  if (gameArray.length > 10) {
+  if (gameArray.length >= 10) {
     playAgainBtn?.classList.remove('hidden');
   } else {
     playAgainBtn?.classList.add('hidden');
