@@ -403,6 +403,8 @@ function displayResultPage(): void {
   }
   feedbackPage.classList.add('hidden');
   resultPage.classList.remove('hidden');
+  nextQuestionBtn?.classList.remove('hidden');
+  showResultBtn?.classList.add('hidden');
   resultTitlePlayerName.innerHTML = savedPlayerName;
   totalScoreSpan.innerHTML = `${totalScore}`;
   if (gameArray.length >= 10) {
