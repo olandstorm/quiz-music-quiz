@@ -263,10 +263,12 @@ function displayNamePage(): void {
 
 // --------------------ENABLE RUNBTN---------------
 
-
 function enableRunBtn(): void {
+  if (runBtn === null) {
+    return;
+  }
   if (playerNameInput.value.length > 3) {
-    runBtn?.removeAttribute('disabled');
+    runBtn.removeAttribute('disabled');
   } 
 }
 
