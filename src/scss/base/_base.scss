@@ -44,19 +44,17 @@ main {
   line-height: 3rem;
   row-gap: 4rem;
 }
-.namePage {
-  .nameLabel {
-    font-weight: bold;
-    font-size: 1.7rem;
-  }
-  .playerName {
-    margin-top: 2rem;
-    border: none;
-    border-radius: 10px;
-    height: 3.5rem;
-    width: 15rem;
-    padding-left: 15px;
-  }
+.nameLabel {
+  font-weight: bold;
+  font-size: 1.7rem;
+}
+.playerName {
+  margin-top: 2rem;
+  border: none;
+  border-radius: 10px;
+  height: 3.5rem;
+  width: 15rem;
+  padding-left: 15px;
 }
 .questionPage {
   background-color: $questionsBgColor;
@@ -72,10 +70,8 @@ main {
     gap: 1rem;
     justify-items: start;
     padding-inline-end: 2rem;
-    label {
-      span {
-        padding-left: 15px;
-      }
+    label span {
+      padding-left: 15px;
     }
   }
 }
@@ -117,7 +113,6 @@ main {
 // Togglable classes and commonly used classes across the page
 .resultTimer {
   background-color: $timerBgColor;
-  position: absolute;
   width: 50%;
   height: 10vh;
   right: 0;
@@ -125,7 +120,6 @@ main {
   align-items: start;
   padding-left: 1rem;
   font-weight: 600;
-  font-size: 2rem;
 }
 .hidden {
   display: none !important;

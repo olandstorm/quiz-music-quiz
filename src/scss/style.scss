@@ -7,10 +7,6 @@
 
 @import 'components/form';
 
-@media (hover: hover) {
-  @import 'abstracts/hover';
-}
-
 @media screen and (min-width: 768px) {
   @import 'layout/tablet';
 }
