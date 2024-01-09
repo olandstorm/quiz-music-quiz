@@ -1,5 +1,5 @@
 import { questionArray, type IQuestionArray } from './questionArray.ts';
-import './scss/style.scss'; // Importera huvud-SCSS-filen
+import './scss/style.scss';
 
 /**
  * --------------------------------
