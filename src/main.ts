@@ -110,7 +110,7 @@ function toggleTimerContainer(): void {
   ) {
     timerContainer.classList.remove('hidden');
     timerContainer.classList.remove('resultTimer');
-  } else if (!(resultPage as HTMLElement)?.classList.contains('hidden')) {
+  } else if (!(resultPage as HTMLElement).classList.contains('hidden')) {
     timerContainer.classList.remove('hidden');
     timerContainer.classList.add('resultTimer');
   } else {
