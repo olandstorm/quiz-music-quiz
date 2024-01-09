@@ -13,16 +13,16 @@ button:active {
   background-color: $tertiaryBtnBgColor;
   color: $activeBtnTextColor;
 }
-.readyBtn {
+.landingPageReadyBtn {
   background-color: $tertiaryBtnBgColor;
   color: $secondaryBtnBgColor;
   padding-inline: 30px;
 }
-.readyBtn:active {
+.landingPageReadyBtn:active {
   background-color: $secondaryBtnBgColor;
   color: $btnTextColor;
 }
-.runBtn {
+.namePageRunBtn {
   background-color: $secondaryBtnBgColor;
   font-size: 1.2rem;
 }

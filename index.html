@@ -35,21 +35,20 @@
       <div class="timerContainer hidden" id="timerContainer">
         <p class="timer" id="timer">00:00</p>
       </div>
-      <!-- Timer end -->
-      <!-- Landing page -->
 
+      <!-- Landing page -->
       <section class="landingPage" id="landingPage">
         <h1 class="pageHeading uppercase" id="pageHeading">Sången bakom sången</h1>
         <button class="readyBtn" id="readyBtn">Redo?</button>
       </section>
-      <!-- End Landing page -->
+
       <!---Name page --->
       <section class="namePage hidden uppercase" id="namePage">
         <label for="playerName" class="nameLabel" id="nameLabel">Namn?</label>
         <input type="text" class="playerName" id="playerName" name="playerName" />
-        <button class="runBtn" id="runBtn">Kör</button>
+        <button class="namePageRunBtn" id="namePageRunBtn">Kör</button>
       </section>
-      <!--- End Name page --->
+
       <!-- Question page -->
       <section class="questionPage hidden" id="questionPage">
         <h2 class="questionNumber" id="questionNumber">1</h2>
@@ -72,7 +71,7 @@
         </form>
         <button class="answerBtn" id="answerBtn" disabled>Svara</button>
       </section>
-      <!-- End Question page -->
+
       <!-- Feedback page -->
       <section class="feedbackPage hidden" id="feedbackPage">
         <div class="answerContainer">
@@ -86,7 +85,7 @@
           <button class="showResultBtn uppercase hidden" id="showResultBtn">Visa resultat</button>
         </div>
       </section>
-      <!-- End Feedback page -->
+
       <!-- Result page -->
       <section class="resultPage hidden" id="resultPage">
         <h2 class="resultTitle uppercase">Resultat för <span id="resultTitlePlayerName"></span></h2>
@@ -96,7 +95,7 @@
         <button id="playAgainBtn" class="playAgainBtn">Spela igen</button>
         <button id="newPlayerBtn" class="newPlayerBtn">Ny spelare</button>
       </section>
-      <!-- End Result page -->
+
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>

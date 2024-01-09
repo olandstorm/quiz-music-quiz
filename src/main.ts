@@ -1,104 +1,111 @@
 import { questionArray, type IQuestionArray } from './questionArray.ts';
 import './scss/style.scss'; // Importera huvud-SCSS-filen
 
-/*
-
-// GLOBAL VARIABLES 
-// If the variable you need is of the local variety in another function, 
-// talk to the person who made the variable, then move it to here instead. 
-// But make sure the old function still works before merging! 
-
-// TS definition of what the variable should contain + initial definition för the playerName
-let playerName: string | null = null; 
-const totalScore: number = 0; // TS type defined and set to 0. 
-// Our array of 10 questions picked for the round, needs editing after Q-array. 
-let questionsForRound: { question: string, answer1: string, answer2: string, answer3: string } [] ; 
-// For saving the used questions, 
-// later in IF statment make sure to include this as a check for "used question" when player wants to play round 2. 
-let usedQuestions: { question: string, answer1: string, answer2: string, answer3: string } [] ; 
-
-// Timer (might be it's own div/ section later) - parts: 
+/**
+ * --------------------------------
+ * -----------CONTAINERS------------
+ * --------------------------------
+ */
 const timerContainer = document.getElementById('timerContainer');
-let timer: any; // What we will loop out to the container. Will be altered by stopTime and startTime perhaps? 
-const timerRun: boolean = false; // start and stop condition
-let startTime: any = '00.00'; // mm:ss
-let stopTime: any = '00.00' 
+const landingPage = document.getElementById('landingPage');
+const namePage = document.getElementById('namePage');
+const questionPage = document.getElementById('questionPage');
+const feedbackPage = document.getElementById('feedbackPage');
+const correctAnswerContainer = document.getElementById('correctAnswerContainer');
+const wrongAnswerContainer = document.getElementById('wrongAnswerContainer');
+const resultPage = document.getElementById('resultPage');
 
-// Dessa skall inte nödvändigtvis vara globala sen men jag höll ändå på och tog med dem. 
-const landingPage = document.getElementById('landingPage'); // For adding/ removing "hidden" from classlist.
-const namePage = document.getElementById('namePage'); // For adding/ removing "hidden" from classlist.
-const questionPage = document.getElementById('questionPage'); // For adding/ removing "hidden" from classlist.
-const feedbackPage = document.getElementById('feedbackPage'); // For adding/ removing "hidden" from classlist.
-const resultPage = document.getElementById('resultPage'); // For adding/ removing "hidden" from classlist.
-
-// Landing page - parts: 
-const readyBtn = document.getElementById('readyBtn');
-
-// Name page - parts:
-// Add eventlistener to take the value of the name input + error if empty. 
-const runBtn = document.getElementById('runBtn'); 
-const playerNameInput = document.getElementById('playerName'); 
-// Assigns new value to the playerName (Should trigger when "runBtn" is clicked on). 
-playerName = playerNameInput.value;  
-
-// Question page - parts:
-const questionForm = document.getElementById('questionForm');
-const radioBtnContainer = document.getElementById('radioBtnContainer'); 
-// Add click event x 3: enable answer btn (otherwise disabled) 
-const answerRadioBtn1 = document.getElementById('answerRadioBtn1'); 
-const answerRadioBtn2 = document.getElementById('answerRadioBtn2'); 
-const answerRadioBtn3 = document.getElementById('answerRadioBtn3'); 
-// Add click event: checking of answer is correct ect. 
-const answerBtn = document.getElementById('answerBtn'); 
-// h2 element targeted, we will change innerHTML by count +1 for every question.
-const questionNumber = document.getElementById('questionNumber');  
-
-// Feedback page - parts:
-// For toggling "hidden" from classlist x2. 
-// Note, this one is inside the feedbackPage container so that needs to be visible as well!
-const correctAnswerContainer = document.getElementById('correctAnswerContainer'); 
-const wrongAnswerContainer = document.getElementById('wrongAnswerContainer'); 
-const nextQuestionBtn = document.getElementById('nextQuestionBtn');
-// targets the <p> in the wrongAnswerContainer so we can display the correct answer when player makes mistake.
-const correctAnswer = document.getElementById('correctAnswer');
-
-// Result page - parts: 
-const totalScoreContainer = document.getElementById('totalScoreContainer');
-// Btn for opening namePage(?) - yet to be determined? Maybe we need 2 buttons? "playAgain and newPlayer"? 
-const playAgainBtn = document.getElementById('playAgainBtn'); 
-
+/**
+* --------------------------------
+* -----------BUTTONS--------------
+* --------------------------------
 */
-
-// -------------------RADIOBUTTONS AND ANSWERBUTTON------------------------------
-// when any radioBtn is clicked, remove the disabled attribute from the answerBtn.
-const answerBtn = document.getElementById('answerBtn');
-
-function enableAnswerBtn(): boolean {
-  answerBtn?.removeAttribute('disabled');
-  return true;
-}
-
-// declare all radiobuttons in the questionform via class
+const landingPageReadyBtn = document.getElementById('landingPageReadyBtn');
+const namePageRunBtn = document.getElementById('namePageRunBtn');
+const answerRadioBtn1 = document.getElementById('answerRadioBtn1') as HTMLInputElement;
+const answerRadioBtn2 = document.getElementById('answerRadioBtn2') as HTMLInputElement;
+const answerRadioBtn3 = document.getElementById('answerRadioBtn3') as HTMLInputElement;
 const allRadioBtns = document.querySelectorAll('.answerRadioBtn');
-// for each radiobutton, add an eventlistener which triggers the enableAnswerBtn function
+const answerBtn = document.getElementById('answerBtn');
+const answerRadioBtn = document.querySelectorAll('.answerText');
+const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+const showResultBtn = document.getElementById('showResultBtn');
+const newPlayerBtn = document.getElementById('newPlayerBtn');
+const playAgainBtn = document.querySelector('#playAgainBtn');
+
+/**
+* --------------------------------
+* --------INPUTS AND TEXT---------
+* --------------------------------
+*/
+const playerNameInput = document.querySelector('.playerName') as HTMLInputElement;
+const questionText = document.querySelector('#questionText');
+const resultTitlePlayerName = document.querySelector('#resultTitlePlayerName'); 
+const totalScoreSpan = document.querySelector('#totalScore span'); 
+
+/**
+* --------------------------------
+* -------------EVENTS-------------
+* --------------------------------
+*/
+if (landingPageReadyBtn !== null) {
+  landingPageReadyBtn.addEventListener('click', displayNamePage);
+}
+if (namePageRunBtn !== null) {
+  namePageRunBtn.addEventListener('click', startQuiz);
+}
 allRadioBtns.forEach(radioBtn => {
   radioBtn.addEventListener('click', enableAnswerBtn);
 });
+answerBtn?.addEventListener('click', displayFeedbackPage);
+if (nextQuestionBtn !== null) {
+  nextQuestionBtn.addEventListener('click', nextQuestion);
+}
+if (showResultBtn !== null) {
+  showResultBtn.addEventListener('click', displayResultPage);
+}
+if (newPlayerBtn !== null) {
+  newPlayerBtn.addEventListener('click', newPlayerRound);
+}
+playAgainBtn?.addEventListener('click', playAgain);
 
-// --------------------SAVE NAME FROM INPUT------------------------
 
-// global variable for the name input on the namePage
-const playerNameInput = document.querySelector('.playerName') as HTMLInputElement;
-let savedPlayerName: string = ''; // declare the nameinput as initially empty
-
-console.log(savedPlayerName);
+/**
+* --------------------------------
+* -------------OTHER--------------
+* --------------------------------
+*/
+let gameArray: any[] = [];
+let savedPlayerName: string = ''; 
+let questionCounter: number = 0;
+let currentQuestion: IQuestionArray;
+let totalScore: number = 0; // REMOVE? Skulle ev bort vid merge? 
 
 /**
  * --------------------------------
  * -------------TIMER--------------
  * --------------------------------
  */
-
+interface ITimer {
+  intervalId: number | null;
+  seconds: number;
+  minutes: number;
+}
+const timer: ITimer = {
+  intervalId: null,
+  seconds: 0,
+  minutes: 0,
+};
+/**
+ * Adds 0 if in less than 10
+ */
+function formatTime(time: number): string {
+  return time < 10 ? `0${time}` : `${time}`;
+}
+/**
+ * Toggle timer visibility
+ * Toggle timer styling
+ */
 function toggleTimerContainer(): void {
   if (
     !(questionPage as HTMLElement)?.classList.contains('hidden') ||
@@ -114,32 +121,17 @@ function toggleTimerContainer(): void {
     timerContainer?.classList.remove('resultTimer');
   }
 }
-
-// An interface for the timer
-interface ITimer {
-  intervalId: number | null;
-  seconds: number;
-  minutes: number;
-}
-
-// Display the timer in the document
+/**
+ * Loops to HTML
+ */
 function updateTimer(timer: ITimer): void {
-  // function for displaying the timer on the page
   const timerDisplay = document.querySelector('.timer');
   console.log(`${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`);
 
-  // change the innerHTML of the timercontainer to display the actual timer
   if (timerDisplay !== null) {
     timerDisplay.innerHTML = `${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`;
   }
 }
-
-// Adds the 0 before if the number < 0
-function formatTime(time: number): string {
-  return time < 10 ? `0${time}` : `${time}`;
-}
-
-// Function to start the timer
 function startTimer(timer: ITimer): void {
   timer.intervalId = setInterval(() => {
     timer.seconds += 1;
@@ -150,16 +142,12 @@ function startTimer(timer: ITimer): void {
     updateTimer(timer);
   }, 1000);
 }
-
-// Function to stop the timer
 function stopTimer(timer: ITimer): void {
   if (timer.intervalId !== null) {
     clearInterval(timer.intervalId);
     timer.intervalId = null;
   }
 }
-
-// Function to reset the timer
 function resetTimer(timer: ITimer): void {
   stopTimer(timer);
   timer.seconds = 0;
@@ -167,95 +155,28 @@ function resetTimer(timer: ITimer): void {
   updateTimer(timer);
 }
 
-// Variable for the timer
-const timer: ITimer = {
-  intervalId: null,
-  seconds: 0,
-  minutes: 0,
-};
-
-// Variables for containers
-const timerContainer = document.getElementById('timerContainer');
-const landingPage = document.getElementById('landingPage');
-const namePage = document.getElementById('namePage');
-const questionPage = document.getElementById('questionPage');
-const feedbackPage = document.getElementById('feedbackPage');
-const resultPage = document.getElementById('resultPage');
-
-// Variables for Buttons
-const readyBtn = document.getElementById('readyBtn');
-const runBtn = document.getElementById('runBtn');
-
-const questionText = document.querySelector('#questionText');
-const answerRadioBtn = document.querySelectorAll('.answerText');
-
-// Next question button - Feedback page
-const nextQuestionBtn = document.getElementById('nextQuestionBtn');
-// Show result button - Feedback page
-const showResultBtn = document.getElementById('showResultBtn');
-
-// New player btn - result page
-const newPlayerBtn = document.getElementById('newPlayerBtn');
-
-// Variables for each radio-Btn
-const answerRadioBtn1 = document.getElementById('answerRadioBtn1') as HTMLInputElement;
-const answerRadioBtn2 = document.getElementById('answerRadioBtn2') as HTMLInputElement;
-const answerRadioBtn3 = document.getElementById('answerRadioBtn3') as HTMLInputElement;
-
-// Events
-
-// Click event to display the name page after user clicks on
-// Condition to add evtlsnr if readyBtn exists in html
-if (readyBtn !== null) {
-  readyBtn.addEventListener('click', displayNamePage);
-}
-
-// Click event to trigger the start of the quiz after user clicks on
-// Condition to add evtlsnr if runBtn exists in html
-if (runBtn !== null) {
-  runBtn.addEventListener('click', startQuiz);
-}
-
-// Click event to trigger next question
-// Condition to add evtlsnr if nextQuestionBtn exists in html
-if (nextQuestionBtn !== null) {
-  nextQuestionBtn.addEventListener('click', nextQuestion);
-}
-
-// Click event to trigger Result page
-// Condition to add evtlsnr if showResultBtn exists in html
-if (showResultBtn !== null) {
-  showResultBtn.addEventListener('click', displayResultPage);
-}
-
-// Click event to trigger new player
-// Condition to add evtlsnr if newPlayerBtn exists in html
-if (newPlayerBtn !== null) {
-  newPlayerBtn.addEventListener('click', newPlayerRound);
-}
-
-// variable for empty gameArray
-let gameArray: any[] = [];
-console.table(gameArray);
-
-// Functions
-
-// Function to display namepage when user klicks on readyBtn
+/**
+ * --------------------------------
+ * ---------LANDINGPAGE------------
+ * --------------------------------
+ */
 function displayNamePage(): void {
   if (landingPage !== null && namePage !== null) {
     landingPage.classList.add('hidden');
     namePage.classList.remove('hidden');
   }
-
   // call on gameArray to copy original questionArray
   gameArray = [...questionArray];
   console.table(gameArray);
   // Calls timerContainer to go away
   toggleTimerContainer();
 }
-// Funktion som triggas när användare klickar på "kör" i namnsida
-// Kallar även på fråge-funktion
 
+/**
+ * --------------------------------
+ * -----------NAMEPAGE-------------
+ * --------------------------------
+ */
 function startQuiz(): void {
   if (namePage !== null && questionPage !== null) {
     namePage.classList.add('hidden');
@@ -264,32 +185,42 @@ function startQuiz(): void {
 
   startTimer(timer);
   showQuestion();
-  // Calls timerContainer to display propperly
   toggleTimerContainer();
 
-  // if the name input is not empty let the savedPlayerName be the value of the input
   if (playerNameInput !== null) {
-    // this will then be used to print out the name on the resultPage
     savedPlayerName = playerNameInput.value;
   }
-  console.log(savedPlayerName);
 }
 
-// Funktion som visar en random fråga från arrayen, och
-let currentQuestion: IQuestionArray;
-
-// Randomize a question and return that question
+/**
+ * --------------------------------
+ * ---------QUESTIONPAGE-----------
+ * --------------------------------
+ */
+/**
+ * Randomize a question.
+ * Return question
+ * Remove question from the temporary array
+ */
 function randomQuestion(): IQuestionArray {
   const randomQuestionId: number = Math.floor(Math.random() * gameArray.length);
   currentQuestion = gameArray[randomQuestionId];
   gameArray.splice(randomQuestionId, 1);
   return currentQuestion;
 }
-
-// Variable for counting
-let questionCounter: number = 0;
-
-// function for counting and displaying question number
+/**
+ * Display the selected question.
+ */
+function showQuestion(): void {
+  randomQuestion();
+  if (questionText !== null && answerRadioBtn !== null) {
+    questionText.innerHTML = currentQuestion.question;
+    for (let i = 0; i < answerRadioBtn.length; i++) {
+      answerRadioBtn[i].innerHTML = currentQuestion.answers[i].answer;
+    }
+  }
+  displayQuestionNumber();
+}
 function displayQuestionNumber(): void {
   const questionNumber = document.querySelector('#questionNumber');
   if (questionNumber === null) {
@@ -305,35 +236,31 @@ function displayQuestionNumber(): void {
     questionCounter = 0;
   }
 }
-
-// Display that question in the HTML
-function showQuestion(): void {
-  randomQuestion();
-  if (questionText !== null && answerRadioBtn !== null) {
-    questionText.innerHTML = currentQuestion.question;
-    for (let i = 0; i < answerRadioBtn.length; i++) {
-      answerRadioBtn[i].innerHTML = currentQuestion.answers[i].answer;
-    }
-  }
-  displayQuestionNumber();
-  console.table(gameArray);
-  console.table(questionArray);
+/**
+ * When a radioBtn is choosen, remove 'disabled' on answer btn. 
+ */
+function enableAnswerBtn(): boolean {
+  answerBtn?.removeAttribute('disabled');
+  return true;
 }
-
-// Check what the user har picked as answer in the form and return the index of that button
+/**
+ * Checks which answer the user choose. 
+ * Returns answer index.
+ */
 function checkAnswerInput(): number | null {
   const radioButtons = document.getElementsByName('answer');
   for (let i = 0; i < radioButtons.length; i++) {
     const radioButton = radioButtons[i] as HTMLInputElement;
     if (radioButton.checked) {
-      console.log(i);
       return i;
     }
   }
   return null;
 }
-
-// Check the correct answer of the array of answers and return the index of that correct answer
+/**
+ * Checks which answer is correct for current question. 
+ * Returns answer index.
+ */
 function checkCorrectAnswer(): number | null {
   for (let i = 0; i < currentQuestion.answers.length; i++) {
     if (currentQuestion.answers[i].correct) {
@@ -343,15 +270,42 @@ function checkCorrectAnswer(): number | null {
   }
   return null;
 }
-
-// Run a test of the users answer and the correct answer of the question and return a log of the answer
+/**
+ * Checks user answer vs questions correct answer. 
+ * Returns true if correct.
+ */
 function isAnswerCorrect(): boolean {
   const userAnswerIndex = checkAnswerInput();
   const correctAnswerIndex = checkCorrectAnswer();
   return userAnswerIndex === correctAnswerIndex;
 }
+/**
+ * Toggles feedbackcontainer visible.
+ * Toggles different subcontainers depending on if answer was corrct or not.
+ */
+function displayFeedbackPage(): void {
+  if (feedbackPage !== null && questionPage !== null) {
+    feedbackPage.classList.remove('hidden');
+    questionPage.classList.add('hidden');
+  }
 
-// Function to clear the answer input and disable answr btn
+  toggleTimerContainer();
+
+  const rightAnswer = isAnswerCorrect();
+  if (rightAnswer) {
+    totalScore += 1;
+    correctAnswerContainer?.classList.remove('hidden');
+    wrongAnswerContainer?.classList.add('hidden');
+  } else { 
+    correctAnswerContainer?.classList.add('hidden');
+    wrongAnswerContainer?.classList.remove('hidden');
+  }
+  clearAnswer();
+  getResult();
+}
+/**
+ * Clears the answer input and re-disablea answer btn
+ */
 function clearAnswer(): void {
   answerRadioBtn1.checked = false;
   answerRadioBtn2.checked = false;
@@ -361,7 +315,12 @@ function clearAnswer(): void {
   }
 }
 
-// Funktion för att dölja feedback page och gå vidare till nästa fråga
+/**
+ * --------------------------------
+ * ---------FEEDBACKPAGE-----------
+ * --------------------------------
+ */
+
 function nextQuestion(): void {
   if (feedbackPage !== null && questionPage !== null) {
     feedbackPage.classList.add('hidden');
@@ -369,11 +328,6 @@ function nextQuestion(): void {
   }
   showQuestion();
 }
-
-// DELETE WHEN MERGE IF NEEDED
-let totalScore: number = 0; // TS type defined and set to 0.
-// DELETE ABOVE IF NEEDED
-
 /**
  * Takes the user to resultPage if it was the 10th question
  */
@@ -384,11 +338,11 @@ function getResult(): void {
     stopTimer(timer);
   }
 }
-
-// Function for displaying Result page and toggle display on the playAgain-button
+/**
+ * Toggle result page
+ * Display "play again" btn
+ */
 function displayResultPage(): void {
-  const resultTitlePlayerName = document.querySelector('#resultTitlePlayerName');
-  const totalScoreSpan = document.querySelector('#totalScore span');
   if (feedbackPage === null) {
     return;
   }
@@ -412,14 +366,14 @@ function displayResultPage(): void {
   } else {
     playAgainBtn?.classList.add('hidden');
   }
-  // Calls timerContainer to display propperly
   toggleTimerContainer();
 }
 
-// Function to make the same player play another round
-const playAgainBtn = document.querySelector('#playAgainBtn');
-playAgainBtn?.addEventListener('click', playAgain);
-
+/**
+ * --------------------------------
+ * ---------RESULTPAGE-----------
+ * --------------------------------
+ */
 function playAgain(): void {
   if (resultPage === null) {
     return;
@@ -435,11 +389,9 @@ function playAgain(): void {
   showQuestion();
   toggleTimerContainer();
 }
-
 function resetTotalScore(): void {
   totalScore = 0;
 }
-
 function newPlayerRound(): void {
   if (resultPage === null) {
     return;
@@ -457,37 +409,4 @@ function newPlayerRound(): void {
   toggleTimerContainer();
 }
 
-// eventlistener for answerBtn which displays the feedback page
-answerBtn?.addEventListener('click', displayFeedbackPage);
 
-// function displaying feedback page when answerBtn is clicked
-function displayFeedbackPage(): void {
-  if (feedbackPage !== null && questionPage !== null) {
-    feedbackPage.classList.remove('hidden');
-    questionPage.classList.add('hidden');
-  }
-  // Calls timerContainer to display propperly
-  toggleTimerContainer();
-  // local variable for the correctAnswerContainer
-  const correctAnswerContainer = document.getElementById('correctAnswerContainer');
-  // local variable for the wrongAnswerContainer
-  const wrongAnswerContainer = document.getElementById('wrongAnswerContainer');
-  // local variable for checking if answer is correct
-  const rightAnswer = isAnswerCorrect();
-
-  // check if the radioBtn answer is true
-  if (rightAnswer) {
-    // Adjust total score
-    totalScore += 1;
-    // if answer is true, display the correctAnswerContainer styling
-    correctAnswerContainer?.classList.remove('hidden');
-    wrongAnswerContainer?.classList.add('hidden');
-  } else {
-    // if answer isn't true, display the wrongAnswerContainer styling
-    correctAnswerContainer?.classList.add('hidden');
-    wrongAnswerContainer?.classList.remove('hidden');
-  }
-  clearAnswer();
-  // Makes the buttons toggle display and stops timer if last question
-  getResult();
-}
