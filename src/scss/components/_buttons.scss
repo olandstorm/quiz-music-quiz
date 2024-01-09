@@ -8,6 +8,7 @@ button {
   border-radius: 10px;
   transition: all 0.2s;
   text-transform: uppercase;
+  cursor: pointer;
 }
 button:active {
   background-color: $tertiaryBtnBgColor;
