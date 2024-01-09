@@ -91,8 +91,6 @@ allRadioBtns.forEach(radioBtn => {
 const playerNameInput = document.querySelector('.playerName') as HTMLInputElement;
 let savedPlayerName: string = ''; // declare the nameinput as initially empty
 
-console.log(savedPlayerName);
-
 /**
  * --------------------------------
  * -------------TIMER--------------
@@ -126,7 +124,6 @@ interface ITimer {
 function updateTimer(timer: ITimer): void {
   // function for displaying the timer on the page
   const timerDisplay = document.querySelector('.timer');
-  console.log(`${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`);
 
   // change the innerHTML of the timercontainer to display the actual timer
   if (timerDisplay !== null) {
@@ -236,7 +233,6 @@ if (newPlayerBtn !== null) {
 
 // variable for empty gameArray
 let gameArray: any[] = [];
-console.table(gameArray);
 
 // Functions
 
@@ -249,7 +245,6 @@ function displayNamePage(): void {
 
   // call on gameArray to copy original questionArray
   gameArray = [...questionArray];
-  console.table(gameArray);
   // Calls timerContainer to go away
   toggleTimerContainer();
 }
@@ -272,7 +267,6 @@ function startQuiz(): void {
     // this will then be used to print out the name on the resultPage
     savedPlayerName = playerNameInput.value;
   }
-  console.log(savedPlayerName);
 }
 
 // Funktion som visar en random fråga från arrayen, och
@@ -315,9 +309,7 @@ function showQuestion(): void {
       answerRadioBtn[i].innerHTML = currentQuestion.answers[i].answer;
     }
   }
-  displayQuestionNumber();
-  console.table(gameArray);
-  console.table(questionArray);
+  displayQuestionNumber()
 }
 
 // Check what the user har picked as answer in the form and return the index of that button
@@ -326,7 +318,6 @@ function checkAnswerInput(): number | null {
   for (let i = 0; i < radioButtons.length; i++) {
     const radioButton = radioButtons[i] as HTMLInputElement;
     if (radioButton.checked) {
-      console.log(i);
       return i;
     }
   }
@@ -337,7 +328,6 @@ function checkAnswerInput(): number | null {
 function checkCorrectAnswer(): number | null {
   for (let i = 0; i < currentQuestion.answers.length; i++) {
     if (currentQuestion.answers[i].correct) {
-      console.log(i);
       return i;
     }
   }
