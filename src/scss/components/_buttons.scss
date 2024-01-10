@@ -1,13 +1,18 @@
-// Add styling about buttons
+// Add styling on buttons
+@media (hover: hover) {
+  button:hover {
+    opacity: 0.5;
+  }
+}
 button {
   background-color: $btnBgColor;
   color: $btnTextColor;
   padding: 5px 20px;
-  width: fit-content;
   border: none;
   border-radius: 10px;
   transition: all 0.2s;
   text-transform: uppercase;
+  cursor: pointer;
 }
 button:active {
   background-color: $tertiaryBtnBgColor;
@@ -30,15 +35,17 @@ button:active {
   padding-inline: 30px;
   margin-top: 20px;
 }
-.nextQuestionBtn, .showResultBtn {
+.nextQuestionBtn,
+.showResultBtn {
   position: absolute;
-  top: 55vh;
+  bottom: 10%;
   left: 50%;
   transform: translate(-50%);
   padding: 10px 15px;
   font-size: 1.3rem;
 }
-.nextQuestionBtn:active, .showResultBtn:active {
+.nextQuestionBtn:active,
+.showResultBtn:active {
   background-color: $secondaryBtnBgColor;
 }
 .playAgainBtn {

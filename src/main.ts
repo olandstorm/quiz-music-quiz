@@ -38,7 +38,7 @@ const playAgainBtn = document.querySelector('#playAgainBtn');
 * --------INPUTS AND TEXT---------
 * --------------------------------
 */
-const playerNameInput = document.querySelector('.playerName') as HTMLInputElement;
+const playerNameInput = document.querySelector('#playerName') as HTMLInputElement;
 const questionText = document.querySelector('#questionText');
 const resultTitlePlayerName = document.querySelector('#resultTitlePlayerName'); 
 const totalScoreSpan = document.querySelector('#totalScore span'); 
@@ -53,11 +53,12 @@ if (landingPageReadyBtn !== null) {
 }
 if (namePageRunBtn !== null) {
   namePageRunBtn.addEventListener('click', startQuiz);
-}
 allRadioBtns.forEach(radioBtn => {
   radioBtn.addEventListener('click', enableAnswerBtn);
 });
-answerBtn?.addEventListener('click', displayFeedbackPage);
+if (answerBtn !== null) {
+  answerBtn.addEventListener('click', displayFeedbackPage);
+}
 if (nextQuestionBtn !== null) {
   nextQuestionBtn.addEventListener('click', nextQuestion);
 }
@@ -67,9 +68,9 @@ if (showResultBtn !== null) {
 if (newPlayerBtn !== null) {
   newPlayerBtn.addEventListener('click', newPlayerRound);
 }
-playAgainBtn?.addEventListener('click', playAgain);
-
-
+if (playAgainBtn !== null) {
+  playAgainBtn.addEventListener('click', playAgain);
+}
 /**
 * --------------------------------
 * -------------OTHER--------------
@@ -79,7 +80,7 @@ let gameArray: any[] = [];
 let savedPlayerName: string = ''; 
 let questionCounter: number = 0;
 let currentQuestion: IQuestionArray;
-let totalScore: number = 0; // REMOVE? Skulle ev bort vid merge? 
+let totalScore: number = 0; 
 
 /**
  * --------------------------------
@@ -107,30 +108,32 @@ function formatTime(time: number): string {
  * Toggle timer styling
  */
 function toggleTimerContainer(): void {
+  if (timerContainer === null) {
+    return;
+  }
   if (
-    !(questionPage as HTMLElement)?.classList.contains('hidden') ||
-    !(feedbackPage as HTMLElement)?.classList.contains('hidden')
+    !(questionPage as HTMLElement).classList.contains('hidden') ||
+    !(feedbackPage as HTMLElement).classList.contains('hidden')
   ) {
-    timerContainer?.classList.remove('hidden');
-    timerContainer?.classList.remove('resultTimer');
-  } else if (!(resultPage as HTMLElement)?.classList.contains('hidden')) {
-    timerContainer?.classList.remove('hidden');
-    timerContainer?.classList.add('resultTimer');
+    timerContainer.classList.remove('hidden');
+    timerContainer.classList.remove('resultTimer');
+  } else if (!(resultPage as HTMLElement).classList.contains('hidden')) {
+    timerContainer.classList.remove('hidden');
+    timerContainer.classList.add('resultTimer');
   } else {
-    timerContainer?.classList.add('hidden');
-    timerContainer?.classList.remove('resultTimer');
+    timerContainer.classList.add('hidden');
+    timerContainer.classList.remove('resultTimer');
   }
 }
 /**
- * Loops to HTML
+ * Print to HTML
  */
 function updateTimer(timer: ITimer): void {
   const timerDisplay = document.querySelector('.timer');
-  console.log(`${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`);
-
-  if (timerDisplay !== null) {
-    timerDisplay.innerHTML = `${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`;
+  if (timerDisplay === null) {
+   return; 
   }
+  timerDisplay.innerHTML = `${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`;
 }
 function startTimer(timer: ITimer): void {
   timer.intervalId = setInterval(() => {
@@ -143,10 +146,11 @@ function startTimer(timer: ITimer): void {
   }, 1000);
 }
 function stopTimer(timer: ITimer): void {
-  if (timer.intervalId !== null) {
-    clearInterval(timer.intervalId);
-    timer.intervalId = null;
+  if (timer.intervalId === null) {
+    return;
   }
+  clearInterval(timer.intervalId);
+  timer.intervalId = null;
 }
 function resetTimer(timer: ITimer): void {
   stopTimer(timer);
@@ -161,14 +165,15 @@ function resetTimer(timer: ITimer): void {
  * --------------------------------
  */
 function displayNamePage(): void {
-  if (landingPage !== null && namePage !== null) {
-    landingPage.classList.add('hidden');
-    namePage.classList.remove('hidden');
+  if (landingPage === null) {
+    return;
   }
-  // call on gameArray to copy original questionArray
+  if (namePage === null) {
+    return;
+  }
+  landingPage.classList.add('hidden');
+  namePage.classList.remove('hidden');
   gameArray = [...questionArray];
-  console.table(gameArray);
-  // Calls timerContainer to go away
   toggleTimerContainer();
 }
 
@@ -177,19 +182,35 @@ function displayNamePage(): void {
  * -----------NAMEPAGE-------------
  * --------------------------------
  */
-function startQuiz(): void {
-  if (namePage !== null && questionPage !== null) {
-    namePage.classList.add('hidden');
-    questionPage.classList.remove('hidden');
+function enableRunBtn(): void {
+  if (namePageRunBtn === null) {
+    return;
   }
-
+  if (playerNameInput.value.length > 3) {
+    namePageRunBtn.removeAttribute('disabled');
+  } 
+}
+function disableRunBtn(): void {
+  if (namePageRunBtn === null) {
+    return;
+  }
+  namePageRunBtn.setAttribute('disabled', '');
+}
+  
+function startQuiz(): void {
+  if (namePage === null) {
+    return;
+  }
+  if (questionPage === null) {
+    return;
+  }
+  namePage.classList.add('hidden');
+  questionPage.classList.remove('hidden')
+  disableRunBtn();
   startTimer(timer);
   showQuestion();
   toggleTimerContainer();
-
-  if (playerNameInput !== null) {
-    savedPlayerName = playerNameInput.value;
-  }
+  savedPlayerName = playerNameInput.value;
 }
 
 /**
@@ -213,12 +234,14 @@ function randomQuestion(): IQuestionArray {
  */
 function showQuestion(): void {
   randomQuestion();
-  if (questionText !== null && answerRadioBtn !== null) {
-    questionText.innerHTML = currentQuestion.question;
-    for (let i = 0; i < answerRadioBtn.length; i++) {
-      answerRadioBtn[i].innerHTML = currentQuestion.answers[i].answer;
-    }
+  if (questionText === null) {
+    return;
   }
+  questionText.innerHTML = currentQuestion.question;
+  for (let i = 0; i < answerRadioBtn.length; i++) {
+    answerRadioBtn[i].innerHTML = currentQuestion.answers[i].answer;
+  }
+
   displayQuestionNumber();
 }
 function displayQuestionNumber(): void {
@@ -231,7 +254,6 @@ function displayQuestionNumber(): void {
   }
   questionCounter += 1;
   questionNumber.innerHTML = `${questionCounter}`;
-  // If questions reach 10 reset
   if (questionCounter === 10) {
     questionCounter = 0;
   }
@@ -264,7 +286,6 @@ function checkAnswerInput(): number | null {
 function checkCorrectAnswer(): number | null {
   for (let i = 0; i < currentQuestion.answers.length; i++) {
     if (currentQuestion.answers[i].correct) {
-      console.log(i);
       return i;
     }
   }
@@ -283,36 +304,47 @@ function isAnswerCorrect(): boolean {
  * Toggles feedbackcontainer visible.
  * Toggles different subcontainers depending on if answer was corrct or not.
  */
-function displayFeedbackPage(): void {
-  if (feedbackPage !== null && questionPage !== null) {
-    feedbackPage.classList.remove('hidden');
-    questionPage.classList.add('hidden');
-  }
-
+function displayFeedbackPage(): void {  
   toggleTimerContainer();
 
   const rightAnswer = isAnswerCorrect();
+  if (feedbackPage === null) {
+    return;
+  }
+  if (questionPage === null) {
+    return;
+  }
+  if (correctAnswerContainer === null) {
+    return;
+  }
+  if (wrongAnswerContainer === null) {
+    return;
+  }
+  feedbackPage.classList.remove('hidden');
+  questionPage.classList.add('hidden');
+
   if (rightAnswer) {
     totalScore += 1;
-    correctAnswerContainer?.classList.remove('hidden');
-    wrongAnswerContainer?.classList.add('hidden');
-  } else { 
-    correctAnswerContainer?.classList.add('hidden');
-    wrongAnswerContainer?.classList.remove('hidden');
+    correctAnswerContainer.classList.remove('hidden');
+    wrongAnswerContainer.classList.add('hidden');
+  } else {
+    correctAnswerContainer.classList.add('hidden');
+    wrongAnswerContainer.classList.remove('hidden');
   }
   clearAnswer();
   getResult();
-}
+}   
 /**
- * Clears the answer input and re-disablea answer btn
+ * Clears the answer input and re-disable answer btn
  */
 function clearAnswer(): void {
+  if (answerBtn === null) {
+    return;
+  }
   answerRadioBtn1.checked = false;
   answerRadioBtn2.checked = false;
   answerRadioBtn3.checked = false;
-  if (answerBtn !== null) {
-    answerBtn.setAttribute('disabled', '');
-  }
+  answerBtn.setAttribute('disabled', '');
 }
 
 /**
@@ -322,19 +354,29 @@ function clearAnswer(): void {
  */
 
 function nextQuestion(): void {
-  if (feedbackPage !== null && questionPage !== null) {
-    feedbackPage.classList.add('hidden');
-    questionPage.classList.remove('hidden');
+  if (feedbackPage === null) {
+    return;
   }
+  if (questionPage === null) {
+    return;
+  }
+  feedbackPage.classList.add('hidden');
+  questionPage.classList.remove('hidden');
   showQuestion();
 }
 /**
  * Takes the user to resultPage if it was the 10th question
  */
 function getResult(): void {
+  if (nextQuestionBtn === null) {
+    return;
+  }
+  if (showResultBtn === null) {
+    return;
+  }
   if (questionCounter === 0) {
-    nextQuestionBtn?.classList.add('hidden');
-    showResultBtn?.classList.remove('hidden');
+    nextQuestionBtn.classList.add('hidden');
+    showResultBtn.classList.remove('hidden');
     stopTimer(timer);
   }
 }
@@ -349,22 +391,31 @@ function displayResultPage(): void {
   if (resultPage === null) {
     return;
   }
+  if (nextQuestionBtn === null) {
+    return;
+  }
+  if (showResultBtn === null) {
+    return;
+  }
   if (resultTitlePlayerName === null) {
     return;
   }
   if (totalScoreSpan === null) {
     return;
   }
+  if (playAgainBtn === null) {
+    return;
+  }
   feedbackPage.classList.add('hidden');
   resultPage.classList.remove('hidden');
-  nextQuestionBtn?.classList.remove('hidden');
-  showResultBtn?.classList.add('hidden');
+  nextQuestionBtn.classList.remove('hidden');
+  showResultBtn.classList.add('hidden');
   resultTitlePlayerName.innerHTML = savedPlayerName;
   totalScoreSpan.innerHTML = `${totalScore}`;
   if (gameArray.length >= 10) {
-    playAgainBtn?.classList.remove('hidden');
+    playAgainBtn.classList.remove('hidden');
   } else {
-    playAgainBtn?.classList.add('hidden');
+    playAgainBtn.classList.add('hidden');
   }
   toggleTimerContainer();
 }
@@ -408,5 +459,3 @@ function newPlayerRound(): void {
   resetTotalScore();
   toggleTimerContainer();
 }
-
-
