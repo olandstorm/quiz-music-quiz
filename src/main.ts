@@ -271,6 +271,15 @@ function enableRunBtn(): void {
     runBtn.removeAttribute('disabled');
   } 
 }
+// Disable run button
+function disableRunBtn(): void {
+  if (runBtn === null) {
+    return;
+  }
+  runBtn.setAttribute('disabled', '');
+} 
+
+
 
 // Funktion som triggas när användare klickar på "kör" i namnsida
 // Kallar även på fråge-funktion
@@ -280,7 +289,7 @@ function startQuiz(): void {
     namePage.classList.add('hidden');
     questionPage.classList.remove('hidden');
   }
-
+  disableRunBtn();
   startTimer(timer);
   showQuestion();
   // Calls timerContainer to display propperly
