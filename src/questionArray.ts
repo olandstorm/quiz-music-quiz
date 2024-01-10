@@ -1,9 +1,5 @@
 /**
- * Här definierar vi en mall för hur vi vill att vår array ska se ut.
- * Ett så kallat "interface".
- * Den är för att garantera att ALLA objekt i vår array har samtliga egenskaper.
- * Prova t.ex. att lägga till en egenskap i interfacet, och notera hur arrayen nedanför
- * får rödmarkeringar där denna egenskap saknas.
+ * The interface we use for our array containting questions for the quiz.
  */
 export interface IQuestionArray {
   id: number;
@@ -15,8 +11,10 @@ export interface IQuestionArray {
   ];
 }
 
-// Här skriver vi att vår array med namnet myExampleArray ska följa reglerna (interfacet)
-// i IExampleArray och att det är en array genom att vi sätter [] efter
+/**
+ * The QuestionArray
+ * Questions can be added/ removed according the the structure of the interface defined above as needed. 
+ */
 export const questionArray: IQuestionArray[] = [
   {
     id: 1,
