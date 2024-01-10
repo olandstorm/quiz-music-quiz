@@ -74,7 +74,10 @@ const playAgainBtn = document.getElementById('playAgainBtn');
 const answerBtn = document.getElementById('answerBtn');
 
 function enableAnswerBtn(): boolean {
-  answerBtn?.removeAttribute('disabled');
+  if (answerBtn === null) {
+    return false;
+  }
+  answerBtn.removeAttribute('disabled');
   return true;
 }
 
@@ -93,10 +96,6 @@ allRadioBtns.forEach(radioBtn => {
 const playerNameInput = document.querySelector('.playerName') as HTMLInputElement;
 let savedPlayerName: string = ''; // declare the nameinput as initially empty
 
-console.log(savedPlayerName);
-
-
-
 /**
  * --------------------------------
  * -------------TIMER--------------
@@ -104,18 +103,21 @@ console.log(savedPlayerName);
  */
 
 function toggleTimerContainer(): void {
+  if (timerContainer === null) {
+    return;
+  }
   if (
-    !(questionPage as HTMLElement)?.classList.contains('hidden') ||
-    !(feedbackPage as HTMLElement)?.classList.contains('hidden')
+    !(questionPage as HTMLElement).classList.contains('hidden') ||
+    !(feedbackPage as HTMLElement).classList.contains('hidden')
   ) {
-    timerContainer?.classList.remove('hidden');
-    timerContainer?.classList.remove('resultTimer');
-  } else if (!(resultPage as HTMLElement)?.classList.contains('hidden')) {
-    timerContainer?.classList.remove('hidden');
-    timerContainer?.classList.add('resultTimer');
+    timerContainer.classList.remove('hidden');
+    timerContainer.classList.remove('resultTimer');
+  } else if (!(resultPage as HTMLElement).classList.contains('hidden')) {
+    timerContainer.classList.remove('hidden');
+    timerContainer.classList.add('resultTimer');
   } else {
-    timerContainer?.classList.add('hidden');
-    timerContainer?.classList.remove('resultTimer');
+    timerContainer.classList.add('hidden');
+    timerContainer.classList.remove('resultTimer');
   }
 }
 
@@ -130,12 +132,11 @@ interface ITimer {
 function updateTimer(timer: ITimer): void {
   // function for displaying the timer on the page
   const timerDisplay = document.querySelector('.timer');
-  console.log(`${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`);
-
-  // change the innerHTML of the timercontainer to display the actual timer
-  if (timerDisplay !== null) {
-    timerDisplay.innerHTML = `${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`;
+  if (timerDisplay === null) {
+    return;
   }
+  // change the innerHTML of the timercontainer to display the actual timer
+  timerDisplay.innerHTML = `${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`;
 }
 
 // Adds the 0 before if the number < 0
@@ -157,10 +158,11 @@ function startTimer(timer: ITimer): void {
 
 // Function to stop the timer
 function stopTimer(timer: ITimer): void {
-  if (timer.intervalId !== null) {
-    clearInterval(timer.intervalId);
-    timer.intervalId = null;
+  if (timer.intervalId === null) {
+    return;
   }
+  clearInterval(timer.intervalId);
+  timer.intervalId = null;
 }
 
 // Function to reset the timer
@@ -243,20 +245,21 @@ if (newPlayerBtn !== null) {
 
 // variable for empty gameArray
 let gameArray: any[] = [];
-console.table(gameArray);
 
 // Functions
 
 // Function to display namepage when user klicks on readyBtn
 function displayNamePage(): void {
-  if (landingPage !== null && namePage !== null) {
-    landingPage.classList.add('hidden');
-    namePage.classList.remove('hidden');
+  if (landingPage === null) {
+    return;
   }
-
+  if (namePage === null) {
+    return;
+  }
+  landingPage.classList.add('hidden');
+  namePage.classList.remove('hidden');
   // call on gameArray to copy original questionArray
   gameArray = [...questionArray];
-  console.table(gameArray);
   // Calls timerContainer to go away
   toggleTimerContainer();
 }
@@ -285,22 +288,21 @@ function disableRunBtn(): void {
 // Kallar även på fråge-funktion
 
 function startQuiz(): void {
-  if (namePage !== null && questionPage !== null) {
-    namePage.classList.add('hidden');
-    questionPage.classList.remove('hidden');
+  if (namePage === null) {
+    return;
   }
+  if (questionPage === null) {
+    return;
+  }
+  namePage.classList.add('hidden');
+  questionPage.classList.remove('hidden')
   disableRunBtn();
   startTimer(timer);
   showQuestion();
   // Calls timerContainer to display propperly
   toggleTimerContainer();
-
-  // if the name input is not empty let the savedPlayerName be the value of the input
-  if (playerNameInput !== null) {
-    // this will then be used to print out the name on the resultPage
-    savedPlayerName = playerNameInput.value;
-  }
-  console.log(savedPlayerName);
+  // this will then be used to print out the name on the resultPage
+  savedPlayerName = playerNameInput.value;
 }
 
 // Funktion som visar en random fråga från arrayen, och
@@ -337,24 +339,22 @@ function displayQuestionNumber(): void {
 // Display that question in the HTML
 function showQuestion(): void {
   randomQuestion();
-  if (questionText !== null && answerRadioBtn !== null) {
-    questionText.innerHTML = currentQuestion.question;
-    for (let i = 0; i < answerRadioBtn.length; i++) {
-      answerRadioBtn[i].innerHTML = currentQuestion.answers[i].answer;
-    }
+  if (questionText === null) {
+    return;
   }
-  displayQuestionNumber();
-  console.table(gameArray);
-  console.table(questionArray);
-}
+  questionText.innerHTML = currentQuestion.question;
+  for (let i = 0; i < answerRadioBtn.length; i++) {
+    answerRadioBtn[i].innerHTML = currentQuestion.answers[i].answer;
+  }
 
+  displayQuestionNumber();
+}
 // Check what the user har picked as answer in the form and return the index of that button
 function checkAnswerInput(): number | null {
   const radioButtons = document.getElementsByName('answer');
   for (let i = 0; i < radioButtons.length; i++) {
     const radioButton = radioButtons[i] as HTMLInputElement;
     if (radioButton.checked) {
-      console.log(i);
       return i;
     }
   }
@@ -365,7 +365,6 @@ function checkAnswerInput(): number | null {
 function checkCorrectAnswer(): number | null {
   for (let i = 0; i < currentQuestion.answers.length; i++) {
     if (currentQuestion.answers[i].correct) {
-      console.log(i);
       return i;
     }
   }
@@ -381,20 +380,25 @@ function isAnswerCorrect(): boolean {
 
 // Function to clear the answer input and disable answr btn
 function clearAnswer(): void {
+  if (answerBtn === null) {
+    return;
+  }
   answerRadioBtn1.checked = false;
   answerRadioBtn2.checked = false;
   answerRadioBtn3.checked = false;
-  if (answerBtn !== null) {
-    answerBtn.setAttribute('disabled', '');
-  }
+  answerBtn.setAttribute('disabled', '');
 }
 
 // Funktion för att dölja feedback page och gå vidare till nästa fråga
 function nextQuestion(): void {
-  if (feedbackPage !== null && questionPage !== null) {
-    feedbackPage.classList.add('hidden');
-    questionPage.classList.remove('hidden');
+  if (feedbackPage === null) {
+    return;
   }
+  if (questionPage === null) {
+    return;
+  }
+  feedbackPage.classList.add('hidden');
+  questionPage.classList.remove('hidden');
   showQuestion();
 }
 
@@ -406,9 +410,15 @@ let totalScore: number = 0; // TS type defined and set to 0.
  * Takes the user to resultPage if it was the 10th question
  */
 function getResult(): void {
+  if (nextQuestionBtn === null) {
+    return;
+  }
+  if (showResultBtn === null) {
+    return;
+  }
   if (questionCounter === 0) {
-    nextQuestionBtn?.classList.add('hidden');
-    showResultBtn?.classList.remove('hidden');
+    nextQuestionBtn.classList.add('hidden');
+    showResultBtn.classList.remove('hidden');
     stopTimer(timer);
   }
 }
@@ -423,22 +433,31 @@ function displayResultPage(): void {
   if (resultPage === null) {
     return;
   }
+  if (nextQuestionBtn === null) {
+    return;
+  }
+  if (showResultBtn === null) {
+    return;
+  }
   if (resultTitlePlayerName === null) {
     return;
   }
   if (totalScoreSpan === null) {
     return;
   }
+  if (playAgainBtn === null) {
+    return;
+  }
   feedbackPage.classList.add('hidden');
   resultPage.classList.remove('hidden');
-  nextQuestionBtn?.classList.remove('hidden');
-  showResultBtn?.classList.add('hidden');
+  nextQuestionBtn.classList.remove('hidden');
+  showResultBtn.classList.add('hidden');
   resultTitlePlayerName.innerHTML = savedPlayerName;
   totalScoreSpan.innerHTML = `${totalScore}`;
   if (gameArray.length >= 10) {
-    playAgainBtn?.classList.remove('hidden');
+    playAgainBtn.classList.remove('hidden');
   } else {
-    playAgainBtn?.classList.add('hidden');
+    playAgainBtn.classList.add('hidden');
   }
   // Calls timerContainer to display propperly
   toggleTimerContainer();
@@ -446,7 +465,10 @@ function displayResultPage(): void {
 
 // Function to make the same player play another round
 const playAgainBtn = document.querySelector('#playAgainBtn');
-playAgainBtn?.addEventListener('click', playAgain);
+
+if (playAgainBtn !== null) {
+  playAgainBtn.addEventListener('click', playAgain);
+}
 
 function playAgain(): void {
   if (resultPage === null) {
@@ -486,14 +508,12 @@ function newPlayerRound(): void {
 }
 
 // eventlistener for answerBtn which displays the feedback page
-answerBtn?.addEventListener('click', displayFeedbackPage);
+if (answerBtn !== null) {
+  answerBtn.addEventListener('click', displayFeedbackPage);
+}
 
 // function displaying feedback page when answerBtn is clicked
 function displayFeedbackPage(): void {
-  if (feedbackPage !== null && questionPage !== null) {
-    feedbackPage.classList.remove('hidden');
-    questionPage.classList.add('hidden');
-  }
   // Calls timerContainer to display propperly
   toggleTimerContainer();
   // local variable for the correctAnswerContainer
@@ -502,18 +522,32 @@ function displayFeedbackPage(): void {
   const wrongAnswerContainer = document.getElementById('wrongAnswerContainer');
   // local variable for checking if answer is correct
   const rightAnswer = isAnswerCorrect();
+  if (feedbackPage === null) {
+    return;
+  }
+  if (questionPage === null) {
+    return;
+  }
+  if (correctAnswerContainer === null) {
+    return;
+  }
+  if (wrongAnswerContainer === null) {
+    return;
+  }
+  feedbackPage.classList.remove('hidden');
+  questionPage.classList.add('hidden');
 
   // check if the radioBtn answer is true
   if (rightAnswer) {
     // Adjust total score
     totalScore += 1;
     // if answer is true, display the correctAnswerContainer styling
-    correctAnswerContainer?.classList.remove('hidden');
-    wrongAnswerContainer?.classList.add('hidden');
+    correctAnswerContainer.classList.remove('hidden');
+    wrongAnswerContainer.classList.add('hidden');
   } else {
     // if answer isn't true, display the wrongAnswerContainer styling
-    correctAnswerContainer?.classList.add('hidden');
-    wrongAnswerContainer?.classList.remove('hidden');
+    correctAnswerContainer.classList.add('hidden');
+    wrongAnswerContainer.classList.remove('hidden');
   }
   clearAnswer();
   // Makes the buttons toggle display and stops timer if last question
