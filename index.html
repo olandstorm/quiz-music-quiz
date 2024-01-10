@@ -43,7 +43,7 @@
         <button class="landingPageReadyBtn" id="landingPageReadyBtn">Redo?</button>
       </section>
 
-      <!---Name page --->
+      <!-- Name page -->
       <section class="namePage hidden uppercase" id="namePage">
         <label for="playerName" class="nameLabel" id="nameLabel">Namn?</label>
         <input type="text" class="playerName" id="playerName" name="playerName" placeholder="Minst 4 tecken!" />
@@ -93,8 +93,10 @@
         <div id="totalScoreContainer" class="totalScoreContainer">
           <p id="totalScore" class="totalScore"><span></span> av 10</p>
         </div>
-        <button id="playAgainBtn" class="playAgainBtn">Spela igen</button>
-        <button id="newPlayerBtn" class="newPlayerBtn">Ny spelare</button>
+        <div class="resultPageBtnContainer">
+          <button id="playAgainBtn" class="playAgainBtn">Spela igen</button>
+          <button id="newPlayerBtn" class="newPlayerBtn">Ny spelare</button>
+        </div>
       </section>
     </main>
     <script type="module" src="/src/main.ts"></script>
