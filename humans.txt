@@ -1,7 +1,7 @@
 /* TEAM */
-Your title: Your name.
-Github: your Github username.
-Location: City, Country.
+Your title: Amanda Hansson
+Github: @LilithSWE
+Location: Skepplanda, Sweden.
 
 Your title: Your name.
 Github: your Github username.
@@ -31,3 +31,4 @@ Last update: 2024/01/09
 Doctype: HTML5
 Standards: HTML5, CSS3, TypeScript
 Software: VSC, Miro
+Plug-ins: ESlint, Prettier 
