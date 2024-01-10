@@ -16,10 +16,10 @@ const wrongAnswerContainer = document.getElementById('wrongAnswerContainer');
 const resultPage = document.getElementById('resultPage');
 
 /**
-* --------------------------------
-* -----------BUTTONS--------------
-* --------------------------------
-*/
+ * --------------------------------
+ * -----------BUTTONS--------------
+ * --------------------------------
+ */
 const landingPageReadyBtn = document.getElementById('landingPageReadyBtn');
 const namePageRunBtn = document.getElementById('namePageRunBtn');
 const answerRadioBtn1 = document.getElementById('answerRadioBtn1') as HTMLInputElement;
@@ -34,28 +34,26 @@ const newPlayerBtn = document.getElementById('newPlayerBtn');
 const playAgainBtn = document.querySelector('#playAgainBtn');
 
 /**
-* --------------------------------
-* --------INPUTS AND TEXT---------
-* --------------------------------
-*/
+ * --------------------------------
+ * --------INPUTS AND TEXT---------
+ * --------------------------------
+ */
 const playerNameInput = document.querySelector('#playerName') as HTMLInputElement;
 const questionText = document.querySelector('#questionText');
-const resultTitlePlayerName = document.querySelector('#resultTitlePlayerName'); 
-const totalScoreSpan = document.querySelector('#totalScore span'); 
+const resultTitlePlayerName = document.querySelector('#resultTitlePlayerName');
+const totalScoreSpan = document.querySelector('#totalScore span');
 
 /**
-* --------------------------------
-* -------------EVENTS-------------
-* --------------------------------
-*/
-if (landingPageReadyBtn !== null) {
-  landingPageReadyBtn.addEventListener('click', displayNamePage);
-}
+ * --------------------------------
+ * -------------EVENTS-------------
+ * --------------------------------
+ */
 if (namePageRunBtn !== null) {
   namePageRunBtn.addEventListener('click', startQuiz);
-allRadioBtns.forEach(radioBtn => {
-  radioBtn.addEventListener('click', enableAnswerBtn);
-});
+  allRadioBtns.forEach(radioBtn => {
+    radioBtn.addEventListener('click', enableAnswerBtn);
+  });
+}
 if (answerBtn !== null) {
   answerBtn.addEventListener('click', displayFeedbackPage);
 }
@@ -71,16 +69,18 @@ if (newPlayerBtn !== null) {
 if (playAgainBtn !== null) {
   playAgainBtn.addEventListener('click', playAgain);
 }
+playerNameInput.addEventListener('input', enableRunBtn);
+
 /**
-* --------------------------------
-* -------------OTHER--------------
-* --------------------------------
-*/
+ * --------------------------------
+ * -------------OTHER--------------
+ * --------------------------------
+ */
 let gameArray: any[] = [];
-let savedPlayerName: string = ''; 
+let savedPlayerName: string = '';
 let questionCounter: number = 0;
 let currentQuestion: IQuestionArray;
-let totalScore: number = 0; 
+let totalScore: number = 0;
 
 /**
  * --------------------------------
@@ -131,7 +131,7 @@ function toggleTimerContainer(): void {
 function updateTimer(timer: ITimer): void {
   const timerDisplay = document.querySelector('.timer');
   if (timerDisplay === null) {
-   return; 
+    return;
   }
   timerDisplay.innerHTML = `${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`;
 }
@@ -164,6 +164,10 @@ function resetTimer(timer: ITimer): void {
  * ---------LANDINGPAGE------------
  * --------------------------------
  */
+// Had to move to be closer to funciton
+if (landingPageReadyBtn !== null) {
+  landingPageReadyBtn.addEventListener('click', displayNamePage);
+}
 function displayNamePage(): void {
   if (landingPage === null) {
     return;
@@ -188,7 +192,7 @@ function enableRunBtn(): void {
   }
   if (playerNameInput.value.length > 3) {
     namePageRunBtn.removeAttribute('disabled');
-  } 
+  }
 }
 function disableRunBtn(): void {
   if (namePageRunBtn === null) {
@@ -196,7 +200,7 @@ function disableRunBtn(): void {
   }
   namePageRunBtn.setAttribute('disabled', '');
 }
-  
+
 function startQuiz(): void {
   if (namePage === null) {
     return;
@@ -205,7 +209,7 @@ function startQuiz(): void {
     return;
   }
   namePage.classList.add('hidden');
-  questionPage.classList.remove('hidden')
+  questionPage.classList.remove('hidden');
   disableRunBtn();
   startTimer(timer);
   showQuestion();
@@ -259,14 +263,14 @@ function displayQuestionNumber(): void {
   }
 }
 /**
- * When a radioBtn is choosen, remove 'disabled' on answer btn. 
+ * When a radioBtn is choosen, remove 'disabled' on answer btn.
  */
 function enableAnswerBtn(): boolean {
   answerBtn?.removeAttribute('disabled');
   return true;
 }
 /**
- * Checks which answer the user choose. 
+ * Checks which answer the user choose.
  * Returns answer index.
  */
 function checkAnswerInput(): number | null {
@@ -280,7 +284,7 @@ function checkAnswerInput(): number | null {
   return null;
 }
 /**
- * Checks which answer is correct for current question. 
+ * Checks which answer is correct for current question.
  * Returns answer index.
  */
 function checkCorrectAnswer(): number | null {
@@ -292,7 +296,7 @@ function checkCorrectAnswer(): number | null {
   return null;
 }
 /**
- * Checks user answer vs questions correct answer. 
+ * Checks user answer vs questions correct answer.
  * Returns true if correct.
  */
 function isAnswerCorrect(): boolean {
@@ -304,7 +308,7 @@ function isAnswerCorrect(): boolean {
  * Toggles feedbackcontainer visible.
  * Toggles different subcontainers depending on if answer was corrct or not.
  */
-function displayFeedbackPage(): void {  
+function displayFeedbackPage(): void {
   toggleTimerContainer();
 
   const rightAnswer = isAnswerCorrect();
@@ -333,7 +337,7 @@ function displayFeedbackPage(): void {
   }
   clearAnswer();
   getResult();
-}   
+}
 /**
  * Clears the answer input and re-disable answer btn
  */
