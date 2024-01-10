@@ -18,6 +18,15 @@ button:active {
   background-color: $tertiaryBtnBgColor;
   color: $activeBtnTextColor;
 }
+button:active[disabled] {
+  background-color: $btnBgColor;
+  color: $btnTextColor;
+  opacity: 0.5;
+}
+button[disabled] {
+  cursor: no-drop;
+  opacity: 0.5;
+}
 .landingPageReadyBtn {
   background-color: $tertiaryBtnBgColor;
   color: $secondaryBtnTextColor;
@@ -27,10 +36,10 @@ button:active {
   background-color: $secondaryBtnBgColor;
   color: $btnTextColor;
 }
-.namePageRunBtn {
+/*.namePageRunBtn {
   background-color: $secondaryBtnBgColor;
   font-size: 1.2rem;
-}
+}*/
 .answerBtn {
   padding-inline: 30px;
   margin-top: 20px;
