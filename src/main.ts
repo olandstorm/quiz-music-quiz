@@ -85,6 +85,8 @@ allRadioBtns.forEach(radioBtn => {
   radioBtn.addEventListener('click', enableAnswerBtn);
 });
 
+
+
 // --------------------SAVE NAME FROM INPUT------------------------
 
 // global variable for the name input on the namePage
@@ -92,6 +94,8 @@ const playerNameInput = document.querySelector('.playerName') as HTMLInputElemen
 let savedPlayerName: string = ''; // declare the nameinput as initially empty
 
 console.log(savedPlayerName);
+
+
 
 /**
  * --------------------------------
@@ -210,6 +214,9 @@ if (readyBtn !== null) {
   readyBtn.addEventListener('click', displayNamePage);
 }
 
+// Input event to enable run button
+playerNameInput.addEventListener('input', enableRunBtn);
+
 // Click event to trigger the start of the quiz after user clicks on
 // Condition to add evtlsnr if runBtn exists in html
 if (runBtn !== null) {
@@ -253,6 +260,27 @@ function displayNamePage(): void {
   // Calls timerContainer to go away
   toggleTimerContainer();
 }
+
+// --------------------ENABLE RUNBTN---------------
+
+function enableRunBtn(): void {
+  if (runBtn === null) {
+    return;
+  }
+  if (playerNameInput.value.length > 3) {
+    runBtn.removeAttribute('disabled');
+  } 
+}
+// Disable run button
+function disableRunBtn(): void {
+  if (runBtn === null) {
+    return;
+  }
+  runBtn.setAttribute('disabled', '');
+} 
+
+
+
 // Funktion som triggas när användare klickar på "kör" i namnsida
 // Kallar även på fråge-funktion
 
@@ -261,7 +289,7 @@ function startQuiz(): void {
     namePage.classList.add('hidden');
     questionPage.classList.remove('hidden');
   }
-
+  disableRunBtn();
   startTimer(timer);
   showQuestion();
   // Calls timerContainer to display propperly
