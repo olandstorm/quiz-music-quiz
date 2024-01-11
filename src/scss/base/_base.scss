@@ -14,7 +14,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 // Specific page-containers and their content
@@ -34,8 +34,6 @@ main {
   height: 20vh;
   width: 100%;
   font-size: 2rem;
-  position: absolute;
-  top: 0;
   color: $timerTextColor;
 }
 .landingPage {
@@ -60,9 +58,10 @@ main {
 .questionPage {
   background-color: $questionsBgColor;
   text-align: center;
-  height: 60vh;
-  padding-inline: 20px;
+  min-height: 60vh;
+  padding: 20px;
   font-size: clamp(2vh, 1rem, 10vh);
+  margin-bottom: 20vh;
   .questionNumber {
     font-size: clamp(2vh, 3rem, 10vh);
   }
@@ -71,8 +70,15 @@ main {
     gap: 1rem;
     justify-items: start;
     padding-inline-end: 2rem;
-    label span {
-      padding-left: 15px;
+    label {
+      display: flex;
+      .answerRadioBtn {
+        margin-top: 0;
+      }
+      span {
+        padding-left: 15px;
+        text-align: left;
+      }
     }
   }
 }
@@ -80,22 +86,29 @@ main {
 .answerRadioBtn {
   cursor: pointer;
 }
-.answerContainer {
-  position: relative;
-  .correctAnswerContainer,
-  .wrongAnswerContainer {
-    display: flex;
-    height: 33vh;
-    background-color: $correctMsgBgColor;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    h2 {
-      margin-bottom: 4rem;
+.feedbackPage {
+  display: flex;
+  height: 60vh;
+  margin-bottom: 20vh;
+  flex-direction: column;
+  justify-content: center;
+  .answerContainer {
+    position: relative;
+    .correctAnswerContainer,
+    .wrongAnswerContainer {
+      display: flex;
+      height: 33vh;
+      background-color: $correctMsgBgColor;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      h2 {
+        margin-bottom: 4rem;
+      }
     }
-  }
-  .wrongAnswerContainer {
-    background-color: $falseMsgBgColor;
+    .wrongAnswerContainer {
+      background-color: $falseMsgBgColor;
+    }
   }
 }
 .resultPage {
@@ -109,11 +122,13 @@ main {
     color: $timerTextColor;
   }
   .totalScoreContainer {
-    padding-left: 2rem;
     align-self: flex-start;
     font-size: 1.2rem;
     font-weight: bold;
     color: $timerTextColor;
+  }
+  .resultPageBtnContainer {
+    text-align: center;
   }
 }
 // Togglable classes and commonly used classes across the page
@@ -121,8 +136,9 @@ main {
   background-color: $timerBgColor;
   width: 50%;
   height: 10vh;
+  position: absolute;
   right: 0;
-  top: 25vh;
+  top: 35vh;
   align-items: start;
   padding-left: 1rem;
   font-weight: 600;

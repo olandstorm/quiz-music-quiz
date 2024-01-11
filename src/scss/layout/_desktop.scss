@@ -33,13 +33,14 @@ main {
   display: flex;
   align-items: center;
   width: 100%;
-}
-.answerContainer {
-  height: 60%;
-  width: 100%;
-  .correctAnswerContainer,
-  .wrongAnswerContainer {
-    height: 100%;
+  height: 100%;
+  .answerContainer {
+    height: 60%;
+    width: 100%;
+    .correctAnswerContainer,
+    .wrongAnswerContainer {
+      height: 100%;
+    }
   }
 }
 .resultTimer {
