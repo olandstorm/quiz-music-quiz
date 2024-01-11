@@ -30,14 +30,23 @@ Mobile![Mobile wireframe](devdocs/wireframes/mobile-wireframe.PNG) Tablet ![Tabl
 
 Text text text
 
+## Technical requirements
+
+- Create an array container with at least 20 questions.
+- Generate a set of questions randomly from the question container array.
+- Remove the selected question from the array to ensure that player is presented with unique questions even when playing new round.
+- Display the selected question along with three answer options.
+- Ensure that only one answer can be correct for each question.
+- Accumulate and update the score for each correct answer.
+- Implement a timer function that starts ticking upon starting the quiz.
+- Reset the timer for each quiz round or when the player chooses the “New player” option.
+- Conclude the quiz round after 10 questions are answered.
+- Display the total time taken, the final score, and an option to re-take the quiz.
+- If the player chooses to play another round, provide a different set of 10 questions.
+- Reset the timer for the new round.
+- Allow the player to select a "New Player" option which resets and re-shuffles the questions presented for player to see unique set of questions.
+
 ## Lessons Learned
-
-As mentioned earlier this assignment was a group collaborative project which required us to get familiar with planning and structure, coding together and merging our code to produce a quiz. The quiz in itself requires the following:
-
-- 10 questions with 3 answer options, only 1 answer can be right
-- when the first initial round is played the user can retake the quiz, however must be presented with a new set of questions.
-- whilst the quiz is running a timer is ticking
--
 
 General takeaways:
 
