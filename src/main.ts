@@ -192,6 +192,8 @@ function enableRunBtn(): void {
   }
   if (playerNameInput.value.length > 3) {
     namePageRunBtn.removeAttribute('disabled');
+  } else {
+    disableRunBtn();
   }
 }
 function disableRunBtn(): void {
