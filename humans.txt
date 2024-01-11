@@ -1,23 +1,23 @@
 /* TEAM */
-Your title: Amanda Hansson
+Developer: Amanda Hansson
 Github: @LilithSWE
-Location: Skepplanda, Sweden.
+Location: Skepplanda, Sweden
 
-Your title: Your name.
-Github: your Github username.
-Location: City, Country.
+Developer: Ala Hojat Jalali
+Github: @alahojat
+Location: Stockholm, Sweden
 
-Your title: Your name.
-Github: your Github username.
-Location: City, Country.
+Developer: Mustafa Mehdi
+Github: @MustafaaMehdi
+Location: Stockholm, Sweden
 
-Your title: Your name.
-Github: your Github username.
-Location: City, Country.
+Developer: Per Rosén
+Github: @PerRosen63
+Location: Visby, Sweden
 
 Developer: Oskar Landström
 Github: @olandstorm
-Location: Stockholm, Sweden.
+Location: Stockholm, Sweden
 
 
 /* THANKS */
