@@ -1,1 +1,44 @@
 // Add styling for tablet
+
+// Timer
+.timerContainer {
+  align-items: flex-end;
+  .timer {
+    margin-right: 8vw;
+  }
+}
+.questionPage,
+.feedbackPage {
+  margin: 0 8vw;
+}
+.questionText {
+  max-width: 550px;
+}
+.nextQuestionBtn,
+.showResultBtn {
+  bottom: 20%;
+}
+.resultTitle {
+  margin-left: 5vw;
+}
+.resultTimer {
+  align-items: flex-start;
+  .timer {
+    margin-left: 10px;
+  }
+}
+.resultPage {
+  .totalScoreContainer {
+    align-self: center;
+  }
+}
+.totalScore {
+  font-size: 2.5rem;
+}
+.resultPageBtnContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  padding-bottom: 20px;
+}

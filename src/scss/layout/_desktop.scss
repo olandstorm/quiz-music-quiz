@@ -1,1 +1,68 @@
 // Add styling for desktop
+main {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-flow: column;
+}
+.landingPage,
+.namePage {
+  width: 100vw;
+  max-width: 100%;
+  grid-column: 1 / 13;
+}
+.questionPage,
+.feedbackPage {
+  grid-column: 1 / 9;
+  margin: 0;
+}
+.questionPage {
+  height: 100%;
+}
+.timerContainer {
+  grid-column: 9 / 13;
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  .timer {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 5rem);
+  }
+}
+.feedbackPage {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.answerContainer {
+  height: 60%;
+  width: 100%;
+  .correctAnswerContainer,
+  .wrongAnswerContainer {
+    height: 100%;
+  }
+}
+.resultTimer {
+  width: 25%;
+  padding: 0;
+  height: 190px;
+  position: fixed;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.resultPage {
+  grid-column: 1 / 13;
+  margin: 0;
+  padding: 6rem 2rem;
+  .resultTitle {
+    margin-top: 50px;
+    font-size: clamp(2rem, 4vw, 5rem);
+  }
+  .totalScoreContainer {
+    padding: 0;
+  }
+}
+.totalScore {
+  font-size: 3rem;
+}

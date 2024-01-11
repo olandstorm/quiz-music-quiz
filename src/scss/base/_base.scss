@@ -36,6 +36,7 @@ main {
   font-size: 2rem;
   position: absolute;
   top: 0;
+  color: $timerTextColor;
 }
 .landingPage {
   height: 100vh;
@@ -75,6 +76,10 @@ main {
     }
   }
 }
+.answerText,
+.answerRadioBtn {
+  cursor: pointer;
+}
 .answerContainer {
   position: relative;
   .correctAnswerContainer,
@@ -101,15 +106,16 @@ main {
     align-self: flex-start;
     font-style: italic;
     font-size: 2.6rem;
+    color: $timerTextColor;
   }
   .totalScoreContainer {
     padding-left: 2rem;
     align-self: flex-start;
     font-size: 1.2rem;
     font-weight: bold;
+    color: $timerTextColor;
   }
 }
-
 // Togglable classes and commonly used classes across the page
 .resultTimer {
   background-color: $timerBgColor;
