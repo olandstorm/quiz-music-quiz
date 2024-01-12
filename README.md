@@ -63,12 +63,12 @@ TypeScript specific takeaways:
 
 ## Validation reports
 
-[HTML validation](https://linktodocumentation)
+[HTML validation](devdocs\validation\HTML_validation.pdf)
 
-[CSS validation](https://linktodocumentation)
+[CSS validation](devdocs\validation\CSS_validation.pdf)
 
-[Lighthouse report](https://linktodocumentation)
+[Lighthouse mobile report](devdocs\validation\Mobile_Lighthouse.png) / [Lighthouse desktop report](devdocs\validation\Desktop_Lighthouse.png)
 
 ## Acknowledgements
 
-[many thank you's to our mastermind teacher](https://github.com/postmodernistx)
+[Many thank you's to our mastermind teacher, Jenni Pulli!](https://github.com/postmodernistx)
