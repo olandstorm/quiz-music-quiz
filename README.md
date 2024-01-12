@@ -28,7 +28,13 @@ Mobile![Mobile wireframe](devdocs/wireframes/mobile-wireframe.PNG) Tablet ![Tabl
 
 ## Result
 
-Text text text
+Mobile
+
+![Alt text](devdocs/final/Mobile-start.jpg) ![Alt text](devdocs/final/Mobile-name.jpg) ![Alt text](devdocs/final/Mobile-question.jpg) ![Alt text](devdocs/final/Mobile-right.jpg) ![Alt text](devdocs/final/Mobile-wrong.jpg) ![Alt text](devdocs/final/Mobile-result.jpg)
+
+Desktop
+
+![Alt text](devdocs/final/Desktop-start.jpg) ![Alt text](devdocs/final/Desktop-name.jpg) ![Alt text](devdocs/final/Desktop-question.jpg) ![Alt text](devdocs/final/Desktop-right.jpg) ![Alt text](devdocs/final/Desktop-wrong.jpg) ![Alt text](devdocs/final/Desktop-result.jpg)
 
 ## Technical requirements
 

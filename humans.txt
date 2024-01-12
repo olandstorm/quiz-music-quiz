@@ -27,7 +27,7 @@ Role: Teacher and mentor of the project.
 
 
 /* SITE */
-Last update: 2024/01/09
+Last update: 2024/01/12
 Doctype: HTML5
 Standards: HTML5, CSS3, TypeScript
 Software: VSC, Miro
