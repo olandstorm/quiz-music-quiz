@@ -27,7 +27,7 @@ Klicka i vilka krav ni har gjort:
 - [x] Sidan ska vara någorlunda snygg (CSS).
 - [x] Ni har checkat av "vanliga misstag" från tidigare uppgifter, såväl HTML & CSS som JavaScript.
 - [x] Sidan är tillgänglighetsgranskad.
-- [ ] Sidan är validerad.
+- [x] Sidan är validerad.
 - [x] Ni har gjort en Lighthouse-analys på live-sidan.
 
 #### Funktionsbeskrivning
