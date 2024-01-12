@@ -3,6 +3,8 @@
 // Timer
 .timerContainer {
   align-items: flex-end;
+  position: absolute;
+  top: 0;
   .timer {
     margin-right: 8vw;
   }
@@ -23,6 +25,7 @@
 }
 .resultTimer {
   align-items: flex-start;
+  top: 25vh;
   .timer {
     margin-left: 10px;
   }
