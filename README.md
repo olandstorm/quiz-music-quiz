@@ -6,7 +6,7 @@ https://medieinstitutet.github.io/fed23d-javascript-grundkurs-gruppuppgift-apels
 
 ## Assignment introduction
 
-An introduction to our first attempt at navigating TypeScript (send help). And and why not combine it with our first ever collaborative group assigment (hello code conflict) whilst exploring the world of TypeScript. Oh and whilst we are at it we might as well throw the concept of agile workflows into the mix.
+An introduction to our first attempt at navigating TypeScript (send help). And why not combine it with our first ever collaborative group assigment (hello code conflict) whilst exploring the world of TypeScript. Oh and whilst we are at it we might as well throw the concept of agile workflows into the mix.
 
 What you see is a joint collaborative effort between five authors resulting in a minimalist quiz that serves its purpose. Unfortunately for all you non-Swedish speakers, you won't get to experience how little you actually know about real music.
 
