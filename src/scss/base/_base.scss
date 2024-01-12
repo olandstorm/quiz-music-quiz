@@ -44,6 +44,11 @@ main {
   padding-bottom: 10vh;
   line-height: 3rem;
   row-gap: 4rem;
+  .pageSlogan {
+    color: $primaryHeaderColor;
+    text-align: center;
+    font-size: 1.3rem;
+  }
 }
 .nameLabel {
   font-weight: bold;
