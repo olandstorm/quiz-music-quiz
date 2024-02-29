@@ -2,7 +2,7 @@
 
 ## Demolink
 
-https://medieinstitutet.github.io/fed23d-javascript-grundkurs-gruppuppgift-apelsinerna/
+https://olandstorm.github.io/quiz-music-quiz/
 
 ## Assignment introduction
 
